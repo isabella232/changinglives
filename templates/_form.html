@@ -15,6 +15,7 @@
                 <canvas width="300" height="300">
                 </canvas>
                 <input type="hidden" name="image">
+                <input type="text" name="string">
             </li>
             <li class="form-message">
                 <label for="message" class="instructions">
@@ -62,14 +63,22 @@
         $(document).ready(function() {
             var canvas = $("canvas")[0];
 
-            if (canvas.getContext) {    
+            if (!canvas.getContext) {    
+                alert("Your browser doesn't support canvas. Things will be broken.");
+            }
+
+            $("input[name='string']").keyup(function(e) {
                 var ctx = canvas.getContext('2d');
 
-                ctx.fillStyle = "rgb(200, 0, 0)";
-                ctx.fillRect(10, 30, 200, 250);
-            } else {
-                alert("Your browser doesn't support canvas.");
-            }
+                ctx.fillStyle = "black";
+                ctx.fillRect(0, 0, 300, 300);
+
+                ctx.fillStyle = "rgb(220, 220, 220)";
+                ctx.font = "16pt Arial"
+                ctx.textAlign = "center";
+                ctx.textBaseline = "bottom";
+                ctx.fillText($(this).val(), 150, 280);
+            });
 
             $('#tumblr-form').submit(function(e) {
                 var btn = $('.form-submit button');
