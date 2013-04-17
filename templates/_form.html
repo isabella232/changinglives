@@ -4,7 +4,7 @@
 </div>
 
 <div class="tumblr-form">
-    <form id="tumblr-form" method="post" enctype="multipart/form-data" action="http://{{ SERVERS[0] }}/{{ PROJECT_SLUG }}/">
+    <form id="tumblr-form" method="post" enctype="multipart/form-data" action="http://localhost:8001/{{ PROJECT_SLUG }}/">
         <img src="img/replace-me.jpg" alt="Sample Photo" class="sample-photo" />
         <ol>
             <li class="form-intro">
@@ -12,10 +12,9 @@
                 <p>This is some text for the form kicker.</p>
                 </li>
             <li class="form-photo">
-                <label for="image" class="instructions">
-                        <strong>SHOW:</strong><br />Take a photo.
-                </label>
-                <input type="file" name="image" width="90" accept="image/*">
+                <canvas width="300" height="300">
+                </canvas>
+                <input type="hidden" name="image">
             </li>
             <li class="form-message">
                 <label for="message" class="instructions">
@@ -61,12 +60,25 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            var canvas = $("canvas")[0];
+
+            if (canvas.getContext) {    
+                var ctx = canvas.getContext('2d');
+
+                ctx.fillStyle = "rgb(200, 0, 0)";
+                ctx.fillRect(10, 30, 200, 250);
+            } else {
+                alert("Your browser doesn't support canvas.");
+            }
+
             $('#tumblr-form').submit(function(e) {
                 var btn = $('.form-submit button');
 
                 btn.text('Sending, please wait...');
                 // btn.attr('disabled', 'disabled');
 
+                $("input[name='image']").val(canvas.toDataURL("image/jpeg"));
+                        
                 return true;
             });
 

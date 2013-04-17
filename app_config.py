@@ -9,9 +9,9 @@ They will be exposed to users. Use environment variables instead.
 
 import os
 
-PROJECT_NAME = 'App Template'
-PROJECT_SLUG = 'app-template'
-REPOSITORY_NAME = 'app-template'
+PROJECT_NAME = 'The Change Lives of Women'
+PROJECT_SLUG = 'changing-lives'
+REPOSITORY_NAME = 'changinglives'
 CONFIG_NAME = PROJECT_SLUG.replace('-', '').upper()
 
 PROJECT_CREDITS = 'Jeremy Bowers, Brian Boyer, Alyson Hurt and Matt Stiles / NPR'

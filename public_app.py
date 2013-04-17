@@ -33,7 +33,6 @@ def _post_to_tumblr():
     """
     Handles the POST to Tumblr.
     """
-
     def strip_html(value):
         """
         Strips HTML from a string.
@@ -56,16 +55,27 @@ def _post_to_tumblr():
     message = strip_breaks(message)
 
     name = strip_html(request.form.get('signed_name', None))
-    email = strip_html(request.form.get('email', None))
+
+    image = request.form.get('image', None)
+
+    image = image.replace('data:image/jpeg;base64,', '').decode('base64')
 
     context = {
         'message': message,
         'name': name,
-        'email': email,
         'app_config': app_config
     }
 
     caption = render_template('caption.html', **context)
+
+    file_path = '/uploads/%s/%s_%s.jpg' % (
+        app_config.PROJECT_SLUG,
+        str(time.mktime(datetime.datetime.now().timetuple())).replace('.', ''),
+        secure_filename(context['name'].replace(' ', '-'))
+    )
+
+    with open('/var/www%s' % file_path, 'wb') as f:
+        f.write(image)
 
     t = Tumblpy(
         app_key=os.environ['TUMBLR_CONSUMER_KEY'],
@@ -73,14 +83,6 @@ def _post_to_tumblr():
         oauth_token=os.environ['TUMBLR_OAUTH_TOKEN'],
         oauth_token_secret=os.environ['TUMBLR_OAUTH_TOKEN_SECRET'])
 
-    file_path = '/uploads/%s/%s_%s' % (
-        app_config.PROJECT_SLUG,
-        str(time.mktime(datetime.datetime.now().timetuple())).replace('.', ''),
-        secure_filename(request.files['image'].filename.replace(' ', '-'))
-    )
-
-    with open('/var/www%s' % file_path, 'w') as f:
-        f.write(request.files['image'].read())
 
     params = {
         "type": "photo",
