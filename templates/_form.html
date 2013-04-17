@@ -16,7 +16,7 @@
                 </canvas>
                 <input type="hidden" name="image">
                 <label for="string">Enter your message:</label>
-                <input type="text" name="string"></input>
+                <textarea name="string"></textarea>
             </li>
             <li class="form-message">
                 <label for="message" class="instructions">
@@ -75,16 +75,26 @@
                 ctx.fillStyle = "black";
                 ctx.fillRect(0, 0, 600, 300);
 
-                ctx.fillStyle = "rgb(220, 220, 220)";
-                ctx.font = "64pt CrossStitch"
-                ctx.textAlign = "center";
-                ctx.textBaseline = "bottom";
-                ctx.fillText(text, 300, 280);
+                var lines = text.split("\n");
+
+                line_height = 70;
+                base = 280 - line_height * (lines.length - 1);
+
+                for (i = 0; i < lines.length; i++) {
+                    line = lines[i];
+                    y = base + i * line_height;
+
+                    ctx.fillStyle = "rgb(220, 220, 220)";
+                    ctx.font = "64pt CrossStitch"
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "bottom";
+                    ctx.fillText(line, 300, y);
+                }
             }
 
             render("");
 
-            $("input[name='string']").keyup(function(e) {
+            $("textarea[name='string']").keyup(function(e) {
                 render($(this).val());    
             });
 
