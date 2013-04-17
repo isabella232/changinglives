@@ -16,7 +16,7 @@
                 </canvas>
                 <input type="hidden" name="image">
                 <label for="string">Enter your message:</label>
-                <input type="text" name="string">
+                <input type="text" name="string"></input>
             </li>
             <li class="form-message">
                 <label for="message" class="instructions">
@@ -61,18 +61,6 @@
     <![endif]-->
 
     <script type="text/javascript">
-        function render(text) {
-            var ctx = canvas.getContext('2d');
-
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, 600, 300);
-
-            ctx.fillStyle = "rgb(220, 220, 220)";
-            ctx.font = "64pt CrossStitch"
-            ctx.textAlign = "center";
-            ctx.textBaseline = "bottom";
-            ctx.fillText(text, 300, 280);
-        }
 
         $(document).ready(function() {
             var canvas = $("canvas")[0];
@@ -80,6 +68,21 @@
             if (!canvas.getContext) {    
                 alert("Your browser doesn't support canvas. Things will be broken.");
             }
+    
+            function render(text) {
+                var ctx = canvas.getContext('2d');
+
+                ctx.fillStyle = "black";
+                ctx.fillRect(0, 0, 600, 300);
+
+                ctx.fillStyle = "rgb(220, 220, 220)";
+                ctx.font = "64pt CrossStitch"
+                ctx.textAlign = "center";
+                ctx.textBaseline = "bottom";
+                ctx.fillText(text, 300, 280);
+            }
+
+            render("");
 
             $("input[name='string']").keyup(function(e) {
                 render($(this).val());    
