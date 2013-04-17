@@ -4,17 +4,18 @@
 </div>
 
 <div class="tumblr-form">
+    <div style="font-family: CrossStitch;">.</div>
     <form id="tumblr-form" method="post" enctype="multipart/form-data" action="http://{{ SERVERS[0] }}/{{ PROJECT_SLUG }}/">
-        <img src="img/replace-me.jpg" alt="Sample Photo" class="sample-photo" />
         <ol>
             <li class="form-intro">
                 <!-- <h2>This project has now concluded. Thank you for your submissions.</h2> -->
                 <p>This is some text for the form kicker.</p>
                 </li>
             <li class="form-photo">
-                <canvas width="300" height="300">
+                <canvas width="600" height="300">
                 </canvas>
                 <input type="hidden" name="image">
+                <label for="string">Enter your message:</label>
                 <input type="text" name="string">
             </li>
             <li class="form-message">
@@ -60,6 +61,19 @@
     <![endif]-->
 
     <script type="text/javascript">
+        function render(text) {
+            var ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, 600, 300);
+
+            ctx.fillStyle = "rgb(220, 220, 220)";
+            ctx.font = "64pt CrossStitch"
+            ctx.textAlign = "center";
+            ctx.textBaseline = "bottom";
+            ctx.fillText(text, 300, 280);
+        }
+
         $(document).ready(function() {
             var canvas = $("canvas")[0];
 
@@ -68,16 +82,7 @@
             }
 
             $("input[name='string']").keyup(function(e) {
-                var ctx = canvas.getContext('2d');
-
-                ctx.fillStyle = "black";
-                ctx.fillRect(0, 0, 300, 300);
-
-                ctx.fillStyle = "rgb(220, 220, 220)";
-                ctx.font = "16pt Arial"
-                ctx.textAlign = "center";
-                ctx.textBaseline = "bottom";
-                ctx.fillText($(this).val(), 150, 280);
+                render($(this).val());    
             });
 
             $('#tumblr-form').submit(function(e) {
