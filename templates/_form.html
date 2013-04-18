@@ -14,6 +14,7 @@
             <li class="form-photo">
                 <canvas width="600" height="300">
                 </canvas>
+                <img id="background" src="img/dinoriders.jpg" style="display: none; "/>
                 <input type="hidden" name="image">
                 <label for="string">Enter your message:</label>
                 <textarea name="string"></textarea>
@@ -64,6 +65,7 @@
 
         $(document).ready(function() {
             var canvas = $("canvas")[0];
+            var bg = $("#background")[0];
 
             if (!canvas.getContext) {    
                 alert("Your browser doesn't support canvas. Things will be broken.");
@@ -72,8 +74,13 @@
             function render(text) {
                 var ctx = canvas.getContext('2d');
 
-                ctx.fillStyle = "black";
-                ctx.fillRect(0, 0, 600, 300);
+                //ctx.fillStyle = "black";
+                //ctx.fillRect(0, 0, 600, 300);
+                ctx.drawImage(bg, 0, 0, 600, 300);
+
+                ctx.fillStyle = "rgb(30, 30, 200)";
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = "rgb(230, 230, 230)";
 
                 var lines = text.split("\n");
 
@@ -84,11 +91,11 @@
                     line = lines[i];
                     y = base + i * line_height;
 
-                    ctx.fillStyle = "rgb(220, 220, 220)";
                     ctx.font = "64pt CrossStitch"
                     ctx.textAlign = "center";
                     ctx.textBaseline = "bottom";
                     ctx.fillText(line, 300, y);
+                    //ctx.strokeText(line, 300, y);
                 }
             }
 
