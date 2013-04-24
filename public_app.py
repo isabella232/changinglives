@@ -72,10 +72,10 @@ def _post_to_tumblr():
 
     context = {
         'message': message,
-        'message_urlencoded': urllib.urlencode(message),
+        'message_urlencoded': urllib.quote(message),
         'name': name,
         'app_config': app_config,
-        'image_url_urlencoded': urllib.urlencode('http://%s/%s' % (app_config.SERVERS[0], file_path))
+        'image_url_urlencoded': urllib.quote('http://%s/%s' % (app_config.SERVERS[0], file_path))
     }
 
     caption = render_template('caption.html', **context)
