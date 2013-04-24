@@ -363,6 +363,7 @@ def render_confs():
     context['PROJECT_SLUG'] = app_config.PROJECT_SLUG
     context['PROJECT_NAME'] = app_config.PROJECT_NAME
     context['REPOSITORY_NAME'] = app_config.REPOSITORY_NAME
+    context['CONFIG_NAME'] = app_config.CONFIG_NAME
     context['DEPLOYMENT_TARGET'] = env.settings
 
     for service, remote_path, extension in SERVICES:
