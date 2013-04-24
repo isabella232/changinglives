@@ -18,10 +18,10 @@ PROJECT_CREDITS = 'Jeremy Bowers, Brian Boyer, Alyson Hurt and Matt Stiles / NPR
 PROJECT_SHORTLINK = 'npr.org/foo'
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
-PRODUCTION_SERVERS = ['54.244.84.250']
+PRODUCTION_SERVERS = ['54.214.20.225']
 
 STAGING_S3_BUCKETS = ['stage-apps.npr.org']
-STAGING_SERVERS = ['54.244.169.197']
+STAGING_SERVERS = ['54.214.20.232']
 
 S3_BUCKETS = []
 SERVERS = []
@@ -67,10 +67,10 @@ def get_secrets():
         '%s_TUMBLR_OAUTH_TOKEN' % CONFIG_NAME,
         '%s_TUMBLR_OAUTH_TOKEN_SECRET' % CONFIG_NAME,
         '%s_TUMBLR_APP_SECRET' % CONFIG_NAME,
-        'AWS_SECRET_ACCESS_KEY',
-        'AWS_ACCESS_KEY_ID'
     ]
+
     secrets_dict = {}
+    
     for secret in secrets:
         # Saves the secret with the old name.
         secrets_dict[secret.replace('%s_' % CONFIG_NAME, '')] = os.environ.get(secret, None)
