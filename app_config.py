@@ -67,10 +67,10 @@ def get_secrets():
         '%s_TUMBLR_OAUTH_TOKEN' % CONFIG_NAME,
         '%s_TUMBLR_OAUTH_TOKEN_SECRET' % CONFIG_NAME,
         '%s_TUMBLR_APP_SECRET' % CONFIG_NAME,
-        'AWS_SECRET_ACCESS_KEY',
-        'AWS_ACCESS_KEY_ID'
     ]
+
     secrets_dict = {}
+    
     for secret in secrets:
         # Saves the secret with the old name.
         secrets_dict[secret.replace('%s_' % CONFIG_NAME, '')] = os.environ.get(secret, None)

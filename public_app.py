@@ -77,11 +77,13 @@ def _post_to_tumblr():
     with open('/var/www%s' % file_path, 'wb') as f:
         f.write(image)
 
+    secrets = app_config.get_secrets()
+
     t = Tumblpy(
-        app_key=os.environ['TUMBLR_APP_KEY'],
-        app_secret=os.environ['TUMBLR_APP_SECRET'],
-        oauth_token=os.environ['TUMBLR_OAUTH_TOKEN'],
-        oauth_token_secret=os.environ['TUMBLR_OAUTH_TOKEN_SECRET'])
+        app_key=secrets['TUMBLR_APP_KEY'],
+        app_secret=secrets['TUMBLR_APP_SECRET'],
+        oauth_token=secrets['TUMBLR_OAUTH_TOKEN'],
+        oauth_token_secret=secrets['TUMBLR_OAUTH_TOKEN_SECRET'])
 
     params = {
         "type": "photo",
