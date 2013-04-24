@@ -41,6 +41,13 @@ def test_widget():
     """
     return render_template('tumblr-form.html', **make_context())
 
+@app.route('/test-signs.html')
+def test_signs():
+    """
+    Example page displaying potential sign designs.
+    """
+    return render_template('test-signs.html', **make_context())
+
 # Render LESS files on-demand
 @app.route('/less/<string:filename>')
 def _less(filename):
