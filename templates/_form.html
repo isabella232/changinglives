@@ -16,22 +16,41 @@
                 <input type="hidden" name="image">
             </li>
             <li class="form-customize">
-                <label for="color">Pick a color:</label>
-                <input type="radio" name="color" value="teal" /><span class="teal">Teal</span>
-                <input type="radio" name="color" value="red" /><span class="red">Red</span>
-                <input type="radio" name="color" value="blue" /><span class="blue">Blue</span>
-                <input type="radio" name="color" value="gray" /><span class="gray">Gray</span>
+                <div class="form-color">
+                    <h3>Pick a color</h3>
+                    <input type="radio" name="color" id="color-teal" value="teal" checked="checked" />
+                        <label class="teal active" for="color-teal">Teal</label>
+                    <input type="radio" name="color" id="color-red" value="red" />
+                        <label class="red" for="color-red">Red</label>
+                    <input type="radio" name="color" id="color-blue" value="blue" />
+                        <label class="blue" for="color-blue">Blue</label>
+                    <input type="radio" name="color" id="color-gray" value="gray" />
+                        <label class="gray" for="color-gray">Gray</label>
+                </div>
                 
-                <label for="typeface">Pick a typeface:</label>
-                <input type="radio" name="typeface" value="Roboto Condensed" /><span class="roboto">Advice</span>
-                <input type="radio" name="typeface" value="Snippet" /><span class="snippet">Advice</span>
-                <input type="radio" name="typeface" value="Noto Serif" /><span class="noto">Advice</span>
-                <input type="radio" name="typeface" value="Quicksand" /><span class="quicksand">Advice</span>
+                <div class="form-typeface">
+                    <h3>Pick a typeface</h3>
+                    <input type="radio" name="typeface" id="type-roboto" value="Roboto Condensed" checked="checked" />
+                        <label class="roboto active" for="type-roboto">Advice</label>
+                    <input type="radio" name="typeface" id="type-snippet" value="Snippet" />
+                        <label class="snippet" for="type-snippet">Advice</label>
+                    <input type="radio" name="typeface" id="type-noto" value="Noto Serif" />
+                        <label class="noto" for="type-noto">Advice</label>
+                    <input type="radio" name="typeface" id="type-quicksand" value="Quicksand" />
+                        <label class="quicksand" for="type-quicksand">Advice</label>
+                </div>
                 
-                <label for="ornament">Pick an ornament:</label>
-                <input type="radio" name="color" value="flower-corner" /><span class="flower-corner">Flower Corner</span>
-                <input type="radio" name="color" value="swash-border" /><span class="swash-border">Swash Border</span>
-                <input type="radio" name="color" value="triangle-border" /><span class="triangle-border">Triangle Border</span>
+                <div class="form-ornament">
+                    <h3>Pick an ornament</h3>
+                    <input type="radio" name="ornament" id="ornament-none" value="no-border" checked="checked" />
+                        <label class="no-border active" for="ornament-none">No border</label>
+                    <input type="radio" name="ornament" id="ornament-flower" value="flower-corner" />
+                        <label class="flower-corner" for="ornament-flower">Flower Corner</label>
+                    <input type="radio" name="ornament" id="ornament-swash" value="swash-border" />
+                        <label class="swash-border" for="ornament-swash">Swash Border</label>
+                    <input type="radio" name="ornament" id="ornament-triangle" value="triangle-border" />
+                        <label class="triangle-border" for="ornament-triangle">Triangle Border</label>
+                </div>
             </li>
             <li class="form=message">
                 <label for="string">
@@ -45,7 +64,6 @@
                 </label>
                 <textarea name="message"></textarea>
             </li>
-    {{ JS.push('js/lib/cufon-yui.js') }}
             <li class="form-signature">
             <label for="signed_name">From,</label>
                 <input type="text" name="signed_name" placeholder="Your Initials" class="signed-name"></input>
@@ -84,7 +102,6 @@
     <![endif]-->
 
     <script type="text/javascript">
-
         $(document).ready(function() {
             var $preview = $('#preview');
             var preview_div = $preview[0];
@@ -103,34 +120,10 @@
                 var bg = preview.rect(0, 0, width, height);
                 bg.attr({ fill: '#000', 'stroke-width': 0 });
 
-                var font = preview.getFont('Quicksand');
-                var lines = text.split('\n');
-                var text_paths = [];
-                var line_height = 0;
-                var base_width = (width / 2);
-
-                for (var i = 0; i < lines.length; i++) {
-                    var line = lines[i];
-
-                    var text_path = preview.print(0, 0, line, font, 64, 'middle');
-                    
-                    var bbox = text_path.getBBox();
-                    text_path.translate(base_width - (bbox.width / 2), 0)
-                    line_height = Math.max(line_height, bbox.height);
-                    
-                    text_paths.push(text_path);
-                }
-
-                var lines_height = line_height * lines.length;
-                var base_height = (height / 2) - (lines_height / 2)
-
-                for (var i = 0; i < text_paths.length; i++) {
-                    var text_path = text_paths[i];
-
-                    text_path.translate(0, base_height + line_height * i);
-                    text_path.attr({ fill: '#fff' }); 
-                }
+                var lines = preview.text(width / 2, height / 2, text);
+                lines.attr({ fill: '#fff', 'font-family': 'CrossStitch', 'font-size': '64', 'text-anchor': 'middle' }); 
             }
+
             render('');
 
             $('textarea[name="string"]').keyup(function(e) {
@@ -156,6 +149,18 @@
                     $('.tumblr-form').html('<p>Sorry, iOS versions older than 6 are not supported.');
                 }
             }
+
+
+            var $customize = $('.form-customize');
+            var $customize_radio = $customize.find('input');
+            var $customize_labels = $customize.find('label');
+            console.log($customize_radio.length);
+            $customize_radio.click(function() {
+                console.log(this);
+                $(this).parents('div').children('label').removeClass('active');
+                $(this).next('label').addClass('active');
+                console.log($(this).parents('div'));
+            });
         });
     </script>
 </div>
