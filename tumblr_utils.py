@@ -218,17 +218,22 @@ def _render_output_template(posts, input_template, output_file):
     context = {}
     context['posts'] = posts
     with open(input_template,  'r') as read_template:
-        with open(output_file, 'wb') as write_template:
-            payload = Template(read_template.read())
-            write_template.write(payload.render(**context))
+        payload = Template(read_template.read())
+        return payload.render(**context)
 
 
-def _write_popular(post_list):
+def write_aggregates():
     """
-    Logic for determining the most popular posts.
-    Relies on app_config.NUMBER_OF_AGGREGATES to determine number of posts.
+    Most popular posts as defined by Tumblr notes.
     """
-    # Sort the results first.
+
+    # Call function to fetch posts.
+    post_list = fetch_posts()
+
+    return_obj = {}
+    return_obj['popular'] = None
+    return_obj['featured'] = None
+
     popular_list = sorted(post_list, key=lambda post: post['note_count'], reverse=True)
 
     popular_output = []
@@ -240,11 +245,8 @@ def _write_popular(post_list):
     popular_output = sorted(popular_output, key=lambda post: post['note_count'], reverse=True)
 
     # Call funtion to write file.
-    _render_output_template(popular_output, 'templates/_post_list.html', 'www/aggregates_popular.html')
+    return_obj['popular'] = _render_output_template(popular_output, 'templates/_post_list.html', 'www/aggregates_popular.html')
 
-
-def _write_featured(post_list):
-    # Sort the results first.
     featured_list = sorted(post_list, key=lambda post: post['timestamp'], reverse=True)
 
     featured_output = []
@@ -260,28 +262,19 @@ def _write_featured(post_list):
     featured_output = sorted(featured_output, key=lambda post: post['timestamp'], reverse=True)
 
     # Call funtion to write file.
-    _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_post_list.html', 'www/aggregates_featured.html')
+    return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_post_list.html', 'www/aggregates_featured.html')
 
-
-def write_aggregates():
-    """
-    Most popular posts as defined by Tumblr notes.
-    """
-
-    # Call function to fetch posts.
-    post_list = fetch_posts()
-    _write_popular(post_list)
-    _write_featured(post_list)
+    with open('www/aggregates.json', 'wb') as json_file:
+        json_file.write("aggregateCallback(%s)" % json.dumps(return_obj))
 
 
 def deploy_aggregates(s3_buckets):
     """
     Control function for deploying the aggregate files.
     """
-    for output_file in ['aggregates_featured', 'aggregates_popular']:
-        file_name = '%s.html' % output_file
-        file_path = 'www/%s' % file_name
-        _deploy_file(s3_buckets, file_path, file_name)
+    file_name = 'aggregates.json'
+    file_path = 'www/%s' % file_name
+    _deploy_file(s3_buckets, file_path, file_name)
 
 
 def write_test_posts():
