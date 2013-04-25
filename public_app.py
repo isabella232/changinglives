@@ -74,7 +74,6 @@ def _post_to_tumblr():
         f.write(svg.encode('utf-8'))
 
     command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
-    logger.info(command)
     args = shlex.split(command)
     subprocess.call(args)
 
@@ -96,9 +95,6 @@ def _post_to_tumblr():
         oauth_token=secrets['TUMBLR_OAUTH_TOKEN'],
         oauth_token_secret=secrets['TUMBLR_OAUTH_TOKEN_SECRET'])
     
-    logger.info(secrets['TUMBLR_APP_KEY'])
-    logger.info("http://%s%s" % (app_config.SERVERS[0], png_path))
-
     params = {
         "type": "photo",
         "caption": caption,
