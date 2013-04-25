@@ -74,7 +74,9 @@ def _post_to_tumblr():
         f.write(svg.encode('utf-8'))
 
     command = shlex.split('cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path))
-    subprocess.call(command)
+    logger.info(command)
+    args = shlex.split(command)
+    subprocess.call(args)
 
     context = {
         'message': message,
