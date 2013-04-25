@@ -23,6 +23,7 @@
                 </label>
                 <textarea name="message"></textarea>
             </li>
+    {{ JS.push('js/lib/cufon-yui.js') }}
             <li class="form-signature">
             <label for="signed_name">Initialed,</label>
                 <input type="text" name="signed_name" placeholder="Your Initials" class="signed-name"></input>
@@ -79,10 +80,34 @@
                 var bg = preview.rect(0, 0, width, height);
                 bg.attr({ fill: '#000', 'stroke-width': 0 });
 
-                var lines = preview.text(width / 2, height / 2, text);
-                lines.attr({ fill: '#fff', 'font-family': 'CrossStitch', 'font-size': '64', 'text-anchor': 'middle' }); 
-            }
+                var font = preview.getFont('Quicksand');
+                var lines = text.split('\n');
+                var text_paths = [];
+                var line_height = 0;
+                var base_width = (width / 2);
 
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i];
+
+                    var text_path = preview.print(0, 0, line, font, 64, 'middle');
+                    
+                    var bbox = text_path.getBBox();
+                    text_path.translate(base_width - (bbox.width / 2), 0)
+                    line_height = Math.max(line_height, bbox.height);
+                    
+                    text_paths.push(text_path);
+                }
+
+                var lines_height = line_height * lines.length;
+                var base_height = (height / 2) - (lines_height / 2)
+
+                for (var i = 0; i < text_paths.length; i++) {
+                    var text_path = text_paths[i];
+
+                    text_path.translate(0, base_height + line_height * i);
+                    text_path.attr({ fill: '#fff' }); 
+                }
+            }
             render('');
 
             $('textarea[name="string"]').keyup(function(e) {
