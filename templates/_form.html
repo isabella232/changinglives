@@ -12,7 +12,7 @@
                 <p>This is some text for the form kicker.</p>
                 </li>
             <li class="form-photo">
-                <div id="preview" style="width: 600px; height:300px;"></div>
+                <div id="preview" style="width: 640px; height: 480px;"></div>
                 <input type="hidden" name="image">
                 <label for="string">Enter your message:</label>
                 <textarea name="string"></textarea>
@@ -61,6 +61,13 @@
     <![endif]-->
 
     <script type="text/javascript">
+        var BG_COLOR = '#787878';
+        var DOT_COLOR = '#444';
+        var FONT_NAME = 'Quicksand';
+        var FONT_COLOR = '#fff';
+        var FONT_SIZE = 120;
+        var LINE_HEIGHT = 110;
+        var X_DOTS = 64;
 
         $(document).ready(function() {
             var $preview = $('#preview');
@@ -72,42 +79,57 @@
 
             var preview = new Raphael(preview_div, $preview.width(), $preview.height());
     
+            var width = $preview.width();
+            var height = $preview.height();
+
+            var bg = preview.rect(0, 0, width, height);
+            bg.attr({ fill: BG_COLOR, 'stroke-width': 0 });
+
+            var y_dots = X_DOTS * (height / width)
+            var x_pitch = width / X_DOTS;
+            var y_pitch = height / y_dots;
+
+            for (var x = 1; x < X_DOTS; x++) {
+                for (var y = 1; y < y_dots; y++) {
+                    preview.circle(x * x_pitch, y * y_pitch, 1).attr({ fill: DOT_COLOR, 'stroke-width': 0 });
+                }
+            }
+
+            var font = preview.getFont(FONT_NAME);
+            var text_paths = [];
+            
             function render(text) {
-                var width = $preview.width();
-                var height = $preview.height();
-                preview.clear();
+                for (var i = 0; i < text_paths.length; i++) {
+                    text_paths[i].remove();
+                }
 
-                var bg = preview.rect(0, 0, width, height);
-                bg.attr({ fill: '#000', 'stroke-width': 0 });
+                text_paths = [];
 
-                var font = preview.getFont('Quicksand');
                 var lines = text.split('\n');
-                var text_paths = [];
-                var line_height = 0;
+                var lines_height = LINE_HEIGHT * lines.length;
                 var base_width = (width / 2);
 
                 for (var i = 0; i < lines.length; i++) {
                     var line = lines[i];
 
-                    var text_path = preview.print(0, 0, line, font, 64, 'middle');
+                    var text_path = preview.print(0, 0, line, font, FONT_SIZE, 'middle');
                     
                     var bbox = text_path.getBBox();
                     text_path.translate(base_width - (bbox.width / 2), 0)
-                    line_height = Math.max(line_height, bbox.height);
                     
                     text_paths.push(text_path);
                 }
 
-                var lines_height = line_height * lines.length;
                 var base_height = (height / 2) - (lines_height / 2)
 
                 for (var i = 0; i < text_paths.length; i++) {
                     var text_path = text_paths[i];
 
-                    text_path.translate(0, base_height + line_height * i);
-                    text_path.attr({ fill: '#fff' }); 
+                    text_path.translate(0, base_height + LINE_HEIGHT * i);
+                    text_path.attr({ fill: FONT_COLOR }); 
                 }
             }
+
             render('');
 
             $('textarea[name="string"]').keyup(function(e) {
