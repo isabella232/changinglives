@@ -4,6 +4,8 @@ import datetime
 import logging
 import os
 import re
+import shlex
+import subprocess
 import time
 import urllib
 
@@ -57,25 +59,30 @@ def _post_to_tumblr():
 
     name = strip_html(request.form.get('signed_name', None))
 
-    image = request.form.get('image', None)
+    svg = request.form.get('image', None)
 
-    image = image.replace('data:image/jpeg;base64,', '').decode('base64')
-
-    file_path = '/uploads/%s/%s_%s.jpg' % (
+    file_path = '/uploads/%s/%s_%s' % (
         app_config.PROJECT_SLUG,
         str(time.mktime(datetime.datetime.now().timetuple())).replace('.', ''),
         secure_filename(name.replace(' ', '-'))
     )
 
-    with open('/var/www%s' % file_path, 'wb') as f:
-        f.write(image)
+    svg_path = file_path + '.svg'
+    png_path = file_path + '.png'
+
+    with open('/var/www%s' % svg_path, 'wb') as f:
+        f.write(svg.encode('utf-8'))
+
+    command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
+    args = shlex.split(command)
+    subprocess.call(args)
 
     context = {
         'message': message,
         'message_urlencoded': urllib.quote(message),
         'name': name,
         'app_config': app_config,
-        'image_url_urlencoded': urllib.quote('http://%s/%s' % (app_config.SERVERS[0], file_path))
+        'image_url_urlencoded': urllib.quote('http://%s%s' % (app_config.SERVERS[0], png_path))
     }
 
     caption = render_template('caption.html', **context)
@@ -87,12 +94,12 @@ def _post_to_tumblr():
         app_secret=secrets['TUMBLR_APP_SECRET'],
         oauth_token=secrets['TUMBLR_OAUTH_TOKEN'],
         oauth_token_secret=secrets['TUMBLR_OAUTH_TOKEN_SECRET'])
-
+    
     params = {
         "type": "photo",
         "caption": caption,
         "tags": app_config.TUMBLR_TAGS,
-        "source": "http://%s%s" % (app_config.SERVERS[0], file_path)
+        "source": "http://%s%s" % (app_config.SERVERS[0], png_path)
     }
 
     try:
@@ -104,7 +111,7 @@ def _post_to_tumblr():
 
     except TumblpyError, e:
         logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
-            e.error_code, e.msg, app_config.SERVERS[0], file_path, name))
+            e.error_code, e.msg, app_config.SERVERS[0], svg_path, name))
         return 'TUMBLR ERROR'
 
     return redirect('%s#posts' % tumblr_url, code=301)
