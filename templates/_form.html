@@ -91,6 +91,8 @@
         var FONT_SIZE = 120;
         var LINE_HEIGHT = 110;
         var X_DOTS = 64;
+        var X_OFFSET = 16;
+        var Y_OFFSET = 36;
 
         $(document).ready(function() {
             var $preview = $('#preview');
@@ -130,7 +132,7 @@
 
                 var lines = text.split('\n');
                 var lines_height = LINE_HEIGHT * lines.length;
-                var base_width = (width / 2);
+                var base_width = (width / 2) - X_OFFSET;
 
                 for (var i = 0; i < lines.length; i++) {
                     var line = lines[i];
@@ -143,7 +145,7 @@
                     text_paths.push(text_path);
                 }
 
-                var base_height = (height / 2) - (lines_height / 2)
+                var base_height = (height / 2) - (lines_height / 2 - Y_OFFSET)
 
                 for (var i = 0; i < text_paths.length; i++) {
                     var text_path = text_paths[i];
