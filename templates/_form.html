@@ -81,14 +81,33 @@
                 bg.attr({ fill: '#000', 'stroke-width': 0 });
 
                 var font = preview.getFont('Quicksand');
-                var lines = preview.print(width / 2, height / 2, text, font, 64, 'middle');
-                lines.attr({ fill: '#fff' }); 
+                var lines = text.split('\n');
+                var text_paths = [];
+                var line_height = 0;
+                var base_width = (width / 2);
 
-                var bbox = lines.getBBox();
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i];
 
-                lines.translate(-(bbox.width / 2), -(bbox.height / 2));
+                    var text_path = preview.print(0, 0, line, font, 64, 'middle');
+                    
+                    var bbox = text_path.getBBox();
+                    text_path.translate(base_width - (bbox.width / 2), 0)
+                    line_height = Math.max(line_height, bbox.height);
+                    
+                    text_paths.push(text_path);
+                }
+
+                var lines_height = line_height * lines.length;
+                var base_height = (height / 2) - (lines_height / 2)
+
+                for (var i = 0; i < text_paths.length; i++) {
+                    var text_path = text_paths[i];
+
+                    text_path.translate(0, base_height + line_height * i);
+                    text_path.attr({ fill: '#fff' }); 
+                }
             }
-
             render('');
 
             $('textarea[name="string"]').keyup(function(e) {
