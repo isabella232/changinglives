@@ -27,6 +27,8 @@ S3_BUCKETS = []
 SERVERS = []
 DEBUG = True
 
+NUMBER_OF_AGGREGATES = 10
+
 PROJECT_DESCRIPTION = 'An opinionated project template for client-side apps.'
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 
@@ -70,7 +72,7 @@ def get_secrets():
     ]
 
     secrets_dict = {}
-    
+
     for secret in secrets:
         # Saves the secret with the old name.
         secrets_dict[secret.replace('%s_' % CONFIG_NAME, '')] = os.environ.get(secret, None)

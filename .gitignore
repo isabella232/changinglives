@@ -31,6 +31,7 @@ pip-log.txt
 gzip
 
 node_modules
+www/aggregates_*.html
 www/*.html
 www/css/*.min.css
 www/css/*.less.css
