@@ -20,7 +20,7 @@
             background: #A23520 url('img/aida-pattern.png') repeat;
             color: #fff;
             margin-bottom: 1em;
-            height: 600px;
+            height: 503px;
             display: table;
             width: 48%;
             margin-right: 2%;
@@ -41,33 +41,39 @@
         #sample3 h1 { font-size: 70px; font-family: 'Snippet', sans-serif; }
         #sample4 h1 { font-family: 'Noto Serif', serif; }
         #sample5 h1 { font-size: 150px; font-family: 'Geo', sans-serif; }
-        #sample6 h1 { font-size: 150px; font-family: 'Quicksand', sans-serif; }
+        #sample6 h1 { font-size: 100px; line-height: .9; font-family: 'Quicksand', sans-serif; text-transform: uppercase; }
         
-        #sample1 .ornament {
+        #sample2 { background-color: #AA6A21; }
+        #sample3 { background-color: #B39429; }
+        #sample4 { background-color: #11605E; }
+        #sample5 { background-color: #3D7FA6; }
+        #sample6 { background-color: #787878; }
+
+        .flower-corner .corner {
             background: url('img/corner-1.png') no-repeat;
             height: 41px;
             width: 41px;
             position: absolute;
         }
-        #sample1 .ornament1 {       
+        .flower-corner .corner1 {       
             top: 9px;
             left: 9px;
         }
-        #sample1 .ornament2 {
+        .flower-corner .corner2 {
             transform:rotate(90deg);
             -ms-transform:rotate(90deg); /* IE 9 */
             -webkit-transform:rotate(90deg); /* Safari and Chrome */
             top: 9px;
             right: 9px;
         }
-        #sample1 .ornament3 {
+        .flower-corner .corner3 {
             transform:rotate(180deg);
             -ms-transform:rotate(180deg); /* IE 9 */
             -webkit-transform:rotate(180deg); /* Safari and Chrome */
             bottom: 9px;
             right: 9px;
         }
-        #sample1 .ornament4 {
+        .flower-corner .corner4 {
             transform:rotate(270deg);
             -ms-transform:rotate(270deg); /* IE 9 */
             -webkit-transform:rotate(270deg); /* Safari and Chrome */
@@ -75,40 +81,67 @@
             left: 9px;
         }
         
-        #sample2 {
-            background-color: #AA6A21;
+        .swash-border .border {
+            background: url('img/flourish-1.png') no-repeat;
+            width: 209px;
+            height: 35px;
+            position: absolute;
+            margin-left: -105px; /* half the width of the flourish */
         }
-        #sample3 {
-            background-color: #B39429;
+        .swash-border .border1 {
+            top: 51px;
+            left: 50%;
         }
-        #sample4 {
-            background-color: #11605E;
+        .swash-border .border2 {
+            bottom: 51px;
+            left: 50%;
+            transform:rotate(180deg);
+            -ms-transform:rotate(180deg); /* IE 9 */
+            -webkit-transform:rotate(180deg); /* Safari and Chrome */
         }
-        #sample5 {
-            background-color: #3D7FA6;
+
+        .triangle-border .border {
+            background: url('img/flourish-3.png') no-repeat;
+            width: 329px;
+            height: 17px;
+            position: absolute;
+            margin-left: -165px; /* half the width of the flourish */
         }
-        #sample6 {
-            background-color: #787878;
+        .triangle-border .border1 {
+            top: 27px;
+            left: 50%;
         }
+        .triangle-border .border2 {
+            bottom: 27px;
+            left: 50%;
+            transform:rotate(180deg);
+            -ms-transform:rotate(180deg); /* IE 9 */
+            -webkit-transform:rotate(180deg); /* Safari and Chrome */
+        }
+
     </style>
 </head>
 <body>
 
 
-<section id="sample1">
+<section id="sample1" class="triangle-border">
     <h1>Confidence<br />is your best friend.</h1>
-    <div class="ornament ornament1"></div>
-    <div class="ornament ornament2"></div>
-    <div class="ornament ornament3"></div>
-    <div class="ornament ornament4"></div>
+    <div class="border border1"></div>
+    <div class="border border2"></div>
 </section>
 
-<section id="sample2">
+<section id="sample2" class="swash-border">
     <h1>Take more chances.</h1>
+    <div class="border border1"></div>
+    <div class="border border2"></div>
 </section>
 
-<section id="sample3">
+<section id="sample3" class="flower-corner">
     <h1>Don't wait<br />for the perfect thing<br />to come along.<br />Make it.</h1>
+    <div class="corner corner1"></div>
+    <div class="corner corner2"></div>
+    <div class="corner corner3"></div>
+    <div class="corner corner4"></div>
 </section>
 
 <section id="sample4">
@@ -120,7 +153,7 @@
 </section>
 
 <section id="sample6">
-    <h1>Be present.</h1>
+    <h1>Be present</h1>
 </section>
 
 </body>

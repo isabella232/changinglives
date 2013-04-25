@@ -4,7 +4,6 @@ nprapps' Project Template
 * [About this template](#about-this-template)
 * [Assumptions](#assumptions)
 * [What's in here?](#whats-in-here)
-* [Copy the template](#copy-the-template)
 * [Configure the project](#configure-the-project)
 * [Tumblog setup](#tumblog-setup)
 * [Install requirements](#install-requirements)
@@ -67,26 +66,6 @@ The project contains the following folders and important files:
 * ``render_utils.py`` -- Code supporting template rendering.
 * ``requirements.txt`` -- Python requirements.
 
-Copy the template
------------------
-
-Create a new repository on Github. Everywhere you see ``$NEW_PROJECT_NAME`` in the following script, replace it with the name of the repository you just created.
-
-```
-git clone git@github.com:nprapps/app-template.git $NEW_PROJECT_NAME
-cd $NEW_PROJECT_NAME
-
-# Optional: checkout an initial project branch
-# git checkout [init-map|init-table|init-chat]
-
-rm -rf .git
-git init
-git add * .gitignore
-git commit -am "Initial import from app-template."
-git remote add origin git@github.com:nprapps/$NEW_PROJECT_NAME.git
-git push -u origin master
-```
-
 Configure the project
 ---------------------
 
@@ -135,9 +114,9 @@ curl https://npmjs.org/install.sh | sh
 Then install the project requirements:
 
 ```
-cd $NEW_PROJECT_NAME
+cd changinglives
 npm install less universal-jst
-mkvirtualenv $NEW_PROJECT_NAME
+mkvirtualenv changinglives
 pip install -r requirements.txt
 ```
 
@@ -165,7 +144,7 @@ Run the project locally
 
 A flask app is used to run the project locally. It will automatically recompile templates and assets on demand.
 ```
-workon $NEW_PROJECT_NAME
+workon changinglives
 python app.py
 ```
 
@@ -242,7 +221,7 @@ Compile static assets
 Compile LESS to CSS, compile javascript templates to Javascript and minify all assets:
 
 ```
-workon $NEW_PROJECT_NAME
+workon changinglives
 fab render
 ```
 
