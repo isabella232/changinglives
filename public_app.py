@@ -83,7 +83,7 @@ def _post_to_tumblr():
         'message_urlencoded': urllib.quote(message),
         'name': name,
         'app_config': app_config,
-        'image_url_urlencoded': urllib.quote('http://%s/%s' % (app_config.SERVERS[0], png_path))
+        'image_url_urlencoded': urllib.quote('http://%s%s' % (app_config.SERVERS[0], png_path))
     }
 
     caption = render_template('caption.html', **context)
@@ -95,6 +95,9 @@ def _post_to_tumblr():
         app_secret=secrets['TUMBLR_APP_SECRET'],
         oauth_token=secrets['TUMBLR_OAUTH_TOKEN'],
         oauth_token_secret=secrets['TUMBLR_OAUTH_TOKEN_SECRET'])
+    
+    print secrets['TUMBLR_APP_KEY']
+    print "http://%s%s" % (app_config.SERVERS[0], png_path)
 
     params = {
         "type": "photo",
