@@ -202,8 +202,8 @@ def setup_directories():
     require('settings', provided_by=[production, staging])
 
     run('mkdir -p %(path)s' % env)
-    sudo('chmod -R 777 /var/www/uploads')
     run('mkdir -p /var/www/uploads/%s' % app_config.PROJECT_SLUG)
+    sudo('chmod -R 777 /var/www/uploads')
 
 def setup_virtualenv():
     """

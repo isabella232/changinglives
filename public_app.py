@@ -72,6 +72,8 @@ def _post_to_tumblr():
     with open('/var/www%s' % svg_path, 'wb') as f:
         f.write(svg.encode('utf-8'))
 
+    os.chmod('/var/www%s' % svg_path, 777)
+
     envoy.run('cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path))
 
     context = {
