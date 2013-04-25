@@ -73,11 +73,17 @@ def create_default_labels(auth):
 
 def create_default_tickets(auth):
     """
-    Creates default tickets it Github issues.
+    Creates default tickets in Github issues.
+    """
+    create_tickets('etc/default_tickets.csv')
+        
+def create_tickets(auth, filename):
+    """
+    Creates tickets in Github issues.
     """
     url = 'https://api.github.com/repos/%s/issues' % get_repo_path()
 
-    with open('etc/default_tickets.csv') as f:
+    with open(filename) as f:
         tickets = list(csv.DictReader(f))
 
     print 'Creating %i tickets' % len(tickets)
@@ -94,4 +100,4 @@ def create_default_tickets(auth):
 
         data = json.dumps(ticket)
 
-        requests.post(url, data=data, auth=auth) 
+        requests.post(url, data=data, auth=auth)
