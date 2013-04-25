@@ -5,6 +5,7 @@ import logging
 import os
 import re
 import time
+import urllib
 
 from flask import Flask, redirect, render_template
 from jinja2.filters import escape, do_mark_safe
@@ -60,22 +61,24 @@ def _post_to_tumblr():
 
     image = image.replace('data:image/jpeg;base64,', '').decode('base64')
 
-    context = {
-        'message': message,
-        'name': name,
-        'app_config': app_config
-    }
-
-    caption = render_template('caption.html', **context)
-
     file_path = '/uploads/%s/%s_%s.jpg' % (
         app_config.PROJECT_SLUG,
         str(time.mktime(datetime.datetime.now().timetuple())).replace('.', ''),
-        secure_filename(context['name'].replace(' ', '-'))
+        secure_filename(name.replace(' ', '-'))
     )
 
     with open('/var/www%s' % file_path, 'wb') as f:
         f.write(image)
+
+    context = {
+        'message': message,
+        'message_urlencoded': urllib.quote(message),
+        'name': name,
+        'app_config': app_config,
+        'image_url_urlencoded': urllib.quote('http://%s/%s' % (app_config.SERVERS[0], file_path))
+    }
+
+    caption = render_template('caption.html', **context)
 
     secrets = app_config.get_secrets()
 
