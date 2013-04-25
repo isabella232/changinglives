@@ -12,32 +12,32 @@
                 <p>This is some text for the form kicker.</p>
                 </li>
             <li class="form-photo">
-                <div id="preview" style="width: 600px; height:300px;"></div>
+                <div id="preview" style="width: 640px; height: 480px;"></div>
                 <input type="hidden" name="image">
             </li>
             <li class="form-customize">
                 <div class="form-color">
                     <h3>Pick a color</h3>
-                    <input type="radio" name="color" id="color-teal" value="teal" checked="checked" />
-                        <label class="teal active" for="color-teal">Teal</label>
+                    <input type="radio" name="color" id="color-teal" value="teal" />
+                        <label class="teal" for="color-teal">Teal</label>
                     <input type="radio" name="color" id="color-red" value="red" />
                         <label class="red" for="color-red">Red</label>
                     <input type="radio" name="color" id="color-blue" value="blue" />
                         <label class="blue" for="color-blue">Blue</label>
-                    <input type="radio" name="color" id="color-gray" value="gray" />
-                        <label class="gray" for="color-gray">Gray</label>
+                    <input type="radio" name="color" id="color-gray" value="gray" checked="checked" />
+                        <label class="gray active" for="color-gray">Gray</label>
                 </div>
                 
                 <div class="form-typeface">
                     <h3>Pick a typeface</h3>
-                    <input type="radio" name="typeface" id="type-roboto" value="Roboto Condensed" checked="checked" />
-                        <label class="roboto active" for="type-roboto">Advice</label>
+                    <input type="radio" name="typeface" id="type-roboto" value="Roboto Condensed" />
+                        <label class="roboto" for="type-roboto">Advice</label>
                     <input type="radio" name="typeface" id="type-snippet" value="Snippet" />
                         <label class="snippet" for="type-snippet">Advice</label>
                     <input type="radio" name="typeface" id="type-noto" value="Noto Serif" />
                         <label class="noto" for="type-noto">Advice</label>
-                    <input type="radio" name="typeface" id="type-quicksand" value="Quicksand" />
-                        <label class="quicksand" for="type-quicksand">Advice</label>
+                    <input type="radio" name="typeface" id="type-quicksand" value="Quicksand" checked="checked" />
+                        <label class="quicksand active" for="type-quicksand">Advice</label>
                 </div>
                 
                 <div class="form-ornament">
@@ -102,6 +102,16 @@
     <![endif]-->
 
     <script type="text/javascript">
+        var BG_COLOR = '#787878';
+        var DOT_COLOR = '#444';
+        var FONT_NAME = 'Quicksand';
+        var FONT_COLOR = '#fff';
+        var FONT_SIZE = 120;
+        var LINE_HEIGHT = 110;
+        var X_DOTS = 64;
+        var X_OFFSET = 16;
+        var Y_OFFSET = 36;
+
         $(document).ready(function() {
             var $preview = $('#preview');
             var preview_div = $preview[0];
@@ -112,16 +122,55 @@
 
             var preview = new Raphael(preview_div, $preview.width(), $preview.height());
     
+            var width = $preview.width();
+            var height = $preview.height();
+
+            var bg = preview.rect(0, 0, width, height);
+            bg.attr({ fill: BG_COLOR, 'stroke-width': 0 });
+
+            var y_dots = X_DOTS * (height / width)
+            var x_pitch = width / X_DOTS;
+            var y_pitch = height / y_dots;
+
+            for (var x = 1; x < X_DOTS; x++) {
+                for (var y = 1; y < y_dots; y++) {
+                    preview.circle(x * x_pitch, y * y_pitch, 1).attr({ fill: DOT_COLOR, 'stroke-width': 0 });
+                }
+            }
+
+            var font = preview.getFont(FONT_NAME);
+            var text_paths = [];
+            
             function render(text) {
-                var width = $preview.width();
-                var height = $preview.height();
-                preview.clear();
+                for (var i = 0; i < text_paths.length; i++) {
+                    text_paths[i].remove();
+                }
 
-                var bg = preview.rect(0, 0, width, height);
-                bg.attr({ fill: '#000', 'stroke-width': 0 });
+                text_paths = [];
 
-                var lines = preview.text(width / 2, height / 2, text);
-                lines.attr({ fill: '#fff', 'font-family': 'CrossStitch', 'font-size': '64', 'text-anchor': 'middle' }); 
+                var lines = text.split('\n');
+                var lines_height = LINE_HEIGHT * lines.length;
+                var base_width = (width / 2) - X_OFFSET;
+
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i];
+
+                    var text_path = preview.print(0, 0, line, font, FONT_SIZE, 'middle');
+                    
+                    var bbox = text_path.getBBox();
+                    text_path.translate(base_width - (bbox.width / 2), 0)
+                    
+                    text_paths.push(text_path);
+                }
+
+                var base_height = (height / 2) - (lines_height / 2 - Y_OFFSET)
+
+                for (var i = 0; i < text_paths.length; i++) {
+                    var text_path = text_paths[i];
+
+                    text_path.translate(0, base_height + LINE_HEIGHT * i);
+                    text_path.attr({ fill: FONT_COLOR }); 
+                }
             }
 
             render('');
