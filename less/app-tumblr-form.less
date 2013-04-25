@@ -24,7 +24,7 @@ a {
     max-width: 600px;
     margin: 0 auto;
     padding-top: 10px;
-
+    
     h2 {
         color: #333;
         font-style: italic;
@@ -110,6 +110,50 @@ a {
         background-color: #becfe6;
         cursor: default;
         opacity: 1.0;
+    }
+    
+    .form-customize {
+        span {
+            display: inline-block;
+            width: 44px;
+            height: 44px;
+            text-indent: -9999px;
+            
+            // ornaments
+            &.flower-corner {
+                background: url('../img/preview-corner-1.gif') no-repeat 50% 50%;
+            }
+            &.swash-border {
+                background: url('../img/preview-flourish-1.gif') no-repeat 50% 50%;
+            }
+            &.triangle-border {
+                background: url('../img/preview-flourish-3.gif') no-repeat 50% 50%;
+            }
+            
+            // type
+            &.roboto {
+                background: #787878 url('../img/preview-roboto.png') no-repeat 50% 50%;
+                width: 88px;
+            }
+            &.snippet {
+                background: #787878 url('../img/preview-snippet.png') no-repeat 50% 50%;
+                width: 88px;
+            }
+            &.noto {
+                background: #787878 url('../img/preview-noto.png') no-repeat 50% 50%;
+                width: 88px;
+            }
+            &.quicksand {
+                background: #787878 url('../img/preview-quicksand.png') no-repeat 50% 50%;
+                width: 88px;
+            }
+            
+            // colors
+            &.teal { background-color: #11605E; }
+            &.red { background-color: #A23520; }
+            &.blue { background-color: #3D7FA6; }
+            &.gray { background-color: #787878; }
+        }
     }
 }
 
