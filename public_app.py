@@ -73,7 +73,7 @@ def _post_to_tumblr():
     with open('/var/www%s' % svg_path, 'wb') as f:
         f.write(svg.encode('utf-8'))
 
-    command = 'cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
+    command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
     logger.info(command)
     args = shlex.split(command)
     subprocess.call(args)
