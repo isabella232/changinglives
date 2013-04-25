@@ -4,10 +4,11 @@ import datetime
 import logging
 import os
 import re
+import shlex
+import subprocess
 import time
 import urllib
 
-import envoy
 from flask import Flask, redirect, render_template
 from jinja2.filters import escape, do_mark_safe
 from tumblpy import Tumblpy
@@ -72,8 +73,8 @@ def _post_to_tumblr():
     with open('/var/www%s' % svg_path, 'wb') as f:
         f.write(svg.encode('utf-8'))
 
-    envoy.run('chmod 777 /var/www%s' % svg_path)
-    envoy.run('cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path))
+    command = shlex.split('cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path))
+    subprocess.call(command)
 
     context = {
         'message': message,
