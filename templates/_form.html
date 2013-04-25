@@ -12,9 +12,7 @@
                 <p>This is some text for the form kicker.</p>
                 </li>
             <li class="form-photo">
-                <canvas width="600" height="300">
-                </canvas>
-                <img id="background" src="img/dinoriders.jpg" style="display: none; "/>
+                <div id="preview" style="width: 600px; height:300px;"></div>
                 <input type="hidden" name="image">
                 <label for="string">Enter your message:</label>
                 <textarea name="string"></textarea>
@@ -64,44 +62,30 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-            var canvas = $("canvas")[0];
-            var bg = $("#background")[0];
+            var $preview = $('#preview');
+            var preview_div = $preview[0];
 
-            if (!canvas.getContext) {    
-                alert("Your browser doesn't support canvas. Things will be broken.");
+            if (!Raphael.svg) {
+                alert('Your browser doesn\'t support SVG, so this will be broken.');
             }
+
+            var preview = new Raphael(preview_div, $preview.width(), $preview.height());
     
             function render(text) {
-                var ctx = canvas.getContext('2d');
+                var width = $preview.width();
+                var height = $preview.height();
+                preview.clear();
 
-                //ctx.fillStyle = "black";
-                //ctx.fillRect(0, 0, 600, 300);
-                ctx.drawImage(bg, 0, 0, 600, 300);
+                var bg = preview.rect(0, 0, width, height);
+                bg.attr({ fill: '#000', 'stroke-width': 0 });
 
-                ctx.fillStyle = "rgb(30, 30, 200)";
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = "rgb(230, 230, 230)";
-
-                var lines = text.split("\n");
-
-                line_height = 70;
-                base = 280 - line_height * (lines.length - 1);
-
-                for (i = 0; i < lines.length; i++) {
-                    line = lines[i];
-                    y = base + i * line_height;
-
-                    ctx.font = "64pt CrossStitch"
-                    ctx.textAlign = "center";
-                    ctx.textBaseline = "bottom";
-                    ctx.fillText(line, 300, y);
-                    //ctx.strokeText(line, 300, y);
-                }
+                var lines = preview.text(width / 2, height / 2, text);
+                lines.attr({ fill: '#fff', 'font-family': 'CrossStitch', 'font-size': '64', 'text-anchor': 'middle' }); 
             }
 
-            render("");
+            render('');
 
-            $("textarea[name='string']").keyup(function(e) {
+            $('textarea[name="string"]').keyup(function(e) {
                 render($(this).val());    
             });
 
@@ -111,8 +95,8 @@
                 btn.text('Sending, please wait...');
                 // btn.attr('disabled', 'disabled');
 
-                $("input[name='image']").val(canvas.toDataURL("image/jpeg"));
-                        
+                $('input[name="image"]').val($preview.html());
+
                 return true;
             });
 

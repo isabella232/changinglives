@@ -7,6 +7,7 @@ import re
 import time
 import urllib
 
+import envoy
 from flask import Flask, redirect, render_template
 from jinja2.filters import escape, do_mark_safe
 from tumblpy import Tumblpy
@@ -57,25 +58,28 @@ def _post_to_tumblr():
 
     name = strip_html(request.form.get('signed_name', None))
 
-    image = request.form.get('image', None)
+    svg = request.form.get('image', None)
 
-    image = image.replace('data:image/jpeg;base64,', '').decode('base64')
-
-    file_path = '/uploads/%s/%s_%s.jpg' % (
+    file_path = '/uploads/%s/%s_%s' % (
         app_config.PROJECT_SLUG,
         str(time.mktime(datetime.datetime.now().timetuple())).replace('.', ''),
         secure_filename(name.replace(' ', '-'))
     )
 
-    with open('/var/www%s' % file_path, 'wb') as f:
-        f.write(image)
+    svg_path = file_path + '.svg'
+    png_path = file_path + '.png'
+
+    with open('/var/www%s' % svg_path, 'wb') as f:
+        f.write(svg.encode('utf-8'))
+
+    envoy.run('cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path))
 
     context = {
         'message': message,
         'message_urlencoded': urllib.quote(message),
         'name': name,
         'app_config': app_config,
-        'image_url_urlencoded': urllib.quote('http://%s/%s' % (app_config.SERVERS[0], file_path))
+        'image_url_urlencoded': urllib.quote('http://%s/%s' % (app_config.SERVERS[0], png_path))
     }
 
     caption = render_template('caption.html', **context)
