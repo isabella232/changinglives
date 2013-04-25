@@ -1,46 +1,19 @@
 #!/usr/bin/env python
 
-import datetime
 import gzip
 import json
 import os
+from random import choice
 from sets import *
-import time as pytime
 import urlparse
 
 import boto
+from jinja2 import Template
 import oauth2 as oauth
 import requests
 from tumblpy import Tumblpy
 
 import app_config
-
-
-def _parse_log():
-    with open(app_config.LOG_PATH, 'rb') as f:
-        output_dict = {}
-        for line in f:
-            entry_dict = {}
-            l = line.split(' ')
-            date = l[0]
-            time = l[1]
-            timestamp = datetime.datetime.strptime("%s %s" % (date, time), "%Y-%m-%d %H:%M:%S,%f")
-            entry_dict['timestamp'] = pytime.mktime(timestamp.timetuple())
-            entry_dict['msg_type'] = l[2]
-            entry_dict['msg_code'] = l[3]
-            info = l[4:]
-            output_dict.setdefault(date, {})
-            output_dict[date].setdefault(str(timestamp.hour), {})
-            output_dict[date][str(timestamp.hour)].setdefault('items', [])
-            output_dict[date][str(timestamp.hour)]['items'].append(entry_dict)
-
-        return output_dict
-
-
-def parse_log_to_json():
-    data = _parse_log()
-    with open('data/%s-log.json' % app_config.PROJECT_SLUG, 'wb') as f:
-        f.write(json.dumps(data))
 
 
 def generate_new_oauth_tokens():
@@ -110,11 +83,13 @@ def generate_new_oauth_tokens():
 
 
 def dump_tumblr_json():
+    secrets = app_config.get_secrets()
+
     t = Tumblpy(
-        app_key=app_config.TUMBLR_KEY,
-        app_secret=os.environ['%s_TUMBLR_APP_SECRET' % app_config.CONFIG_NAME],
-        oauth_token=os.environ['%s_TUMBLR_OAUTH_TOKEN' % app_config.CONFIG_NAME],
-        oauth_token_secret=os.environ['%s_TUMBLR_OAUTH_TOKEN_SECRET' % app_config.CONFIG_NAME])
+        app_key=secrets['TUMBLR_APP_KEY'],
+        app_secret=secrets['TUMBLR_APP_SECRET'],
+        oauth_token=secrets['TUMBLR_OAUTH_TOKEN'],
+        oauth_token_secret=secrets['TUMBLR_OAUTH_TOKEN_SECRET'])
 
     limit = 10
     pages = range(0, 20)
@@ -127,25 +102,15 @@ def dump_tumblr_json():
             f.write(json.dumps(posts))
 
 
-def write_json_data():
-
-    output = {
-        'meta': {
-            'total_posts': 0,
-        },
-        'mostpopular': []
-    }
-
+def fetch_posts():
     """
-    Top posts.
+    Returns a list of all tumblr posts, unsorted.
     """
-
-    TUMBLR_FILENAME = app_config.TUMBLR_FILENAME
-
     print "Starting."
     # Set constants
+    secrets = app_config.get_secrets()
     base_url = 'http://api.tumblr.com/v2/blog/%s.tumblr.com/posts/photo' % app_config.TUMBLR_BLOG_ID
-    key_param = '?api_key=%s' % os.environ.get('%s_TUMBLR_APP_KEY' % app_config.CONFIG_NAME)
+    key_param = '?api_key=%s' % secrets['TUMBLR_APP_KEY']
     limit_param = '&limit=20'
     limit = 20
     new_limit = limit
@@ -155,7 +120,6 @@ def write_json_data():
     r = requests.get(base_url + key_param)
     total_count = int(json.loads(r.content)['response']['total_posts'])
     print "%s total posts available." % total_count
-    output['meta']['total_posts'] = total_count
 
     # Do the pagination math.
     pages_count = (total_count / limit)
@@ -189,66 +153,24 @@ def write_json_data():
             except KeyError:
                 pass
 
-    # Sort the results first.
-    print "Finished requesting pages."
-    print "Sorting list."
-    post_list = sorted(post_list, key=lambda post: post['note_count'], reverse=True)
-
-    # Render the sorted list, but slice to just 24 objects per bb.
-    print "Rendering posts from sorted list."
-    for post in post_list[0:24]:
-        default_photo_url = post['photos'][0]['original_size']['url']
-        simple_post = {
-            'id': post['id'],
-            'url': post['post_url'],
-            'text': post['caption'],
-            'timestamp': post['timestamp'],
-            'note_count': post['note_count'],
-            'photo_url': default_photo_url,
-            'photo_url_250': default_photo_url,
-            'photo_url_500': default_photo_url,
-            'photo_url_1280': default_photo_url
-        }
-
-        # Handle the new photo assignment.
-        for photo in post['photos'][0]['alt_sizes']:
-            if int(photo['width']) == 100:
-                simple_post['photo-url-100'] = photo['url']
-            if int(photo['width']) == 250:
-                simple_post['photo_url_250'] = photo['url']
-            if int(photo['width']) == 500:
-                simple_post['photo_url_500'] = photo['url']
-            if int(photo['width']) == 1280:
-                simple_post['photo_url_1280'] = photo['url']
-        output['mostpopular'].append(simple_post)
-
-    # Ensure the proper sort on our output list.
-    print "Ordering output."
-    output['mostpopular'] = sorted(output['mostpopular'], key=lambda post: post['note_count'], reverse=True)
-
-    # Write the JSON file.
-    print "Producing JSON file at %s" % TUMBLR_FILENAME
-    json_output = json.dumps(output)
-    with open(TUMBLR_FILENAME, 'w') as f:
-        f.write(json_output)
-    print "JSON file written."
+    return post_list
 
 
-def deploy_json_data(s3_buckets):
-
-    TUMBLR_FILENAME = app_config.TUMBLR_FILENAME
-
-    with open(TUMBLR_FILENAME, 'r') as json_output:
-        with gzip.open(TUMBLR_FILENAME + '.gz', 'wb') as f:
-            f.write(json_output.read())
+def _deploy_file(s3_buckets, file_path, file_name):
+    """
+    Generic function for deploying a file to arbitrary S3 buckets.
+    """
+    with open(file_path, 'r') as html_output:
+        with gzip.open(file_name + '.gz', 'wb') as f:
+            f.write(html_output.read())
 
     for bucket in s3_buckets:
         conn = boto.connect_s3()
         bucket = conn.get_bucket(bucket)
         key = boto.s3.key.Key(bucket)
-        key.key = '%s/live-data/%s-data.json' % (app_config.PROJECT_SLUG, app_config.PROJECT_SLUG)
+        key.key = '%s/%s' % (app_config.PROJECT_SLUG, file_name)
         key.set_contents_from_filename(
-            TUMBLR_FILENAME + '.gz',
+            file_name + '.gz',
             policy='public-read',
             headers={
                 'Cache-Control': 'max-age=5 no-cache no-store must-revalidate',
@@ -256,4 +178,142 @@ def deploy_json_data(s3_buckets):
             }
         )
 
-    os.remove(TUMBLR_FILENAME + '.gz')
+    os.remove(file_name + '.gz')
+
+
+def _format_post(post):
+    default_photo_url = post['photos'][0]['original_size']['url']
+
+    simple_post = {
+        'id': post['id'],
+        'url': post['post_url'],
+        'text': post['caption'],
+        'timestamp': post['timestamp'],
+        'note_count': post['note_count'],
+        'photo_url': default_photo_url,
+        'photo_url_100': default_photo_url,
+        'photo_url_250': default_photo_url,
+        'photo_url_500': default_photo_url,
+        'photo_url_1280': default_photo_url
+    }
+
+    # Handle the new photo assignment.
+    for photo in post['photos'][0]['alt_sizes']:
+        if int(photo['width']) == 100:
+            simple_post['photo_url_100'] = photo['url']
+        if int(photo['width']) == 250:
+            simple_post['photo_url_250'] = photo['url']
+        if int(photo['width']) == 500:
+            simple_post['photo_url_500'] = photo['url']
+        if int(photo['width']) == 1280:
+            simple_post['photo_url_1280'] = photo['url']
+
+    return simple_post
+
+
+def _render_output_template(posts, input_template, output_file):
+    """
+    Renders the output templates.
+    """
+    context = {}
+    context['posts'] = posts
+    with open(input_template,  'r') as read_template:
+        payload = Template(read_template.read())
+        return payload.render(**context)
+
+
+def write_aggregates():
+    """
+    Most popular posts as defined by Tumblr notes.
+    """
+
+    # Call function to fetch posts.
+    post_list = fetch_posts()
+
+    return_obj = {}
+    return_obj['popular'] = None
+    return_obj['featured'] = None
+
+    popular_list = sorted(post_list, key=lambda post: post['note_count'], reverse=True)
+
+    popular_output = []
+    # Render the sorted list, but slice to just 24 objects per bb.
+    for post in popular_list[0:app_config.NUMBER_OF_AGGREGATES]:
+        simple_post = _format_post(post)
+        popular_output.append(simple_post)
+
+    popular_output = sorted(popular_output, key=lambda post: post['note_count'], reverse=True)
+
+    # Call funtion to write file.
+    return_obj['popular'] = _render_output_template(popular_output, 'templates/_post_list.html', 'www/aggregates_popular.html')
+
+    featured_list = sorted(post_list, key=lambda post: post['timestamp'], reverse=True)
+
+    featured_output = []
+    for post in featured_list:
+        is_featured = False
+        for tag in post['tags']:
+            if tag == u'featured':
+                is_featured = True
+
+        if is_featured is True:
+            featured_output.append(_format_post(post))
+
+    featured_output = sorted(featured_output, key=lambda post: post['timestamp'], reverse=True)
+
+    # Call funtion to write file.
+    return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_post_list.html', 'www/aggregates_featured.html')
+
+    with open('www/aggregates.json', 'wb') as json_file:
+        json_file.write("aggregateCallback(%s)" % json.dumps(return_obj))
+
+
+def deploy_aggregates(s3_buckets):
+    """
+    Control function for deploying the aggregate files.
+    """
+    file_name = 'aggregates.json'
+    file_path = 'www/%s' % file_name
+    _deploy_file(s3_buckets, file_path, file_name)
+
+
+def write_test_posts():
+    """
+    Writes test posts to our test blog as defined by app_config.py
+    """
+
+    # This is how many posts will be written.
+    TOTAL_NUMBER = 9
+
+    secrets = app_config.get_secrets()
+
+    t = Tumblpy(
+        app_key=secrets['TUMBLR_APP_KEY'],
+        app_secret=secrets['TUMBLR_APP_SECRET'],
+        oauth_token=secrets['TUMBLR_OAUTH_TOKEN'],
+        oauth_token_secret=secrets['TUMBLR_OAUTH_TOKEN_SECRET'])
+
+    tags = ['featured', '']
+
+    images = [
+        'http://media.npr.org/assets/img/2013/04/24/habitablezones_custom-fa87578c6e6a97788b92a0ecac956b9098607aa6-s40.jpg',
+        'http://media.npr.org/assets/img/2013/04/24/ocpack-32260770b4090f86ddeb7502175a631d50c3b4a1-s51.jpg',
+        'http://media.npr.org/assets/img/2013/04/24/dalrymple-c-karoki-lewis-4c9bd790639c870d51c670cbecbca4b802b82b1a-s51.jpg',
+        'http://media.npr.org/assets/img/2013/04/24/ap111231019469-46289d097a45801ed2ca3464da14b13be40e5adb-s51.jpg'
+    ]
+
+    n = 0
+    while n < TOTAL_NUMBER:
+        image = choice(images)
+        tag = choice(tags)
+        caption = u"<p class='intro'>Introduction,</p><p class='message'>This is a test post.</p><p class='signature-name'>Sincerely,<br/>Test from Test, Test</p>"
+        tumblr_post = t.post('post', blog_url=app_config.TUMBLR_URL, params={
+            'type': 'photo',
+            'caption': caption,
+            'tags': tag,
+            'source': image
+        })
+
+        print n, tumblr_post['id']
+
+        n += 1

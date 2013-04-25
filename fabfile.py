@@ -423,18 +423,21 @@ def deploy(remote='origin'):
         if env.get('install_crontab', False):
             install_crontab()
 
-def write_json_data():
-    """
-    Writes JSON file to www/live-data/.
-    """
-    tumblr_utils.write_json_data()
+"""
+Tumblr-specific commands.
+"""
+def write_test_posts():
+    tumblr_utils.write_test_posts()
 
-def deploy_json_data():
-    """
-    Deploys JSON file to S3.
-    """
-    write_json_data()
-    tumblr_utils.deploy_json_data(env.s3_buckets)
+
+def write_aggregates():
+    tumblr_utils.write_aggregates()
+
+
+def deploy_aggregates():
+    require('settings', provided_by=[production, staging])
+    write_aggregates()
+    tumblr_utils.deploy_aggregates(env.s3_buckets)
 
 """
 Cron jobs
@@ -503,35 +506,3 @@ def shiva_the_destroyer():
 
             if env.get('install_crontab', False):
                 uninstall_crontab()
-
-"""
-Logging
-"""
-def parse_log_to_json():
-    tumblr_utils.parse_log_to_json()
-
-def parse_log_last_24():
-    tumblr_utils.parse_log_last_24()
-
-"""
-App-template meta-commands
-"""
-
-def super_merge():
-    """
-    Merge master branch into all init- branches.
-    """
-    _confirm("You are about to merge 'master' into all 'init-' branches.\nDo you know what you're doing?")
-
-    local('git fetch')
-    local('git checkout master')
-
-    for branch in ['table', 'map', 'chat', 'tumblr']:
-        local('git checkout init-%s' % branch)
-        local('git merge origin/init-%s --no-edit' % branch)
-        local('git merge master --no-edit')
-
-    local('git checkout master')
-
-    local('git push --all')
-
