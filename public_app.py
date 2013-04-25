@@ -96,8 +96,8 @@ def _post_to_tumblr():
         oauth_token=secrets['TUMBLR_OAUTH_TOKEN'],
         oauth_token_secret=secrets['TUMBLR_OAUTH_TOKEN_SECRET'])
     
-    print secrets['TUMBLR_APP_KEY']
-    print "http://%s%s" % (app_config.SERVERS[0], png_path)
+    logger.info(secrets['TUMBLR_APP_KEY'])
+    logger.info("http://%s%s" % (app_config.SERVERS[0], png_path))
 
     params = {
         "type": "photo",
