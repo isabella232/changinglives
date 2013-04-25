@@ -100,7 +100,7 @@ def _post_to_tumblr():
         "type": "photo",
         "caption": caption,
         "tags": app_config.TUMBLR_TAGS,
-        "source": "http://%s%s" % (app_config.SERVERS[0], file_path)
+        "source": "http://%s%s" % (app_config.SERVERS[0], png_path)
     }
 
     try:
@@ -112,7 +112,7 @@ def _post_to_tumblr():
 
     except TumblpyError, e:
         logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
-            e.error_code, e.msg, app_config.SERVERS[0], file_path, name))
+            e.error_code, e.msg, app_config.SERVERS[0], svg_path, name))
         return 'TUMBLR ERROR'
 
     return redirect('%s#posts' % tumblr_url, code=301)
