@@ -23,6 +23,7 @@
                 </label>
                 <textarea name="message"></textarea>
             </li>
+    {{ JS.push('js/lib/cufon-yui.js') }}
             <li class="form-signature">
             <label for="signed_name">Initialed,</label>
                 <input type="text" name="signed_name" placeholder="Your Initials" class="signed-name"></input>
@@ -79,8 +80,13 @@
                 var bg = preview.rect(0, 0, width, height);
                 bg.attr({ fill: '#000', 'stroke-width': 0 });
 
-                var lines = preview.text(width / 2, height / 2, text);
-                lines.attr({ fill: '#fff', 'font-family': 'CrossStitch', 'font-size': '64', 'text-anchor': 'middle' }); 
+                var font = preview.getFont('Quicksand');
+                var lines = preview.print(width / 2, height / 2, text, font, 64, 'middle');
+                lines.attr({ fill: '#fff' }); 
+
+                var bbox = lines.getBBox();
+
+                lines.translate(-(bbox.width / 2), -(bbox.height / 2));
             }
 
             render('');
