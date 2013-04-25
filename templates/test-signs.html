@@ -20,9 +20,12 @@
             background: #A23520 url('img/aida-pattern.png') repeat;
             color: #fff;
             margin-bottom: 1em;
-            width: 100%;
             height: 600px;
             display: table;
+            width: 48%;
+            margin-right: 2%;
+            float: left;
+            position: relative;
         }
         section h1 {
             display: table-cell;
@@ -31,13 +34,46 @@
             text-align: center;
             font-size: 81px;
             line-height: 1.2;
+            font-weight: normal;
         }
         #sample1 h1 { font-family: 'Roboto Condensed', sans-serif; }
         #sample2 h1 { font-size: 110px; font-family: 'Share Tech', sans-serif; }
-        #sample3 h1 { font-family: 'Snippet', sans-serif; }
+        #sample3 h1 { font-size: 70px; font-family: 'Snippet', sans-serif; }
         #sample4 h1 { font-family: 'Noto Serif', serif; }
         #sample5 h1 { font-size: 150px; font-family: 'Geo', sans-serif; }
         #sample6 h1 { font-size: 150px; font-family: 'Quicksand', sans-serif; }
+        
+        #sample1 .ornament {
+            background: url('img/corner-1.png') no-repeat;
+            height: 41px;
+            width: 41px;
+            position: absolute;
+        }
+        #sample1 .ornament1 {       
+            top: 9px;
+            left: 9px;
+        }
+        #sample1 .ornament2 {
+            transform:rotate(90deg);
+            -ms-transform:rotate(90deg); /* IE 9 */
+            -webkit-transform:rotate(90deg); /* Safari and Chrome */
+            top: 9px;
+            right: 9px;
+        }
+        #sample1 .ornament3 {
+            transform:rotate(180deg);
+            -ms-transform:rotate(180deg); /* IE 9 */
+            -webkit-transform:rotate(180deg); /* Safari and Chrome */
+            bottom: 9px;
+            right: 9px;
+        }
+        #sample1 .ornament4 {
+            transform:rotate(270deg);
+            -ms-transform:rotate(270deg); /* IE 9 */
+            -webkit-transform:rotate(270deg); /* Safari and Chrome */
+            bottom: 9px;
+            left: 9px;
+        }
         
         #sample2 {
             background-color: #AA6A21;
@@ -51,6 +87,9 @@
         #sample5 {
             background-color: #3D7FA6;
         }
+        #sample6 {
+            background-color: #787878;
+        }
     </style>
 </head>
 <body>
@@ -58,6 +97,10 @@
 
 <section id="sample1">
     <h1>Confidence<br />is your best friend.</h1>
+    <div class="ornament ornament1"></div>
+    <div class="ornament ornament2"></div>
+    <div class="ornament ornament3"></div>
+    <div class="ornament ornament4"></div>
 </section>
 
 <section id="sample2">
