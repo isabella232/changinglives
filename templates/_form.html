@@ -4,7 +4,6 @@
 </div>
 
 <div class="tumblr-form">
-    <div style="font-family: CrossStitch;">.</div>
     <form id="tumblr-form" method="post" enctype="multipart/form-data" action="http://{{ SERVERS[0] }}/{{ PROJECT_SLUG }}/">
         <ol>
             <li class="form-intro">
@@ -83,13 +82,16 @@
     <![endif]-->
 
     <script type="text/javascript">
-        var BG_COLOR = '#787878';
-        var DOT_COLOR = '#444';
+        var GRID_BG_COLOR = '#787878';
+        var GRID_DOT_COLOR = '#444';
+        var GLYPH_COLOR = '#fff';
         var FONT_NAME = 'Quicksand';
         var FONT_COLOR = '#fff';
         var FONT_SIZE = 120;
         var LINE_HEIGHT = 110;
         var X_DOTS = 64;
+        var GLYPH_RECT_MARGIN = 1 / 8;
+
         var X_OFFSET = 16;
         var Y_OFFSET = 36;
 
@@ -120,6 +122,7 @@
             var font = preview.getFont(FONT_NAME);
             var grid_bg = null;
             var grid_dots = [];
+            var glyph_rects = [];
             var text_paths = [];
 
             function render_grid() {
@@ -131,9 +134,8 @@
                     grid_dots[i].remove();
                 }
 
-
                 grid_bg = preview.rect(0, 0, width, height);
-                grid_bg.attr({ fill: BG_COLOR, 'stroke-width': 0 });
+                grid_bg.attr({ fill: GRID_BG_COLOR, 'stroke-width': 0 });
 
                 var y_dots = X_DOTS * (height / width)
                 var x_pitch = width / X_DOTS;
@@ -143,7 +145,34 @@
 
                 for (var x = 1; x < X_DOTS; x++) {
                     for (var y = 1; y < y_dots; y++) {
-                        grid_dots.push(preview.circle(x * x_pitch, y * y_pitch, 1).attr({ fill: DOT_COLOR, 'stroke-width': 0 }));
+                        grid_dots.push(preview.circle(x * x_pitch, y * y_pitch, 1).attr({ fill: GRID_DOT_COLOR, 'stroke-width': 0 }));
+                    }
+                }
+            }
+
+            function render_glyphs() {
+                for (var i = 0; i < glyph_rects.length; i++) {
+                    glyph_rects[i].remove();
+                }
+
+                glyph_rects = [];
+
+                var y_dots = X_DOTS * (height / width)
+                var x_pitch = width / X_DOTS;
+                var y_pitch = height / y_dots;
+                var x_margin = x_pitch * GLYPH_RECT_MARGIN;
+                var y_margin = y_pitch * GLYPH_RECT_MARGIN;
+
+                for (var y = 0; y < GLYPH.length; y++) {
+                    for (var x = 0; x < GLYPH[0].length; x++) {
+                        if (GLYPH[y][x]) {
+                            var lx = ((x + 1) * x_pitch) + x_margin;
+                            var ly = ((y + 1) * y_pitch) + y_margin;
+                            var lw = x_pitch - (x_margin * 2);
+                            var lh = y_pitch - (y_margin * 2);
+
+                            glyph_rects.push(preview.rect(lx, ly, lw, lh).attr({ fill: GLYPH_COLOR, 'stroke-width': 0 }));
+                        }
                     }
                 }
             }
@@ -181,6 +210,7 @@
             }
 
             render_grid();
+            render_glyphs();
             render_text('');
 
             $('textarea[name="string"]').keyup(function(e) {
