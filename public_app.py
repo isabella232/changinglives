@@ -84,7 +84,7 @@ def _post_to_tumblr():
             '500', e, app_config.SERVERS[0], svg_path, name))
         context = {}
         context['title'] = 'Tumblr error'
-        context['message'] = '%s\n\n%s\n\n' % (e.returncode, e.cmd, e.msg)
+        context['message'] = '%s\n\n%s\n\n' % (e.returncode, e.cmd, e.output)
         return render_template('error.html', **context)
 
     context = {
