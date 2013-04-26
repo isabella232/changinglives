@@ -78,11 +78,13 @@ def _post_to_tumblr():
     command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
     args = shlex.split(command)
     try:
-        subprocess.check_call(args)
+        subprocess.check_output(args, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError, e:
         logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
             '500', e, app_config.SERVERS[0], svg_path, name))
-        return 'CAIROSVG ERROR\n%s' % e
+        return """
+        CAIROSVG ERROR
+        %s""" % e
 
     context = {
         'message': message,
