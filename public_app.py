@@ -75,7 +75,12 @@ def _post_to_tumblr():
 
     command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
     args = shlex.split(command)
-    subprocess.call(args)
+    try:
+        subprocess.check_call(args)
+    except subprocess.CalledProcessError, e:
+        logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
+            e.error_code, e.msg, app_config.SERVERS[0], svg_path, name))
+        return 'CAIROSVG ERROR'
 
     context = {
         'message': message,
@@ -94,7 +99,7 @@ def _post_to_tumblr():
         app_secret=secrets['TUMBLR_APP_SECRET'],
         oauth_token=secrets['TUMBLR_OAUTH_TOKEN'],
         oauth_token_secret=secrets['TUMBLR_OAUTH_TOKEN_SECRET'])
-    
+
     params = {
         "type": "photo",
         "caption": caption,
