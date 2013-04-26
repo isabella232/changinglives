@@ -3,22 +3,17 @@
     <title>Error: {{ title }}</title>
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <style type="text/css">
-        body {
-            padding:0px;
-            margin:0px;
-            background:#555;
-        }
         h1, h2 {
             margin: 15px 25px;
-            color:#fff;
         }
         textarea {
             display:block;
             color: #444;
             font-size:16px;
             background-color:#eee;
+            margin:10px;
             padding:10px;
-            width:100%;
+            width:75%;
             min-height:500px;
             border:0;
             overflow: auto;
@@ -27,7 +22,9 @@
 </head>
 <body>
     <h1>Error!</h1>
-    <h2>Ack, a "{{ title }}" error! <a href="mailto:nprapps@npr.org" class="btn btn-info btn-large">Alert Us!</a></h2>
+    <p>Owch, an error! It's probably our fault.</p>
+    <p>Wanna let us know what happened? Email us at <a href="mailto:nprapps@npr.org">nprapps@npr.org</a>.</p>
+    <p>We've also been alerted.</p>
     <textarea>{{ message }}</textarea>
 </body>
 </html>
