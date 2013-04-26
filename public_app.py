@@ -81,10 +81,10 @@ def _post_to_tumblr():
         subprocess.check_output(args, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError, e:
         logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
-            '500', e, app_config.SERVERS[0], svg_path, name))
+            '500', e.output, app_config.SERVERS[0], svg_path, name))
         context = {}
         context['title'] = 'Tumblr error'
-        context['message'] = '%s\n\n%s\n\n%s' % (e.returncode, e.cmd, e.output)
+        context['message'] = e.output
         return render_template('error.html', **context)
 
     context = {
