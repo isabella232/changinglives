@@ -16,7 +16,7 @@ a {
 }
 
 .tumblr-form {
-    max-width: 600px;
+//    max-width: 600px;
     margin: 0 auto;
     padding-top: 10px;
     
@@ -35,8 +35,9 @@ a {
         list-style: none;
     }
     ol > li {
-        padding: 10px 20px;
+        padding: 10px 11px;
         background-color: #f1f1f1;
+        max-width: 640px;
     }
     ul > li {
         padding: 0;
@@ -107,11 +108,23 @@ a {
         opacity: 1.0;
     }
     
+    .form-photo {
+        width: 640px;
+        float: left;
+    }
+    
     .form-customize {
+        float: left;
+    
         h3 {
-            margin-bottom: 5px;
-            font-size: 13px;
-            color: #121212;
+            margin: 0 0 3px 0;
+            font-size: 12px;
+            color: #333;
+            clear: both;
+            padding-top: 16px;
+        }
+        .form-color h3 {
+            padding-top: 0;
         }
         input[type='radio'] { display: none; }
         label {
@@ -122,6 +135,7 @@ a {
             margin: 0;
             cursor: pointer;
             border: 2px solid #f1f1f1;
+            float: left;
             
             &:hover,
             &.active {
@@ -130,13 +144,14 @@ a {
             
             // ornaments
             &.flower-corner {
-                background: url('../img/preview-corner-1.gif') no-repeat 50% 50%;
+                background: #787878 url('../img/preview-corner-1.gif') no-repeat 50% 50%;
             }
             &.swash-border {
-                background: url('../img/preview-flourish-1.gif') no-repeat 50% 50%;
+                background: #787878 url('../img/preview-flourish-1.gif') no-repeat 50% 50%;
+                clear: both;
             }
             &.triangle-border {
-                background: url('../img/preview-flourish-3.gif') no-repeat 50% 50%;
+                background: #787878 url('../img/preview-flourish-3.gif') no-repeat 50% 50%;
             }
             &.no-border {
                 background: #787878;
@@ -154,6 +169,7 @@ a {
             &.noto {
                 background: #787878 url('../img/preview-noto.png') no-repeat 50% 50%;
                 width: 88px;
+                clear: both;
             }
             &.quicksand {
                 background: #787878 url('../img/preview-quicksand.png') no-repeat 50% 50%;
@@ -163,12 +179,51 @@ a {
             // colors
             &.teal { background-color: #11605E; }
             &.red { background-color: #A23520; }
-            &.blue { background-color: #3D7FA6; }
+            &.blue { background-color: #3D7FA6; clear: both; }
             &.gray { background-color: #787878; }
         }
+        .form-typeface label {
+            clear: both;
+        }
+    }
+    
+    .form-message {
+        clear: both;
+    }
+
+    .legal {
+        padding: 16px 11px 11px 11px;
+        font-size: 11px;
+        color: #666;
+        font-style: italic;
+        max-width: 600px;
     }
 }
 
+@media (min-width: 1200px) {
+}
+@media (max-width: 979px) {
+}
+@media (max-width: 800px) {
+    .tumblr-form {
+        .form-photo, .form-customize { float: none; margin-left: 0; }
+        .form-customize {
+            h3 { padding-top: 0; }
+            div { 
+                width: 33%; float: left;
+            }
+            label.snippet, label.quicksand { clear: none; }
+            label, .form-typeface label { width: 40%; margin-right: 2%; }
+//            .form-typeface label { background-position: 0% 50%; }
+            &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
+        }
+    }
+}
+@media (max-width: 767px) {
+    .tumblr-form .form-customize {
+        div, div.form-typeface { width: 33%; }
+        label, .form-typeface label { width: 40%; margin-right: 2%; }
+    }
+}
 @media (max-width: 480px) {
-    .tumblr-form input[type='file'] { font-size: 12px; }
 }
