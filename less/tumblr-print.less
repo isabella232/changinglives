@@ -3,7 +3,7 @@
 //@img-root: 'http://apps.npr.org/she-works/img';
 
 .permalink-page {
-    #nav, header, #project-form, .modal-bg, footer, .caption { display: none; }
+    #nav, header, #project-form, .modal-bg, footer, .caption, .post_info { display: none; }
     #container { max-width: none; }
     #posts {
         padding: 0;
@@ -11,17 +11,25 @@
         .post { 
             max-width: none; margin: 0;
         
-            .media img { max-height: none; width: 100%; height: auto; }
             .wrap { padding: 0; border: none; -webkit-box-shadow: none; box-shadow: none; }
+
+            .media img { 
+                max-height: none;
+                width: 94%;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+            }
             .for-print { 
-                border-top: 1px solid #999;
+                width: 94%;
+                margin: 0 auto;
                 padding-top: 11px;
                 display: block;
         
                 p {
-                    font: 11px/1.3 Arial, Helvetica, sans-serif;
+                    font: 12px/1.4 Arial, Helvetica, sans-serif;
                     margin-right: 106px;
-                    color: #999;
+                    color: #666;
                     
                     strong { font-weight: bold; }
                 }
