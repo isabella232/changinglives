@@ -45,7 +45,6 @@
                 </label>
                 <textarea name="message"></textarea>
             </li>
-    {{ JS.push('js/lib/cufon-yui.js') }}
             <li class="form-signature">
             <label for="signed_name">From,</label>
                 <input type="text" name="signed_name" placeholder="Your Initials" class="signed-name"></input>
@@ -94,6 +93,18 @@
         var X_OFFSET = 16;
         var Y_OFFSET = 36;
 
+        var GLYPH = [
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,1,1,1,1,1,1,0],
+            [0,1,0,1,0,0,0,0,0],
+            [0,1,1,1,0,0,0,0,0],
+            [0,1,0,0,1,0,0,0,0],
+            [0,1,0,0,0,1,1,1,0],
+            [0,1,0,0,0,1,1,1,0],
+            [0,1,0,0,0,1,1,0,0],
+            [0,0,0,0,0,0,0,0,0]
+        ];
+
         $(document).ready(function() {
             var $preview = $('#preview');
             var preview_div = $preview[0];
@@ -106,24 +117,38 @@
     
             var width = $preview.width();
             var height = $preview.height();
+            var font = preview.getFont(FONT_NAME);
+            var grid_bg = null;
+            var grid_dots = [];
+            var text_paths = [];
 
-            var bg = preview.rect(0, 0, width, height);
-            bg.attr({ fill: BG_COLOR, 'stroke-width': 0 });
+            function render_grid() {
+                if (grid_bg) {
+                    grid_bg.remove();
+                }
 
-            var y_dots = X_DOTS * (height / width)
-            var x_pitch = width / X_DOTS;
-            var y_pitch = height / y_dots;
+                for (var i = 0; i < grid_dots.length; i++) {
+                    grid_dots[i].remove();
+                }
 
-            for (var x = 1; x < X_DOTS; x++) {
-                for (var y = 1; y < y_dots; y++) {
-                    preview.circle(x * x_pitch, y * y_pitch, 1).attr({ fill: DOT_COLOR, 'stroke-width': 0 });
+
+                grid_bg = preview.rect(0, 0, width, height);
+                grid_bg.attr({ fill: BG_COLOR, 'stroke-width': 0 });
+
+                var y_dots = X_DOTS * (height / width)
+                var x_pitch = width / X_DOTS;
+                var y_pitch = height / y_dots;
+                
+                grid_dots = [];
+
+                for (var x = 1; x < X_DOTS; x++) {
+                    for (var y = 1; y < y_dots; y++) {
+                        grid_dots.push(preview.circle(x * x_pitch, y * y_pitch, 1).attr({ fill: DOT_COLOR, 'stroke-width': 0 }));
+                    }
                 }
             }
-
-            var font = preview.getFont(FONT_NAME);
-            var text_paths = [];
             
-            function render(text) {
+            function render_text(text) {
                 for (var i = 0; i < text_paths.length; i++) {
                     text_paths[i].remove();
                 }
@@ -155,10 +180,11 @@
                 }
             }
 
-            render('');
+            render_grid();
+            render_text('');
 
             $('textarea[name="string"]').keyup(function(e) {
-                render($(this).val());    
+                render_text($(this).val());    
             });
 
             $('#tumblr-form').submit(function(e) {
