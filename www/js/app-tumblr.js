@@ -1,4 +1,3 @@
-var GRID_BG_COLOR = '#787878';
 var GRID_DOT_COLOR = '#444';
 var GLYPH_COLOR = '#fff';
 var GLYPH_RECT_MARGIN = 1 / 8;
@@ -31,6 +30,10 @@ var grid_dots = [];
 var glyph_rects = [];
 var text_paths = [];
 
+var current_grid = '#787878';
+var current_glyphs = 'attack-pattern-delta';
+var current_text = '';
+
 function trimMessages(){
     $("body.index-page .post .message").each(function(i,v){
         var message = $(v);
@@ -47,7 +50,7 @@ function resize_window() {
     $project_wrap.height(new_height);
 }
 
-function render_grid() {
+function render_grid(color) {
     /*
      * Render the SVG background grid.
      */
@@ -60,7 +63,7 @@ function render_grid() {
     }
 
     grid_bg = preview.rect(0, 0, width, height);
-    grid_bg.attr({ fill: GRID_BG_COLOR, 'stroke-width': 0 });
+    grid_bg.attr({ fill: color, 'stroke-width': 0 });
 
     var y_dots = X_DOTS * (height / width)
     var x_pitch = width / X_DOTS;
@@ -196,12 +199,23 @@ $(function() {
         height = $preview.height();
         font = preview.getFont(FONT_NAME);
         
-        render_grid();
-        render_glyphs('attack-pattern-delta');
-        render_text('');
+        render_grid(current_grid);
+        render_glyphs(current_glyphs);
+        render_text(current_text);
 
         $('textarea[name="string"]').keyup(function(e) {
-            render_text($(this).val());    
+            current_text = $(this).val();
+            render_text(current_text);    
+        });
+
+        $('input[name="color"]').change(function(e) {
+            var val = $(this).val();
+            var label = $('label[for="color-' + val + '"]');
+            current_grid = label.css('background-color');
+
+            render_grid(current_grid);
+            render_glyphs(current_glyphs);
+            render_text(current_text);
         });
 
         $tumblr_form.submit(function(e) {
