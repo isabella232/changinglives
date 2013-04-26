@@ -9,12 +9,12 @@ They will be exposed to users. Use environment variables instead.
 
 import os
 
-PROJECT_NAME = 'The Change Lives of Women'
+PROJECT_NAME = 'She Works: Note To Self'
 PROJECT_SLUG = 'changing-lives'
 REPOSITORY_NAME = 'changinglives'
 CONFIG_NAME = PROJECT_SLUG.replace('-', '').upper()
 
-PROJECT_CREDITS = 'Jeremy Bowers, Brian Boyer, Alyson Hurt and Matt Stiles / NPR'
+PROJECT_CREDITS = 'Jeremy Bowers, Brian Boyer, Danny DeBelius, Christopher Groskopf, Alyson Hurt and Selena Simmons-Duffin / NPR'
 PROJECT_SHORTLINK = 'npr.org/foo'
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
