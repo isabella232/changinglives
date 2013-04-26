@@ -52,8 +52,9 @@ def _errors():
                     current_item = 4
                     for item in line.split():
                         if current_item <= total_items:
-                            line_dict['message'] += item
+                            line_dict['message'] += '%s ' % item
                             current_item += 1
+                    line_dict['message'] = line_dict['message'].strip()
                     context['errors'].append(line_dict)
                 except:
                     pass
