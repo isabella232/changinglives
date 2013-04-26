@@ -108,8 +108,8 @@ def _post_to_tumblr():
     png_path = file_path + '.png'
 
 
-    # with open('/var/www%s' % svg_path, 'wb') as f:
-    #     f.write(svg.encode('utf-8'))
+    with open('/var/www%s' % svg_path, 'wb') as f:
+        f.write(svg.encode('utf-8'))
 
     command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
     args = shlex.split(command)
