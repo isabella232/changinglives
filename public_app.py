@@ -84,7 +84,9 @@ def _post_to_tumblr():
             '500', e, app_config.SERVERS[0], svg_path, name))
         return """
         CAIROSVG ERROR
-        %s""" % e
+        Return code: %s
+        Command: %s
+        Output: %s""" % (e.returncode, e.cmd, e.output)
 
     context = {
         'message': message,
