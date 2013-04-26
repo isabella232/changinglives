@@ -31,6 +31,46 @@ logger.addHandler(file_handler)
 logger.setLevel(logging.INFO)
 
 
+@app.route('/%s/errors/' % app_config.PROJECT_SLUG, methods=['GET'])
+def _errors():
+    """
+    Parses the log for errors.
+    Returns them to the page.
+    """
+    context = {}
+    context['errors'] = []
+    with open('/var/log/%s.log' % app_config.PROJECT_SLUG) as logfile:
+        for line in logfile:
+            if 'ERROR' in line:
+                line_dict = {}
+                try:
+                    total_items = len(line.split())
+                    line_dict['date'] = line.split()[0]
+                    line_dict['time'] = line.split()[1]
+                    line_dict['type'] = '%s %s' % (line.split()[2], line.split()[3])
+                    line_dict['message'] = ''
+                    current_item = 4
+                    for item in line.split():
+                        if current_item <= total_items:
+                            line_dict['message'] += '%s ' % item
+                            current_item += 1
+                    line_dict['message'] = line_dict['message'].strip()
+                    context['errors'].append(line_dict)
+                except:
+                    pass
+
+    context['errors'] = sorted(context['errors'], key=lambda item: item['date'], reverse=True)
+    return render_template('error.html', **context)
+
+
+@app.route('/%s/test/' % app_config.PROJECT_SLUG, methods=['GET'])
+def _test():
+    """
+    Returns the time. Proves the app server is running.
+    """
+    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+
 @app.route('/%s/' % app_config.PROJECT_SLUG, methods=['POST'])
 def _post_to_tumblr():
     """
@@ -70,12 +110,21 @@ def _post_to_tumblr():
     svg_path = file_path + '.svg'
     png_path = file_path + '.png'
 
+
     with open('/var/www%s' % svg_path, 'wb') as f:
         f.write(svg.encode('utf-8'))
 
     command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
     args = shlex.split(command)
-    subprocess.call(args)
+    try:
+        subprocess.check_output(args, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError, e:
+        logger.error('%s %s %s http://%s%s reader(%s) (times in EST)' % (
+            'ERROR', '500', e, app_config.SERVERS[0], svg_path, name))
+        context = {}
+        context['title'] = 'Tumblr error'
+        context['message'] = e.output
+        return render_template('500.html', **context)
 
     context = {
         'message': message,
@@ -94,7 +143,7 @@ def _post_to_tumblr():
         app_secret=secrets['TUMBLR_APP_SECRET'],
         oauth_token=secrets['TUMBLR_OAUTH_TOKEN'],
         oauth_token_secret=secrets['TUMBLR_OAUTH_TOKEN_SECRET'])
-    
+
     params = {
         "type": "photo",
         "caption": caption,
@@ -112,7 +161,10 @@ def _post_to_tumblr():
     except TumblpyError, e:
         logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
             e.error_code, e.msg, app_config.SERVERS[0], svg_path, name))
-        return 'TUMBLR ERROR'
+        context = {}
+        context['title'] = 'Tumblr error'
+        context['message'] = '%s\n%s' % (e.error_code, e.msg)
+        return render_template('500.html', **context)
 
     return redirect('%s#posts' % tumblr_url, code=301)
 
