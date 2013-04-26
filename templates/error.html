@@ -16,49 +16,16 @@
         div.container {
             padding:15px;
         }
-        textarea {
-            display:block;
-            color: #444;
-            font-size:12px;
-            background-color:#eee;
-            padding:10px;
-            width:100%;
-            min-height:650px;
-            border:0;
-            overflow: auto;
-        }
-        a.contact {
-            display:block;
-            padding:10px 15px;
-            color:#333;
-            background-color:#BCCAE4;
-            text-align:center;
-            font-size:18px;
-            font-weight:bold;
-        }
-        a.contact:hover {
-            text-decoration:none;
-            background-color:#bbb;
-            color:#333;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row-fluid">
             <div class="span12">
-                <h1>Error!</h1>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="span6">
-                <h2>"{{ title }}"</h2>
-                <p>Owch, an error! It's probably our fault. Wanna let us know what happened?</p>
-                <p><a class="contact" href="mailto:nprapps@npr.org">nprapps@npr.org</a></p>
-            </div>
-            <div class="span6">
-                <h2>Debugging</h2>
-                <textarea>{{ message }}</textarea>
+                <h1>Errors</h1>
+                <ul>{% for error in errors %}
+                    <li><strong>{{ error.date }}</strong> {{ error.message }}</li>
+                {% endfor %}</ul>
             </div>
         </div>
     </div>

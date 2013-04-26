@@ -37,13 +37,27 @@ def _errors():
     Parses the log for errors.
     Returns them to the page.
     """
-    error_lines = ''
+    context = {}
+    context['errors'] = []
     with open('/var/log/%s.log' % app_config.PROJECT_SLUG) as logfile:
         for line in logfile:
             if 'ERROR' in line:
-                error_lines += '%s<br/>' % line
-
-    return error_lines
+                line_dict = {}
+                try:
+                    total_items = len(line.split())
+                    line_dict['date'] = line.split()[0]
+                    line_dict['time'] = line.split()[1]
+                    line_dict['type'] = '%s %s' % (line.split()[2], line.split()[3])
+                    line_dict['message'] = ''
+                    current_item = 4
+                    for item in line.split():
+                        if current_item <= total_items:
+                            line_dict['message'] += item
+                            current_item += 1
+                    context['errors'].append(line_dict)
+                except:
+                    pass
+    return render_template('error.html', **context)
 
 
 @app.route('/%s/test/' % app_config.PROJECT_SLUG, methods=['GET'])
@@ -107,7 +121,7 @@ def _post_to_tumblr():
         context = {}
         context['title'] = 'Tumblr error'
         context['message'] = e.output
-        return render_template('error.html', **context)
+        return render_template('500.html', **context)
 
     context = {
         'message': message,
@@ -147,7 +161,7 @@ def _post_to_tumblr():
         context = {}
         context['title'] = 'Tumblr error'
         context['message'] = '%s\n%s' % (e.error_code, e.msg)
-        return render_template('error.html', **context)
+        return render_template('500.html', **context)
 
     return redirect('%s#posts' % tumblr_url, code=301)
 
