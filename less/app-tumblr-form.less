@@ -35,7 +35,7 @@ a {
         list-style: none;
     }
     ol > li {
-        padding: 10px 20px;
+        padding: 10px 11px;
         background-color: #f1f1f1;
         max-width: 640px;
     }
@@ -109,13 +109,12 @@ a {
     }
     
     .form-photo {
-        width: 600px;
+        width: 640px;
         float: left;
     }
     
     .form-customize {
         float: left;
-        margin-left: 11px;
     
         h3 {
             margin: 0 0 3px 0;
@@ -145,14 +144,14 @@ a {
             
             // ornaments
             &.flower-corner {
-                background: url('../img/preview-corner-1.gif') no-repeat 50% 50%;
+                background: #787878 url('../img/preview-corner-1.gif') no-repeat 50% 50%;
             }
             &.swash-border {
-                background: url('../img/preview-flourish-1.gif') no-repeat 50% 50%;
+                background: #787878 url('../img/preview-flourish-1.gif') no-repeat 50% 50%;
                 clear: both;
             }
             &.triangle-border {
-                background: url('../img/preview-flourish-3.gif') no-repeat 50% 50%;
+                background: #787878 url('../img/preview-flourish-3.gif') no-repeat 50% 50%;
             }
             &.no-border {
                 background: #787878;
@@ -191,6 +190,14 @@ a {
     .form-message {
         clear: both;
     }
+
+    .legal {
+        padding: 16px 11px 11px 11px;
+        font-size: 11px;
+        color: #666;
+        font-style: italic;
+        max-width: 600px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -203,16 +210,20 @@ a {
         .form-customize {
             h3 { padding-top: 0; }
             div { 
-                width: 111px; float: left;
-                
-                &.form-typeface { width: 200px; }
+                width: 33%; float: left;
             }
             label.snippet, label.quicksand { clear: none; }
+            label, .form-typeface label { width: 40%; margin-right: 2%; }
+//            .form-typeface label { background-position: 0% 50%; }
             &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
         }
     }
 }
 @media (max-width: 767px) {
+    .tumblr-form .form-customize {
+        div, div.form-typeface { width: 33%; }
+        label, .form-typeface label { width: 40%; margin-right: 2%; }
+    }
 }
 @media (max-width: 480px) {
 }
