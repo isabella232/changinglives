@@ -1,0 +1,18 @@
+// Global variables
+@img-root: 'http://localhost:8000/img';
+//@img-root: 'http://apps.npr.org/she-works/img';
+
+.permalink-page {
+    #nav, header, #project-form, .modal-bg, footer, .caption_and_post_info { display: none; }
+    #container { max-width: none; }
+    #posts {
+        padding: 0;
+    
+        .post { 
+            max-width: none; margin: 0;
+        
+            .media img { max-height: none; width: 100%; height: auto; }
+            .wrap { padding: 0; border: none; -webkit-box-shadow: none; box-shadow: none; }
+        }
+    }
+}

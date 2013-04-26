@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>List of errors</title>
+
+    <link rel="shortcut icon" href="http://npr.org/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <style type="text/css">
+        div.container {
+            padding:15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span12">
+                <h1>Errors</h1>
+                <ul>{% for error in errors %}
+                    <li><strong>{{ error.date }}</strong> {{ error.message }}</li>
+                {% endfor %}</ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

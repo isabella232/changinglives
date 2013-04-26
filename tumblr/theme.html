@@ -33,7 +33,8 @@
         <link rel="stylesheet" href="http://static.tumblr.com/thpaaos/DIcklyl4z/reset.css" type="text/css">
 
         <!-- Project CSS -->
-        <link rel="stylesheet" href="{{ STATIC_CSS }}" />
+        <link rel="stylesheet" href="{{ STATIC_CSS }}" media="screen" />
+        <link rel="stylesheet" href="{{ STATIC_PRINT_CSS }}" media="print" />
 
         <!--[if lt IE 9]>
             <style type="text/css">
@@ -202,6 +203,12 @@
                                             </a>
                                         </div>
                                     {/block:ContentSource}
+                                    
+                                    <div class="btn btn-print"><a href="javascript:window.print();">Print This Poster</a></div>
+                                </section>
+                                <section class="for-print">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                    <p><strong>{{ PROJECT_NAME }}</strong> | Create your own poster at {{ PROJECT_SHORTLINK }}</p>
                                 </section>
                                 {/block:Photo}
                             </section>
