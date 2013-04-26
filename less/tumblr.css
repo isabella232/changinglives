@@ -11,6 +11,9 @@ em{font-style:italic;}
 .group:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
 * html .group{zoom:1;}
 *:first-child+html .group{zoom:1;}
+.btn{background-color:#7598c9;line-height:44px;display:inline-block;padding:0 20px;-webkit-font-smoothing:antialiased;font-weight:bold;cursor:pointer;font-size:12px;}.btn:hover{opacity:.7;}
+.btn a{color:#fff;}
+.caption .btn a{color:#fff;}
 #nav{background-color:#e0e0e0;height:44px;overflow:hidden;border-bottom:2px solid #fff;}#nav ul{list-style:none;margin:0;padding:0;}#nav ul li{float:left;height:44px;line-height:44px;margin-left:22px;font-size:12px;}#nav ul li:first-child{margin-left:0;}
 #nav a,#nav a:link,#nav a:visited{color:#6d8ac4;font-weight:bold;text-transform:lowercase;}
 #nav a:hover,#nav a:active{color:#bccae5;}
@@ -28,7 +31,7 @@ header{display:table-cell;width:220px;vertical-align:top;}
 #blog_info p.more{margin-bottom:22px;}
 #blog_info p.project-credits{color:#ccc;margin-top:15px;margin-bottom:0;font-size:11px;font-style:italic;}
 #blog_info a{color:#bbc9e5;font-weight:bold;}
-#blog_info .project-prompt{border:1px solid #999;background-color:#eee;margin-bottom:22px;padding:11px;}#blog_info .project-prompt h2{font-weight:bold;color:#333;font-size:14px;line-height:1.4;margin-bottom:5px;}
+#blog_info .project-prompt{border:1px solid #999;background-color:#eee;margin:0 -11px 22px -11px;padding:11px;}#blog_info .project-prompt h2{font-weight:bold;color:#333;font-size:14px;line-height:1.4;margin-bottom:5px;}
 #blog_info .project-prompt p{color:#666;font-size:12px;margin-bottom:5px;}#blog_info .project-prompt p.deadline{font-weight:bold;margin-bottom:11px;}
 #blog_info #modal-btn{cursor:pointer;overflow:hidden;background-color:#7598c9;height:38px;padding-top:6px;font-weight:bold;font-size:13px;line-height:16px;padding-right:10px;color:#fff;}#blog_info #modal-btn:hover{background-color:#9eb7dd;}
 #blog_info #modal-btn:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
@@ -61,14 +64,15 @@ header{display:table-cell;width:220px;vertical-align:top;}
 #project-form #tumblr-form button[type='submit']:disabled{background-color:#becfe6;cursor:default;opacity:1.0;}
 #project-form #tumblr-form .legal{padding:16px 11px 11px 11px;font-size:11px;color:#666;font-style:italic;width:80%;}
 .modal-bg{display:none;position:fixed;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:1040;background:#666;background:rgba(0, 0, 0, 0.8);}
-#post-wrap h2{margin:43px 20px -17px 33px;color:#ddd;font-weight:normal;font-size:32px;text-transform:lowercase;}
-#posts,#popular{color:#4C4C4C;position:relative;z-index:1;padding:0 20px 0 40px;}#posts .post,#popular .post{width:48%;margin:1%;float:left;position:relative;overflow:hidden;list-style-type:none;}#posts .post .wrap,#popular .post .wrap{padding:11px 22px 22px 22px;border:3px solid #f7f7f7;background-color:#fff;-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;}#posts .post .wrap:after,#popular .post .wrap:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
+#post-wrap h2{margin:43px 20px -17px 33px;color:#ddd;font-weight:normal;font-size:24px;text-transform:lowercase;}
+#posts,#popular{color:#4C4C4C;position:relative;z-index:1;padding:0 20px 0 40px;}#posts .post,#popular .post{list-style-type:none;margin:15px 0 30px 0;max-width:1000px;}#posts .post .wrap,#popular .post .wrap{padding:11px 22px 22px 22px;border:3px solid #f7f7f7;background-color:#fff;-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;}#posts .post .wrap:after,#popular .post .wrap:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
 #posts:after,#popular:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
 .top.audio *{width:100%;height:91px;}
 .top.media{line-height:0;position:relative;display:inline-block;}
 .post .caption_and_post_info.isphoto{margin-top:30px;}
 .post #disqus_thread{border-top:1px solid #E6E6E6;margin:20px 0 0 0;padding:25px 0 0 0;}
 .post .media{background-color:#ebebeb;}.post .media img{max-height:600px;width:auto;margin:0 auto;display:block;}
+.post .for-print{display:none;}
 .post-pagination{margin-bottom:11px;}.post-pagination a{display:block;font-size:12px;color:#999;}.post-pagination a:hover{color:#787878;}
 .post-pagination a.previous-post{float:left;}
 .post-pagination a.next-post{float:right;}
@@ -113,7 +117,7 @@ ol.notes a{color:#bbb;text-decoration:underline;}ol.notes a:hover{color:#fff;}
 .buttons .arrow{width:10px;height:14px;position:absolute;top:50%;display:block;background-image:url(http://static.tumblr.com/ogedyaw/xu1m8jxnf/arrow_sprite.png);}
 .buttons .left{-webkit-border-top-left-radius:2px;-webkit-border-bottom-left-radius:2px;-moz-border-radius-topleft:2px;-moz-border-radius-bottomleft:2px;border-top-left-radius:2px;border-bottom-left-radius:2px;position:absolute;left:0;}.buttons .left .arrow{background-position:0 15px;margin:-7px auto auto 20px;}
 .buttons .right{border-left-width:1px;-webkit-border-top-right-radius:2px;-webkit-border-bottom-right-radius:2px;-moz-border-radius-topright:2px;-moz-border-radius-bottomright:2px;border-top-right-radius:2px;border-bottom-right-radius:2px;position:absolute;right:0;}.buttons .right .arrow{background-position:10px -71px;margin:-7px auto auto 24px;}
-.index-page #posts,.index-page #popular{padding:0;margin:15px 20px 0 20px;}.index-page #posts .post,.index-page #popular .post{position:relative;overflow:hidden;}.index-page #posts .post .wrap,.index-page #popular .post .wrap{padding:0;}
+.index-page #posts,.index-page #popular{padding:0;margin:15px 20px 0 20px;}.index-page #posts .post,.index-page #popular .post{width:48%;margin:1%;float:left;position:relative;overflow:hidden;}.index-page #posts .post .wrap,.index-page #popular .post .wrap{padding:0;}
 .index-page #posts .post .media,.index-page #popular .post .media{width:auto;float:none;display:block;margin:3px;}.index-page #posts .post .media a,.index-page #popular .post .media a{display:block;}
 .index-page #posts .post .media .img-holder,.index-page #popular .post .media .img-holder{display:block;width:100%;height:200px;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;}
 .index-page #posts .post .caption.excerpt,.index-page #popular .post .caption.excerpt{padding:0;margin:6px;}.index-page #posts .post .caption.excerpt p,.index-page #popular .post .caption.excerpt p{margin:5px;font-size:12px;line-height:1.4;}
