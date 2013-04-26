@@ -92,18 +92,26 @@ em { font-style: italic; }
 
 // MAIN CONTENT
 #container {
-    display: table;
-    height: 100%;
-    min-height: 800px;
-    width: 100%;
+    margin: 0 auto;
+    max-width: 960px;
 }
+
+#popular {
+    ul {
+        display: table;
+
+        li {
+            display: table-cell;
+            width: 33%;
+            padding: 1%;
+        }
+    }
+}
+
 header {
-    display: table-cell;
-    width: 220px;
     vertical-align: top;
 }
 #post-wrap {
-    display: table-cell;
     vertical-align: top;
 }
 
@@ -111,7 +119,6 @@ header {
 // HEADER
 #blog_info {
     padding: 30px 0 30px 30px;
-    position: fixed;
     width: 190px;
 
     h1 {
@@ -513,7 +520,7 @@ header {
 }
 
 .caption {
-    width: auto;
+    width: 100%;
     float: none;
     padding-bottom: 15px;
     overflow: hidden;
@@ -820,9 +827,9 @@ ol.notes {
         margin: 15px 20px 0 20px;
 
         .post {
-            width: 48%;
-            margin: 1%;
-            float: left;
+            // width: 48%;
+            // margin: 1%;
+            // float: left;
             position: relative;
             overflow: hidden;
 
@@ -909,16 +916,16 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
 
 
 // MEDIA QUERIES
-@media (min-width: 1600px) {
-    .index-page #posts .post { width: 19%; margin: .5%; }
-    #container { min-height: 1800px; }
-}
-@media (min-width: 1400px) and (max-width: 1599px) {
-    .index-page #posts .post { width: 23%; margin: 1%; }
-}
-@media (min-width: 1200px) and (max-width: 1399px) {
-    .index-page #posts .post { width: 31%; margin: 1%; }
-}
+// @media (min-width: 1600px) {
+//     .index-page #posts .post { width: 19%; margin: .5%; }
+//     #container { min-height: 1800px; }
+// }
+// @media (min-width: 1400px) and (max-width: 1599px) {
+//     .index-page #posts .post { width: 23%; margin: 1%; }
+// }
+// @media (min-width: 1200px) and (max-width: 1399px) {
+//     .index-page #posts .post { width: 31%; margin: 1%; }
+// }
 @media (min-width: 1200px) { }
 @media (min-width: 980px) { }
 @media (max-width: 979px) {

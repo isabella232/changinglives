@@ -27,7 +27,7 @@ S3_BUCKETS = []
 SERVERS = []
 DEBUG = True
 
-NUMBER_OF_AGGREGATES = 10
+NUMBER_OF_AGGREGATES = 3
 
 PROJECT_DESCRIPTION = 'An opinionated project template for client-side apps.'
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)

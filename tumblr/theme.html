@@ -57,8 +57,8 @@
         {{ SOCIAL_HTML }}
 
         <script type="text/javascript" src="http://assets.tumblr.com/javascript/jquery-1.7.2.min.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/underscore.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/raphael.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/lib/underscore.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/lib/raphael.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/Quicksand_400.font.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/app-tumblr.js"></script>
 
@@ -89,14 +89,6 @@
                     <div class="mobile-prompt">
                         <span></span>
                         <p><strong>Use your smartphone.</strong> Visit <b>{{ PROJECT_SHORTLINK }}</b>.</p>
-                    </div>
-                    
-                    <div class="round-list">
-                        <ul>
-                            <li class="chefs"><a href="/tagged/chef">Famous Chefs Offer Advice</a></li>
-                            <li class="round1"><a href="/tagged/round1">Round 1: Pantry Open Call</a></li>
-                            <li class="round2"><a href="/tagged/round2">Round 2: The Spice Rack</a></li>
-                        </ul>
                     </div>
 
                     {block:IndexPage}
@@ -133,7 +125,7 @@
                             {block:Photo}
                             <section class="media">
                                  <a href="{Permalink}" class="link">
-                                    <span class="img-holder" style="background-image: url('{PhotoURL-400}');"></span>
+                                    <img src="{PhotoURL-HighRes}" />
                                  </a>
                             </section>
                             {block:Caption}
@@ -277,6 +269,7 @@
         <div class="modal-bg"></div>
         {block:IfUseEndlessScrolling}
         <script type="text/javascript">
+
             var Tumblelog = {};
 
             // AJAX
@@ -438,14 +431,14 @@
                 };
             });
 
-            $(function() {
+            (function() {
                 {block:IndexPage}
                 if ( !($.browser.msie && (parseInt($.browser.version, 10) < 9) ) ) {
                     var InfiniteScroll = new Tumblelog.Infinite;
                     InfiniteScroll.init();
                 }
                 {/block:IndexPage}
-            });
+            })();
         </script>
         {/block:IfUseEndlessScrolling}
 

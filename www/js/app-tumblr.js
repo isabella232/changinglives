@@ -257,4 +257,23 @@ $(function() {
             $('.tumblr-form').html('<p>Sorry, iOS versions older than 6 are not supported.');
         }
     }
+
+    function render_popular_posts(posts){
+        var $popular = $('<div id="popular"></div>');
+        var $container = $('#container');
+        $popular.html(posts);
+        $container.prepend($popular);
+    }
+
+    $.ajax({
+        url: "http://stage-apps.npr.org/changing-lives/aggregates.json",
+        context: document.body,
+        jsonp: false,
+        dataType: 'jsonp',
+        crossDomain: true,
+        jsonpCallback: "aggregateCallback"
+    }).done(function(data) {
+        render_popular_posts(data.popular);
+    });
 });
+
