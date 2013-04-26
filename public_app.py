@@ -102,8 +102,8 @@ def _post_to_tumblr():
     try:
         subprocess.check_output(args, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError, e:
-        logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
-            '500', e.output, app_config.SERVERS[0], svg_path, name))
+        logger.error('%s %s %s http://%s%s reader(%s) (times in EST)' % (
+            'ERROR', '500', e.output, app_config.SERVERS[0], svg_path, name))
         context = {}
         context['title'] = 'Tumblr error'
         context['message'] = e.output
