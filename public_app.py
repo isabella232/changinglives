@@ -58,6 +58,8 @@ def _errors():
                     context['errors'].append(line_dict)
                 except:
                     pass
+
+    context['errors'] = sorted(context['errors'], key=lambda item: item['date'], reverse=True)
     return render_template('error.html', **context)
 
 
