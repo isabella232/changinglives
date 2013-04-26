@@ -199,9 +199,9 @@ $(function() {
         height = $preview.height();
         font = preview.getFont(FONT_NAME);
         
-        render_grid(current_grid);
-        render_glyphs(current_glyphs);
-        render_text(current_text);
+        // render_grid(current_grid);
+        // render_glyphs(current_glyphs);
+        // render_text(current_text);
 
         $('textarea[name="string"]').keyup(function(e) {
             current_text = $(this).val();
@@ -260,13 +260,14 @@ $(function() {
 
     function render_popular_posts(posts){
         var $popular = $('<div id="popular"></div>');
-        var $container = $('#container');
+        var $container = $('#post-wrap');
         $popular.html(posts);
-        $container.prepend($popular);
+        $container.prepend($popular).prepend('<h2>Popular Advice</h2>');
     }
 
     $.ajax({
-        url: "http://stage-apps.npr.org/changing-lives/aggregates.json",
+        //url: "http://stage-apps.npr.org/changing-lives/aggregates.json",
+        url: "http://127.0.0.1:8000/js/aggregates.json",
         context: document.body,
         jsonp: false,
         dataType: 'jsonp',
