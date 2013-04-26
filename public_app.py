@@ -31,6 +31,29 @@ logger.addHandler(file_handler)
 logger.setLevel(logging.INFO)
 
 
+@app.route('/%s/errors/' % app_config.PROJECT_SLUG, methods=['GET'])
+def _errors():
+    """
+    Parses the log for errors.
+    Returns them to the page.
+    """
+    error_lines = ''
+    with open('/var/log/%s.log' % app_config.PROJECT_SLUG) as logfile:
+        for line in logfile.split('\n'):
+            if 'error' in line:
+                error_lines += '%s\n' % line
+
+    return error_lines
+
+
+@app.route('/%s/test/' % app_config.PROJECT_SLUG, methods=['GET'])
+def _test():
+    """
+    Returns the time. Proves the app server is running.
+    """
+    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+
 @app.route('/%s/' % app_config.PROJECT_SLUG, methods=['POST'])
 def _post_to_tumblr():
     """
@@ -70,10 +93,9 @@ def _post_to_tumblr():
     svg_path = file_path + '.svg'
     png_path = file_path + '.png'
 
-    # TEST 1: NO SVG FILE THERE FOR CAIRO TO DO THINGS TO.
-    #
-    # with open('/var/www%s' % svg_path, 'wb') as f:
-    #     f.write(svg.encode('utf-8'))
+
+    with open('/var/www%s' % svg_path, 'wb') as f:
+        f.write(svg.encode('utf-8'))
 
     command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
     args = shlex.split(command)
