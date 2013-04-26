@@ -260,7 +260,7 @@ $(function() {
 
     function render_popular_posts(posts){
         var $popular = $('<div id="popular"></div>');
-        var $container = $('#post-wrap');
+        var $container = $('.index-page #post-wrap');
         $popular.html(posts);
         $container.prepend($popular).prepend('<h2>Popular Advice</h2>');
     }
