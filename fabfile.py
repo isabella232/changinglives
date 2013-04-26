@@ -328,11 +328,12 @@ def _render_theme():
 
     context['STATIC_URL'] = 'http://127.0.0.1:8000/'
     context['STATIC_CSS'] = '%sless/tumblr.less' % context['STATIC_URL']
-    print env.settings
+    context['STATIC_PRINT_CSS'] = '%sless/tumblr-print.less' % context['STATIC_URL']
+
     if env.settings == 'production':
         context['STATIC_URL'] = 'http://%s/%s/' % (env.s3_buckets[0], env.deployed_name)
         context['STATIC_CSS'] = '%scss/tumblr.less.css' % context['STATIC_URL']
-
+        context['STATIC_PRINT_CSS'] = '%scss/tumblr-print.less.css' % context['STATIC_URL']
 
     with open('tumblr/theme.html', 'rb') as read_template:
         payload = Template(read_template.read())
