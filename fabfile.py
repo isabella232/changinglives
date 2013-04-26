@@ -122,7 +122,6 @@ def render():
     """
     from flask import g
 
-    update_copy()
     less()
     jst()
 

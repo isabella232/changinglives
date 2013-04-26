@@ -81,7 +81,7 @@ def _post_to_tumblr():
         subprocess.check_call(args)
     except subprocess.CalledProcessError, e:
         logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
-            e.error_code, e.msg, app_config.SERVERS[0], svg_path, name))
+            '500', e.msg, app_config.SERVERS[0], svg_path, name))
         return 'CAIROSVG ERROR'
 
     context = {

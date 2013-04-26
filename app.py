@@ -13,27 +13,6 @@ from render_utils import flatten_app_config, make_context
 app = Flask(app_config.PROJECT_NAME)
 
 # Example application views
-@app.route('/')
-def index():
-    """
-    Example view demonstrating rendering a simple HTML page.
-    """
-    return render_template('index.html', **make_context())
-
-@app.route('/widget.html')
-def widget():
-    """
-    Embeddable widget example page.
-    """
-    return render_template('widget.html', **make_context())
-
-@app.route('/test_widget.html')
-def test_widget():
-    """
-    Example page displaying widget at different embed sizes.
-    """
-    return render_template('test_widget.html', **make_context())
-
 @app.route('/tumblr-form.html')
 def test_widget():
     """
