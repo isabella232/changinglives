@@ -40,7 +40,7 @@ def _errors():
     error_lines = ''
     with open('/var/log/%s.log' % app_config.PROJECT_SLUG) as logfile:
         for line in logfile:
-            if 'error' in line:
+            if 'ERROR' in line:
                 error_lines += '%s<br/>' % line
 
     return error_lines
@@ -103,7 +103,7 @@ def _post_to_tumblr():
         subprocess.check_output(args, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError, e:
         logger.error('%s %s %s http://%s%s reader(%s) (times in EST)' % (
-            'ERROR', '500', e.output, app_config.SERVERS[0], svg_path, name))
+            'ERROR', '500', e, app_config.SERVERS[0], svg_path, name))
         context = {}
         context['title'] = 'Tumblr error'
         context['message'] = e.output
