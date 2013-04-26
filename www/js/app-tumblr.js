@@ -1,27 +1,15 @@
 var GRID_BG_COLOR = '#787878';
 var GRID_DOT_COLOR = '#444';
 var GLYPH_COLOR = '#fff';
+var GLYPH_RECT_MARGIN = 1 / 8;
 var FONT_NAME = 'Quicksand';
 var FONT_COLOR = '#fff';
 var FONT_SIZE = 120;
 var LINE_HEIGHT = 110;
 var X_DOTS = 64;
-var GLYPH_RECT_MARGIN = 1 / 8;
 
 var X_OFFSET = 16;
 var Y_OFFSET = 36;
-
-var GLYPH = [
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,1,1,1,1,1,1,0],
-    [0,1,0,1,0,0,0,0,0],
-    [0,1,1,1,0,0,0,0,0],
-    [0,1,0,0,1,0,0,0,0],
-    [0,1,0,0,0,1,1,1,0],
-    [0,1,0,0,0,1,1,1,0],
-    [0,1,0,0,0,1,1,0,0],
-    [0,0,0,0,0,0,0,0,0]
-];
 
 var $b;
 var $form;
@@ -87,7 +75,7 @@ function render_grid() {
     }
 }
 
-function render_glyphs() {
+function render_glyphs(glyph_set) {
     /*
      * Render the SVG ornament glyphs.
      */
@@ -103,15 +91,48 @@ function render_glyphs() {
     var x_margin = x_pitch * GLYPH_RECT_MARGIN;
     var y_margin = y_pitch * GLYPH_RECT_MARGIN;
 
-    for (var y = 0; y < GLYPH.length; y++) {
-        for (var x = 0; x < GLYPH[0].length; x++) {
-            if (GLYPH[y][x]) {
-                var lx = ((x + 1) * x_pitch) + x_margin;
-                var ly = ((y + 1) * y_pitch) + y_margin;
-                var lw = x_pitch - (x_margin * 2);
-                var lh = y_pitch - (y_margin * 2);
+    var glyphs = GLYPH_SETS[glyph_set];
 
-                glyph_rects.push(preview.rect(lx, ly, lw, lh).attr({ fill: GLYPH_COLOR, 'stroke-width': 0 }));
+    for (var i = 0; i < glyphs.length; i++) {
+        var glyph = glyphs[i];
+        var bitmap = glyph.bitmap;
+        var w = bitmap[0].length;
+        var h = bitmap.length;
+
+        if (glyph.align == 'left') {
+            var x_base = glyph.grid_offset;
+        } else if (glyph.align == 'right') {
+           var x_base = (X_DOTS - glyph.grid_offset) - w; 
+        }
+
+        if (glyph.valign == 'top') {
+            var y_base = glyph.grid_offset;
+        } else if (glyph.valign == 'bottom') {
+            var y_base = (y_dots - glyph.grid_offset) - h; 
+        }
+
+        for (var y = 0; y < h; y++) {
+            for (var x = 0; x < w; x++) {
+                if (glyph.invert) {
+                    var x2 = w - (x + 1);
+                } else {
+                    var x2 = x;
+                }
+
+                if (glyph.vinvert) {
+                    var y2 = h - (y + 1);
+                } else {
+                    var y2 = y;
+                }
+
+                if (bitmap[y2][x2]) {
+                    var lx = ((x + x_base) * x_pitch) + x_margin;
+                    var ly = ((y + y_base) * y_pitch) + y_margin;
+                    var lw = x_pitch - (x_margin * 2);
+                    var lh = y_pitch - (y_margin * 2);
+
+                    glyph_rects.push(preview.rect(lx, ly, lw, lh).attr({ fill: GLYPH_COLOR, 'stroke-width': 0 }));
+                }
             }
         }
     }
@@ -176,7 +197,7 @@ $(function() {
         font = preview.getFont(FONT_NAME);
         
         render_grid();
-        render_glyphs();
+        render_glyphs('attack-pattern-delta');
         render_text('');
 
         $('textarea[name="string"]').keyup(function(e) {
