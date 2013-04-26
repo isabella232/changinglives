@@ -210,8 +210,11 @@
                                     <div class="npr-logo">
                                         <img src="{{ STATIC_URL }}img/npr-logo-transparent.png" alt="" />
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                    <p><strong>{{ PROJECT_NAME }}</strong> | Create your own poster at {{ PROJECT_SHORTLINK }}</p>
+                                    <p>
+                                        <strong>{{ PROJECT_NAME }}</strong><br />
+                                        This poster was originally published at: {ShortURL} | 
+                                        Create your own at: {{ PROJECT_SHORTLINK }}
+                                    </p>
                                 </section>
                                 {/block:Photo}
                             </section>
