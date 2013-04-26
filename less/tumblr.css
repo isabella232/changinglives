@@ -65,13 +65,14 @@ header{display:table-cell;width:220px;vertical-align:top;}
 #project-form #tumblr-form .legal{padding:16px 11px 11px 11px;font-size:11px;color:#666;font-style:italic;width:80%;}
 .modal-bg{display:none;position:fixed;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:1040;background:#666;background:rgba(0, 0, 0, 0.8);}
 #post-wrap h2{margin:43px 20px -17px 33px;color:#ddd;font-weight:normal;font-size:24px;text-transform:lowercase;}
-#posts,#popular{color:#4C4C4C;position:relative;z-index:1;padding:0 20px 0 40px;}#posts .post,#popular .post{position:relative;overflow:hidden;list-style-type:none;}#posts .post .wrap,#popular .post .wrap{padding:11px 22px 22px 22px;border:3px solid #f7f7f7;background-color:#fff;-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;}#posts .post .wrap:after,#popular .post .wrap:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
+#posts,#popular{color:#4C4C4C;position:relative;z-index:1;padding:0 20px 0 40px;}#posts .post,#popular .post{list-style-type:none;margin:15px 0 30px 0;max-width:1000px;}#posts .post .wrap,#popular .post .wrap{padding:11px 22px 22px 22px;border:3px solid #f7f7f7;background-color:#fff;-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;}#posts .post .wrap:after,#popular .post .wrap:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
 #posts:after,#popular:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
 .top.audio *{width:100%;height:91px;}
 .top.media{line-height:0;position:relative;display:inline-block;}
 .post .caption_and_post_info.isphoto{margin-top:30px;}
 .post #disqus_thread{border-top:1px solid #E6E6E6;margin:20px 0 0 0;padding:25px 0 0 0;}
 .post .media{background-color:#ebebeb;}.post .media img{max-height:600px;width:auto;margin:0 auto;display:block;}
+.post .for-print{display:none;}
 .post-pagination{margin-bottom:11px;}.post-pagination a{display:block;font-size:12px;color:#999;}.post-pagination a:hover{color:#787878;}
 .post-pagination a.previous-post{float:left;}
 .post-pagination a.next-post{float:right;}
