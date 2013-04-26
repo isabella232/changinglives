@@ -41,7 +41,7 @@ def _errors():
     with open('/var/log/%s.log' % app_config.PROJECT_SLUG) as logfile:
         for line in logfile:
             if 'error' in line:
-                error_lines += '%s\n' % line
+                error_lines += '%s<br/>' % line
 
     return error_lines
 
