@@ -82,11 +82,10 @@ def _post_to_tumblr():
     except subprocess.CalledProcessError, e:
         logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
             '500', e, app_config.SERVERS[0], svg_path, name))
-        return """
-        CAIROSVG ERROR
-        Return code: %s
-        Command: %s
-        Output: %s""" % (e.returncode, e.cmd, e.output)
+        context = {}
+        context['title'] = 'Tumblr error'
+        context['message'] = '%s\n\n%s\n\n' % (e.returncode, e.cmd, e.msg)
+        return render_template('error.html', **context)
 
     context = {
         'message': message,
@@ -123,7 +122,10 @@ def _post_to_tumblr():
     except TumblpyError, e:
         logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
             e.error_code, e.msg, app_config.SERVERS[0], svg_path, name))
-        return 'TUMBLR ERROR'
+        context = {}
+        context['title'] = 'Tumblr error'
+        context['message'] = '%s\n%s' % (e.error_code, e.msg)
+        return render_template('error.html', **context)
 
     return redirect('%s#posts' % tumblr_url, code=301)
 
