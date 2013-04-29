@@ -110,17 +110,22 @@ def _post_to_tumblr():
     svg_path = file_path + '.svg'
     png_path = file_path + '.png'
 
-
     with open('/var/www%s' % svg_path, 'wb') as f:
         f.write(svg.encode('utf-8'))
 
     command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
     args = shlex.split(command)
     try:
+        # When used with check_output(), subprocess will return errors to a "CalledProcessError."
+        # This is nice. I'm also piping stderr to stdout so we can see a trace if we want.
+        # I am not logging the trace because we need the log to be single lines for continuity.
         subprocess.check_output(args, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError, e:
+        # If we encounter a CalledProcessError, log the output.
         logger.error('%s %s %s http://%s%s reader(%s) (times in EST)' % (
             'ERROR', '500', e, app_config.SERVERS[0], svg_path, name))
+
+        # These bits build a nicer error page that has the real stack trace on it.
         context = {}
         context['title'] = 'Tumblr error'
         context['message'] = e.output
