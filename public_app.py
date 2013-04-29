@@ -80,7 +80,10 @@ def _post_to_tumblr():
         """
         Strips HTML from a string.
         """
-        return re.compile(r'</?\S([^=]*=(\s*"[^"]*"|\s*\'[^\']*\'|\S*)|[^>])*?>', re.IGNORECASE).sub('', value)
+        try:
+            return re.compile(r'</?\S([^=]*=(\s*"[^"]*"|\s*\'[^\']*\'|\S*)|[^>])*?>', re.IGNORECASE).sub('', value)
+        except TypeError:
+            return None
 
     def strip_breaks(value):
         """

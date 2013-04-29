@@ -292,16 +292,21 @@ def generate_new_oauth_tokens():
 def install_cairosvg():
     require('settings', provided_by=[production, staging, development])
     if env.settings == 'development':
-        output = run('python -c "import platform; print platform.dist()"')
-        name = _codename(*eval(output))
-        if name is None:
-            abort(DETECTION_ERROR_MESSAGE)
-
-        puts('%s detected' % name)
-        return name
+        """
+        Assumes you're on a Mac.
+        Sorry!
+        """
+        with settings(warn_only=True):
+            local('brew install py2cairo')
+            prompt('Specify your virtualenv\'s name:', 'virtualenv_name', default="changinglives")
+            local('~/.virtualenvs/%(virtualenv_name)s/bin/pip install cairosvg' % env)
+            local('ln -s /usr/local/lib/python2.7/site-packages/cairo ~/.virtualenvs/%(virtualenv_name)s/lib/python2.7/site-packages/cairo' % env)
 
     if env.settings in ['production', 'staging']:
-        pass
+        with settings(warn_only=True):
+            local('sudo apt-get install python-cairo')
+            local('%(virtualenv_path)s/bin/pip install cairosvg' % env)
+            local('ln -s /usr/lib/python2.7/dist-packages/cairo %(virtualenv_path)s/lib/python2.7/site-packages/cairo')
 
 """
 Deployment
