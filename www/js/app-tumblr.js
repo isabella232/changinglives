@@ -241,7 +241,6 @@ $(function() {
             label.addClass('active');
             current_font = val;
 
-            render_grid(current_grid);
             render_glyphs(current_glyphs);
             render_text(current_font, current_text);
         });
