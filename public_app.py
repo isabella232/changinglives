@@ -103,7 +103,8 @@ def _post_to_tumblr():
     # location = strip_html(request.form.get('location', None))
 
     svg = request.form.get('image', None)
-
+    svg = re.sub('(height|width)=\"[0-9]+\"', '', svg, 2)
+    
     file_path = '/uploads/%s/%s_%s' % (
         app_config.PROJECT_SLUG,
         str(time.mktime(datetime.datetime.now().timetuple())).replace('.', ''),
@@ -118,6 +119,7 @@ def _post_to_tumblr():
 
     command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
     args = shlex.split(command)
+
     try:
         # When used with check_output(), subprocess will return errors to a "CalledProcessError."
         # This is nice. I'm also piping stderr to stdout so we can see a trace if we want.
