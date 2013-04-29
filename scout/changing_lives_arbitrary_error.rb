@@ -1,4 +1,4 @@
-class PostErrors < Scout::Plugin
+class ChangingLivesPostErrors < Scout::Plugin
   def build_report
 
     # log_file_path = '/var/log/changing-lives.log'
