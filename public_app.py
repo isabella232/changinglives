@@ -7,10 +7,9 @@ import re
 import shlex
 import subprocess
 import time
-import urllib
 
 from flask import Flask, redirect, render_template
-from jinja2.filters import escape, do_mark_safe
+from jinja2.filters import do_mark_safe
 from tumblpy import Tumblpy
 from tumblpy import TumblpyError
 from werkzeug import secure_filename

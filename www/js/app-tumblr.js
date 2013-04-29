@@ -1,5 +1,5 @@
-var SVG_WIDTH = 3072;
-var SVG_HEIGHT = 2304;
+var SVG_WIDTH = 2048;
+var SVG_HEIGHT = 2048;
 
 var GRID_X_TICKS = 64;
 var GRID_Y_TICKS = GRID_X_TICKS * (SVG_HEIGHT / SVG_WIDTH)
@@ -59,7 +59,7 @@ function resize_window() {
     $project_wrap.height(new_height);
 
     var width = $preview.width();
-    var height = width * 3 / 4;
+    var height = width;
 
     $preview.height(height);
 
