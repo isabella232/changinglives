@@ -17,8 +17,18 @@ var FONT_COLOR = '#fff';
 var FONT_SIZE = 300;
 var LINE_HEIGHT = FONT_SIZE;
 
-var X_OFFSET = 0;
-var Y_OFFSET = 0;
+var X_OFFSET = {
+    'Roboto Condensed': 20,
+    'Snippet': 25,
+    'Noto Serif': 0,
+    'Quicksand': 30
+};
+var Y_OFFSET = {
+    'Roboto Condensed': 150,
+    'Snippet': 150,
+    'Noto Serif': 150,
+    'Quicksand': 150
+};
 
 var $b;
 var $form;
@@ -161,7 +171,7 @@ function render_text(font_name, text) {
 
     var lines = text.split('\n');
     var lines_height = LINE_HEIGHT * lines.length;
-    var base_width = (SVG_WIDTH / 2) - X_OFFSET;
+    var base_width = (SVG_WIDTH / 2) - X_OFFSET[font_name];
 
     for (var i = 0; i < lines.length; i++) {
         var line = lines[i];
@@ -174,7 +184,7 @@ function render_text(font_name, text) {
         text_paths.push(text_path);
     }
 
-    var base_height = (SVG_HEIGHT / 2) - (lines_height / 2 - Y_OFFSET)
+    var base_height = (SVG_HEIGHT / 2) - (lines_height / 2 - Y_OFFSET[font_name])
 
     for (var i = 0; i < text_paths.length; i++) {
         var text_path = text_paths[i];
