@@ -64,6 +64,7 @@
         <script type="text/javascript" src="{{ STATIC_URL }}js/Noto_Serif_400.font.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/Snippet_400.font.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/Roboto_Condensed_400.font.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/glyphs.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/app-tumblr.js"></script>
 
 
@@ -120,17 +121,6 @@
                                     <img src="{PhotoURL-HighRes}" />
                                  </a>
                             </section>
-                            {block:Caption}
-                            <section class="caption excerpt">
-                                <a href="{Permalink}" class="link">
-                                {Caption}
-                                </a>
-
-                                <ul class="post_info comments">
-                                    <li class="more"><a href="{Permalink}">What would you do? Read / Comment &rsaquo;</a></li>
-                                </ul>
-                            </section>
-                            {/block:Caption}
                             {/block:Photo}
                         </div>
                     </li>

@@ -71,21 +71,17 @@ function render_grid(color) {
      * Render the SVG background grid.
      */
     if (grid_bg) {
-        grid_bg.remove();
-    }
+        grid_bg.attr({ fill: color });
+    } else {
+        grid_bg = preview.rect(0, 0, SVG_WIDTH, SVG_HEIGHT);
+        grid_bg.attr({ fill: color, 'stroke-width': 0 });
 
-    for (var i = 0; i < grid_dots.length; i++) {
-        grid_dots[i].remove();
-    }
+        grid_dots = [];
 
-    grid_bg = preview.rect(0, 0, SVG_WIDTH, SVG_HEIGHT);
-    grid_bg.attr({ fill: color, 'stroke-width': 0 });
-
-    grid_dots = [];
-
-    for (var x = 1; x < GRID_X_TICKS; x++) {
-        for (var y = 1; y < GRID_Y_TICKS; y++) {
-            grid_dots.push(preview.circle(x * GRID_X_PITCH, y * GRID_Y_PITCH, 5).attr({ fill: GRID_DOT_COLOR, 'stroke-width': 0 }));
+        for (var x = 1; x < GRID_X_TICKS; x++) {
+            for (var y = 1; y < GRID_Y_TICKS; y++) {
+                grid_dots.push(preview.circle(x * GRID_X_PITCH, y * GRID_Y_PITCH, 5).attr({ fill: GRID_DOT_COLOR, 'stroke-width': 0 }));
+            }
         }
     }
 }
@@ -112,12 +108,16 @@ function render_glyphs(glyph_set) {
             var x_base = glyph.grid_offset;
         } else if (glyph.align == 'right') {
             var x_base = (GRID_X_TICKS - glyph.grid_offset) - w; 
+        } else if (glyph.align == 'center') {
+            var x_base = ((GRID_X_TICKS / 2) - glyph.grid_offset) - (w / 2);
         }
 
         if (glyph.valign == 'top') {
             var y_base = glyph.grid_offset;
         } else if (glyph.valign == 'bottom') {
             var y_base = (GRID_Y_TICKS - glyph.grid_offset) - h; 
+        } else if (glyph.valign == 'middle') {
+            var y_base = ((GRID_Y_TICKS / 2) - glyph.grid_offset) - (h / 2);
         }
 
         for (var y = 0; y < h; y++) {
@@ -241,7 +241,6 @@ $(function() {
             label.addClass('active');
             current_font = val;
 
-            render_grid(current_grid);
             render_glyphs(current_glyphs);
             render_text(current_font, current_text);
         });
