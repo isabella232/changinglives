@@ -41,7 +41,7 @@ var text_paths = [];
 var current_grid = '#787878';
 var current_glyphs = 'flower-corner';
 var current_font = 'Roboto Condensed';
-var current_text = '';
+var current_text = 'Your\nadvice\nhere';
 
 function trimMessages(){
     $("body.index-page .post .message").each(function(i,v){
