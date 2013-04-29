@@ -14,8 +14,8 @@ var GLYPH_Y_MARGIN = GRID_Y_PITCH * GLYPH_RECT_MARGIN;
 
 var FONT_NAMES = ['Roboto Condensed', 'Snippet', 'Noto Serif', 'Quicksand'];
 var FONT_COLOR = '#fff';
-var FONT_SIZE = 360;
-var LINE_HEIGHT = 360;
+var FONT_SIZE = 300;
+var LINE_HEIGHT = FONT_SIZE;
 
 var X_OFFSET = 0;
 var Y_OFFSET = 0;
@@ -41,7 +41,7 @@ var text_paths = [];
 var current_grid = '#787878';
 var current_glyphs = 'flower-corner';
 var current_font = 'Roboto Condensed';
-var current_text = '';
+var current_text = 'Your\nadvice\nhere';
 
 function trimMessages(){
     $("body.index-page .post .message").each(function(i,v){
