@@ -5,7 +5,7 @@ var GRID_X_TICKS = 64;
 var GRID_Y_TICKS = GRID_X_TICKS * (SVG_HEIGHT / SVG_WIDTH)
 var GRID_X_PITCH = SVG_WIDTH / GRID_X_TICKS;
 var GRID_Y_PITCH = SVG_HEIGHT / GRID_Y_TICKS;
-var GRID_DOT_COLOR = '#444';
+var GRID_DOT_COLOR = '#000';
 
 var GLYPH_COLOR = '#fff';
 var GLYPH_RECT_MARGIN = 1 / 8;
@@ -80,7 +80,7 @@ function render_grid(color) {
 
         for (var x = 1; x < GRID_X_TICKS; x++) {
             for (var y = 1; y < GRID_Y_TICKS; y++) {
-                grid_dots.push(preview.circle(x * GRID_X_PITCH, y * GRID_Y_PITCH, 5).attr({ fill: GRID_DOT_COLOR, 'stroke-width': 0 }));
+                grid_dots.push(preview.circle(x * GRID_X_PITCH, y * GRID_Y_PITCH, 5).attr({ fill: GRID_DOT_COLOR, 'fill-opacity': 0.3, 'stroke-width': 0 }));
             }
         }
     }
