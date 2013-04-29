@@ -25,7 +25,7 @@ em{font-style:italic;}
 #container{display:table;height:100%;min-height:800px;width:100%;}
 header{display:table-cell;width:220px;vertical-align:top;}
 #post-wrap{display:table-cell;vertical-align:top;}
-#blog_info{padding:30px 0 30px 30px;position:fixed;width:190px;}#blog_info h1{font:normal 36px/1.1 Arial,Helvetica,sans-serif;color:#fff;margin-bottom:5px;margin-left:-3px;}#blog_info h1 a{color:#fff;display:block;height:100px;text-indent:-9999px;background:url('http://localhost:8000/img/logo.png') no-repeat;}
+#blog_info{padding:30px 0 30px 30px;position:fixed;width:190px;}#blog_info h1{font:normal 36px/1.1 Arial,Helvetica,sans-serif;color:#fff;margin-bottom:5px;margin-left:-3px;}#blog_info h1 a{color:#fff;display:block;height:70px;text-indent:-9999px;background:url('http://localhost:8000/img/logo.png') no-repeat;}
 #blog_info h2{margin-bottom:22px;margin-left:-6px;color:#bbb;text-transform:uppercase;font-weight:bold;font-size:16px;text-indent:-999px;background:url('http://localhost:8000/img/hed-round-2.png') no-repeat;height:23px;}#blog_info h2 a{display:block;height:23px;}
 #blog_info p.description,#blog_info p.more{color:#ccc;margin-bottom:11px;font-size:13px;}#blog_info p.description strong,#blog_info p.more strong{color:#ededed;}
 #blog_info p.more{margin-bottom:22px;}
@@ -64,7 +64,7 @@ header{display:table-cell;width:220px;vertical-align:top;}
 #project-form #tumblr-form button[type='submit']:disabled{background-color:#becfe6;cursor:default;opacity:1.0;}
 #project-form #tumblr-form .legal{padding:16px 11px 11px 11px;font-size:11px;color:#666;font-style:italic;width:80%;}
 .modal-bg{display:none;position:fixed;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:1040;background:#666;background:rgba(0, 0, 0, 0.8);}
-#post-wrap h2{margin:43px 20px -17px 33px;color:#ddd;font-weight:normal;font-size:24px;text-transform:lowercase;}
+#post-wrap h2{margin:20px 20px -17px 33px;color:#ddd;font-weight:normal;font-size:24px;text-transform:lowercase;}
 #posts,#popular{color:#4C4C4C;position:relative;z-index:1;padding:0 20px 0 40px;}#posts .post,#popular .post{list-style-type:none;margin:15px 0 30px 0;max-width:1000px;}#posts .post .wrap,#popular .post .wrap{padding:11px 22px 22px 22px;border:3px solid #f7f7f7;background-color:#fff;-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;box-shadow:0 1px 4px rgba(0, 0, 0, 0.5),0 0 40px rgba(0, 0, 0, 0.04) inset;}#posts .post .wrap:after,#popular .post .wrap:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
 #posts:after,#popular:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
 .top.audio *{width:100%;height:91px;}
