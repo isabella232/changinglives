@@ -71,21 +71,17 @@ function render_grid(color) {
      * Render the SVG background grid.
      */
     if (grid_bg) {
-        grid_bg.remove();
-    }
+        grid_bg.attr({ fill: color });
+    } else {
+        grid_bg = preview.rect(0, 0, SVG_WIDTH, SVG_HEIGHT);
+        grid_bg.attr({ fill: color, 'stroke-width': 0 });
 
-    for (var i = 0; i < grid_dots.length; i++) {
-        grid_dots[i].remove();
-    }
+        grid_dots = [];
 
-    grid_bg = preview.rect(0, 0, SVG_WIDTH, SVG_HEIGHT);
-    grid_bg.attr({ fill: color, 'stroke-width': 0 });
-
-    grid_dots = [];
-
-    for (var x = 1; x < GRID_X_TICKS; x++) {
-        for (var y = 1; y < GRID_Y_TICKS; y++) {
-            grid_dots.push(preview.circle(x * GRID_X_PITCH, y * GRID_Y_PITCH, 5).attr({ fill: GRID_DOT_COLOR, 'stroke-width': 0 }));
+        for (var x = 1; x < GRID_X_TICKS; x++) {
+            for (var y = 1; y < GRID_Y_TICKS; y++) {
+                grid_dots.push(preview.circle(x * GRID_X_PITCH, y * GRID_Y_PITCH, 5).attr({ fill: GRID_DOT_COLOR, 'stroke-width': 0 }));
+            }
         }
     }
 }
