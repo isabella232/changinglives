@@ -109,7 +109,7 @@ a {
     }
     
     .form-photo {
-        width: 640px;
+        width: 100%;
         float: left;
     }
     
@@ -197,10 +197,10 @@ a {
         color: #666;
         font-style: italic;
         max-width: 600px;
-    }
-    
-    #preview {  width: 100%; }
+    }    
 }
+
+#preview { width: 640px; }
 
 @media (min-width: 1200px) {
 }
@@ -226,6 +226,8 @@ a {
         div, div.form-typeface { width: 33%; }
         label, .form-typeface label { width: 40%; margin-right: 2%; }
     }
+    
+    .form-photo, #preview { width: 100%; }
 }
 @media (max-width: 480px) {
 }
