@@ -15,7 +15,7 @@ var GLYPH_Y_MARGIN = GRID_Y_PITCH * GLYPH_RECT_MARGIN;
 var FONT_NAMES = ['Roboto Condensed', 'Snippet', 'Noto Serif', 'Quicksand'];
 var FONT_COLOR = '#fff';
 var FONT_SIZE = 360;
-var LINE_HEIGHT = 300;
+var LINE_HEIGHT = 360;
 
 var X_OFFSET = 0;
 var Y_OFFSET = 0;
