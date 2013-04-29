@@ -1,5 +1,5 @@
-var SVG_WIDTH = 3072;
-var SVG_HEIGHT = 2304;
+var SVG_WIDTH = 2048;
+var SVG_HEIGHT = 2048;
 
 var GRID_X_TICKS = 64;
 var GRID_Y_TICKS = GRID_X_TICKS * (SVG_HEIGHT / SVG_WIDTH)
@@ -15,7 +15,7 @@ var GLYPH_Y_MARGIN = GRID_Y_PITCH * GLYPH_RECT_MARGIN;
 var FONT_NAMES = ['Roboto Condensed', 'Snippet', 'Noto Serif', 'Quicksand'];
 var FONT_COLOR = '#fff';
 var FONT_SIZE = 360;
-var LINE_HEIGHT = 300;
+var LINE_HEIGHT = 360;
 
 var X_OFFSET = 0;
 var Y_OFFSET = 0;
@@ -59,7 +59,7 @@ function resize_window() {
     $project_wrap.height(new_height);
 
     var width = $preview.width();
-    var height = width * 3 / 4;
+    var height = width;
 
     $preview.height(height);
 
