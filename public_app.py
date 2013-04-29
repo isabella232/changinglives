@@ -96,11 +96,12 @@ def _post_to_tumblr():
     from flask import request
 
     # These should match the form fields.
-    message = strip_html(request.form.get('message', None))
-    message = escape(message)
-    message = strip_breaks(message)
+    # message = strip_html(request.form.get('message', None))
+    # message = escape(message)
+    # message = strip_breaks(message)
 
     name = strip_html(request.form.get('signed_name', None))
+    location = strip_html(request.form.get('location', None))
 
     svg = request.form.get('image', None)
 
@@ -134,15 +135,15 @@ def _post_to_tumblr():
         context['message'] = e.output
         return render_template('500.html', **context)
 
-    context = {
-        'message': message,
-        'message_urlencoded': urllib.quote(message),
-        'name': name,
-        'app_config': app_config,
-        'image_url_urlencoded': urllib.quote('http://%s%s' % (app_config.SERVERS[0], png_path))
-    }
+    # context = {
+    #     'message': message,
+    #     'message_urlencoded': urllib.quote(message),
+    #     'name': name,
+    #     'app_config': app_config,
+    #     'image_url_urlencoded': urllib.quote('http://%s%s' % (app_config.SERVERS[0], png_path))
+    # }
 
-    caption = render_template('caption.html', **context)
+    # caption = render_template('caption.html', **context)
 
     secrets = app_config.get_secrets()
 
@@ -154,7 +155,7 @@ def _post_to_tumblr():
 
     params = {
         "type": "photo",
-        "caption": caption,
+        # "caption": caption,
         "tags": app_config.TUMBLR_TAGS,
         "source": "http://%s%s" % (app_config.SERVERS[0], png_path)
     }
