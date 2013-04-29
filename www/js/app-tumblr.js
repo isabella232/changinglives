@@ -1,7 +1,7 @@
 var GRID_DOT_COLOR = '#444';
 var GLYPH_COLOR = '#fff';
 var GLYPH_RECT_MARGIN = 1 / 8;
-var FONT_NAME = 'Quicksand';
+var FONT_NAMES = ['Roboto Condensed', 'Snippet', 'Noto Serif', 'Quicksand'];
 var FONT_COLOR = '#fff';
 var FONT_SIZE = 120;
 var LINE_HEIGHT = 110;
@@ -24,7 +24,7 @@ var preview;
 
 var width;
 var height;
-var font;
+var fonts = [];
 var grid_bg = null;
 var grid_dots = [];
 var glyph_rects = [];
@@ -32,6 +32,7 @@ var text_paths = [];
 
 var current_grid = '#787878';
 var current_glyphs = 'attack-pattern-delta';
+var current_font = 'Roboto Condensed';
 var current_text = '';
 
 function trimMessages(){
@@ -141,10 +142,12 @@ function render_glyphs(glyph_set) {
     }
 }
 
-function render_text(text) {
+function render_text(font_name, text) {
     /*
      * Render the SVG text.
      */
+    var font = fonts[font_name];
+
     for (var i = 0; i < text_paths.length; i++) {
         text_paths[i].remove();
     }
@@ -197,25 +200,44 @@ $(function() {
 
         width = $preview.width();
         height = $preview.height();
-        font = preview.getFont(FONT_NAME);
+
+        for (var i = 0; i < FONT_NAMES.length; i++) {
+            fonts[FONT_NAMES[i]] = preview.getFont(FONT_NAMES[i]);
+        }
         
         // render_grid(current_grid);
         // render_glyphs(current_glyphs);
-        // render_text(current_text);
+        // render_text(current_font, current_text);
 
         $('textarea[name="string"]').keyup(function(e) {
             current_text = $(this).val();
-            render_text(current_text);    
+            render_text(current_font, current_text);    
         });
 
         $('input[name="color"]').change(function(e) {
             var val = $(this).val();
-            var label = $('label[for="color-' + val + '"]');
+            var label = $('label[for="' + $(this).attr('id') + '"]'); 
+
+            $('.form-color label').removeClass('active');
+            label.addClass('active');
             current_grid = label.css('background-color');
 
             render_grid(current_grid);
             render_glyphs(current_glyphs);
-            render_text(current_text);
+            render_text(current_font, current_text);
+        });
+
+        $('input[name="typeface"]').change(function(e) {
+            var val = $(this).val();
+            var label = $('label[for="' + $(this).attr('id') + '"]'); 
+
+            $('.form-typeface label').removeClass('active');
+            label.addClass('active');
+            current_font = val;
+
+            render_grid(current_grid);
+            render_glyphs(current_glyphs);
+            render_text(current_font, current_text);
         });
 
         $tumblr_form.submit(function(e) {
