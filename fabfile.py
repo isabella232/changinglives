@@ -49,6 +49,9 @@ def staging():
     env.s3_buckets = app_config.STAGING_S3_BUCKETS
     env.hosts = app_config.STAGING_SERVERS
 
+def development():
+    env.settings = 'development'
+
 """
 Branches
 """
@@ -286,6 +289,25 @@ def install_scout_plugins():
 def generate_new_oauth_tokens():
     tumblr_utils.generate_new_oauth_tokens()
 
+def install_cairosvg():
+    require('settings', provided_by=[production, staging, development])
+    if env.settings == 'development':
+        """
+        Assumes you're on a Mac.
+        Sorry!
+        """
+        with settings(warn_only=True):
+            local('brew install py2cairo')
+            prompt('Specify your virtualenv\'s name:', 'virtualenv_name', default="changinglives")
+            local('~/.virtualenvs/%(virtualenv_name)s/bin/pip install cairosvg' % env)
+            local('ln -s /usr/local/lib/python2.7/site-packages/cairo ~/.virtualenvs/%(virtualenv_name)s/lib/python2.7/site-packages/cairo' % env)
+
+    if env.settings in ['production', 'staging']:
+        with settings(warn_only=True):
+            local('sudo apt-get install python-cairo')
+            local('%(virtualenv_path)s/bin/pip install cairosvg' % env)
+            local('ln -s /usr/lib/python2.7/dist-packages/cairo %(virtualenv_path)s/lib/python2.7/site-packages/cairo')
+
 """
 Deployment
 """
@@ -438,6 +460,7 @@ def deploy_aggregates():
     require('settings', provided_by=[production, staging])
     write_aggregates()
     tumblr_utils.deploy_aggregates(env.s3_buckets)
+
 
 """
 Cron jobs

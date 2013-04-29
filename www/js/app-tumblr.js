@@ -299,23 +299,22 @@ $(function() {
         }
     }
 
-    function render_popular_posts(posts){
-        var $popular = $('<div id="popular"></div>');
-        var $container = $('.index-page #post-wrap');
-        $popular.html(posts);
-        $container.prepend($popular).prepend('<h2>Popular Advice</h2>');
-    }
-
     $.ajax({
-        //url: "http://stage-apps.npr.org/changing-lives/aggregates.json",
-        url: "http://127.0.0.1:8000/js/aggregates.json",
+        url: "http://stage-apps.npr.org/changing-lives/aggregates.json",
+        //url: "http://127.0.0.1:8000/js/aggregates.json",
         context: document.body,
         jsonp: false,
         dataType: 'jsonp',
         crossDomain: true,
         jsonpCallback: "aggregateCallback"
     }).done(function(data) {
-        render_popular_posts(data.popular);
+        if ($b.hasClass('index-page')){
+            $container = $('#post-wrap h2');
+        } else {
+            $container = $('#footer');
+        }
+        $popular = $('<div id="popular"></div>');
+        $popular.html(data.popular).insertBefore($container).prepend('<h2>Popular Advice</h2>');
     });
 });
 
