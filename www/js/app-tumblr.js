@@ -31,7 +31,7 @@ var glyph_rects = [];
 var text_paths = [];
 
 var current_grid = '#787878';
-var current_glyphs = 'attack-pattern-delta';
+var current_glyphs = 'flower-corner';
 var current_font = 'Roboto Condensed';
 var current_text = '';
 
@@ -205,9 +205,9 @@ $(function() {
             fonts[FONT_NAMES[i]] = preview.getFont(FONT_NAMES[i]);
         }
         
-        // render_grid(current_grid);
-        // render_glyphs(current_glyphs);
-        // render_text(current_font, current_text);
+        render_grid(current_grid);
+        render_glyphs(current_glyphs);
+        render_text(current_font, current_text);
 
         $('textarea[name="string"]').keyup(function(e) {
             current_text = $(this).val();
@@ -234,6 +234,20 @@ $(function() {
             $('.form-typeface label').removeClass('active');
             label.addClass('active');
             current_font = val;
+
+            render_grid(current_grid);
+            render_glyphs(current_glyphs);
+            render_text(current_font, current_text);
+        });
+
+        $('input[name="ornament"]').change(function(e) {
+            var val = $(this).val();
+            console.log(val);
+            var label = $('label[for="' + $(this).attr('id') + '"]'); 
+
+            $('.form-ornament label').removeClass('active');
+            label.addClass('active');
+            current_glyphs = val;
 
             render_grid(current_grid);
             render_glyphs(current_glyphs);

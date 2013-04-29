@@ -13,7 +13,8 @@ var BITMAPS = {
 
 
 var GLYPH_SETS = {
-    'attack-pattern-delta': [{ 
+    'no-border': [],
+    'flower-corner': [{ 
         bitmap: BITMAPS.BIRD_OF_PREY,
         align: 'left',
         valign: 'top',
@@ -27,5 +28,7 @@ var GLYPH_SETS = {
         grid_offset: 1,
         invert: true,
         vinvert: false
-    }]
+    }],
+    'swash-border': [],
+    'triangle-border': []
 }
