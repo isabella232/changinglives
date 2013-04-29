@@ -1,6 +1,6 @@
 require 'date'
 
-class NearingLimit < Scout::Plugin
+class ChangingLivesOverLimit < Scout::Plugin
   def build_report
 
     log_file_path = '/var/log/changing-lives.log'
@@ -21,7 +21,7 @@ class NearingLimit < Scout::Plugin
         this_date = DateTime.parse(line.split(' ')[0])
 
         if this_date == today
-          if line.split(' ')[2] == 'INFO'
+          if line.include?("photo upload limit")
             count += 1
           end
         end
@@ -29,7 +29,7 @@ class NearingLimit < Scout::Plugin
       end
     end
 
-    report(:successful_posts => count)
+    report(:changing_lives_over_limit_errors => count)
 
   end
 end
