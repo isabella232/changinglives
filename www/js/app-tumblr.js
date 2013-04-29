@@ -1,14 +1,24 @@
+var SVG_WIDTH = 3072;
+var SVG_HEIGHT = 2304;
+
+var GRID_X_TICKS = 64;
+var GRID_Y_TICKS = GRID_X_TICKS * (SVG_HEIGHT / SVG_WIDTH)
+var GRID_X_PITCH = SVG_WIDTH / GRID_X_TICKS;
+var GRID_Y_PITCH = SVG_HEIGHT / GRID_Y_TICKS;
 var GRID_DOT_COLOR = '#444';
+
 var GLYPH_COLOR = '#fff';
 var GLYPH_RECT_MARGIN = 1 / 8;
+var GLYPH_X_MARGIN = GRID_X_PITCH * GLYPH_RECT_MARGIN;
+var GLYPH_Y_MARGIN = GRID_Y_PITCH * GLYPH_RECT_MARGIN;
+
 var FONT_NAMES = ['Roboto Condensed', 'Snippet', 'Noto Serif', 'Quicksand'];
 var FONT_COLOR = '#fff';
-var FONT_SIZE = 120;
-var LINE_HEIGHT = 110;
-var X_DOTS = 64;
+var FONT_SIZE = 360;
+var LINE_HEIGHT = 300;
 
-var X_OFFSET = 16;
-var Y_OFFSET = 36;
+var X_OFFSET = 0;
+var Y_OFFSET = 0;
 
 var $b;
 var $form;
@@ -22,8 +32,6 @@ var $preview;
 var preview_div;
 var preview;
 
-var width;
-var height;
 var fonts = [];
 var grid_bg = null;
 var grid_dots = [];
@@ -49,6 +57,13 @@ function toggle_header() {
 function resize_window() {
     var new_height = $form.height() - $project_hdr.height();
     $project_wrap.height(new_height);
+
+    var width = $preview.width();
+    var height = width * 3 / 4;
+
+    $preview.height(height);
+
+    preview.setSize(width, height);
 }
 
 function render_grid(color) {
@@ -63,18 +78,14 @@ function render_grid(color) {
         grid_dots[i].remove();
     }
 
-    grid_bg = preview.rect(0, 0, width, height);
+    grid_bg = preview.rect(0, 0, SVG_WIDTH, SVG_HEIGHT);
     grid_bg.attr({ fill: color, 'stroke-width': 0 });
 
-    var y_dots = X_DOTS * (height / width)
-    var x_pitch = width / X_DOTS;
-    var y_pitch = height / y_dots;
-    
     grid_dots = [];
 
-    for (var x = 1; x < X_DOTS; x++) {
-        for (var y = 1; y < y_dots; y++) {
-            grid_dots.push(preview.circle(x * x_pitch, y * y_pitch, 1).attr({ fill: GRID_DOT_COLOR, 'stroke-width': 0 }));
+    for (var x = 1; x < GRID_X_TICKS; x++) {
+        for (var y = 1; y < GRID_Y_TICKS; y++) {
+            grid_dots.push(preview.circle(x * GRID_X_PITCH, y * GRID_Y_PITCH, 5).attr({ fill: GRID_DOT_COLOR, 'stroke-width': 0 }));
         }
     }
 }
@@ -89,12 +100,6 @@ function render_glyphs(glyph_set) {
 
     glyph_rects = [];
 
-    var y_dots = X_DOTS * (height / width)
-    var x_pitch = width / X_DOTS;
-    var y_pitch = height / y_dots;
-    var x_margin = x_pitch * GLYPH_RECT_MARGIN;
-    var y_margin = y_pitch * GLYPH_RECT_MARGIN;
-
     var glyphs = GLYPH_SETS[glyph_set];
 
     for (var i = 0; i < glyphs.length; i++) {
@@ -106,13 +111,13 @@ function render_glyphs(glyph_set) {
         if (glyph.align == 'left') {
             var x_base = glyph.grid_offset;
         } else if (glyph.align == 'right') {
-           var x_base = (X_DOTS - glyph.grid_offset) - w; 
+            var x_base = (GRID_X_TICKS - glyph.grid_offset) - w; 
         }
 
         if (glyph.valign == 'top') {
             var y_base = glyph.grid_offset;
         } else if (glyph.valign == 'bottom') {
-            var y_base = (y_dots - glyph.grid_offset) - h; 
+            var y_base = (GRID_Y_TICKS - glyph.grid_offset) - h; 
         }
 
         for (var y = 0; y < h; y++) {
@@ -130,10 +135,10 @@ function render_glyphs(glyph_set) {
                 }
 
                 if (bitmap[y2][x2]) {
-                    var lx = ((x + x_base) * x_pitch) + x_margin;
-                    var ly = ((y + y_base) * y_pitch) + y_margin;
-                    var lw = x_pitch - (x_margin * 2);
-                    var lh = y_pitch - (y_margin * 2);
+                    var lx = ((x + x_base) * GRID_X_PITCH) + GLYPH_X_MARGIN;
+                    var ly = ((y + y_base) * GRID_Y_PITCH) + GLYPH_Y_MARGIN;
+                    var lw = GRID_X_PITCH - (GLYPH_X_MARGIN * 2);
+                    var lh = GRID_Y_PITCH - (GLYPH_Y_MARGIN * 2);
 
                     glyph_rects.push(preview.rect(lx, ly, lw, lh).attr({ fill: GLYPH_COLOR, 'stroke-width': 0 }));
                 }
@@ -156,7 +161,7 @@ function render_text(font_name, text) {
 
     var lines = text.split('\n');
     var lines_height = LINE_HEIGHT * lines.length;
-    var base_width = (width / 2) - X_OFFSET;
+    var base_width = (SVG_WIDTH / 2) - X_OFFSET;
 
     for (var i = 0; i < lines.length; i++) {
         var line = lines[i];
@@ -169,7 +174,7 @@ function render_text(font_name, text) {
         text_paths.push(text_path);
     }
 
-    var base_height = (height / 2) - (lines_height / 2 - Y_OFFSET)
+    var base_height = (SVG_HEIGHT / 2) - (lines_height / 2 - Y_OFFSET)
 
     for (var i = 0; i < text_paths.length; i++) {
         var text_path = text_paths[i];
@@ -196,10 +201,11 @@ $(function() {
     if (!Raphael.svg) {
         alert('Your browser doesn\'t support SVG, so this will be broken.');
     } else {
-        preview = new Raphael(preview_div, $preview.width(), $preview.height());
+        var width = $preview.width();
+        var height = $preview.height();
 
-        width = $preview.width();
-        height = $preview.height();
+        preview = new Raphael(preview_div, width, height);
+        preview.setViewBox(0, 0, SVG_WIDTH, SVG_HEIGHT);
 
         for (var i = 0; i < FONT_NAMES.length; i++) {
             fonts[FONT_NAMES[i]] = preview.getFont(FONT_NAMES[i]);
