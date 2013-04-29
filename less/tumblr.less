@@ -835,8 +835,10 @@ ol.notes {
     margin: 15px 20px 0 20px;
 
     .post {
-        width: 48%;
-        margin: 1%;
+        box-sizing: border-box;
+        width: 50%;
+        margin: 0;
+        padding: 5px;
         float: left;
         position: relative;
         overflow: hidden;
@@ -872,8 +874,17 @@ ol.notes {
     }
 }
 
-.permalink-page .post-list {
-    max-width: 1000px;
+.permalink-page {
+    #popular {
+        margin: 0 0 0 30px;
+        .post-list {
+            max-width: 1020px;
+            margin: 0;
+        }
+        h2 {
+            margin: 0 0 10px 10px;
+        }
+    }
 }
 
 .touch .index-page {
@@ -929,22 +940,24 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
 
 // MEDIA QUERIES
 @media (min-width: 1600px) {
-    .index-page .post-list .post { width: 19%; margin: .5%; }
+    .index-page .post-list .post { width: 20%; }
     #container { min-height: 1800px; }
 }
 @media (min-width: 1400px) and (max-width: 1599px) {
-    .index-page .post-list .post { width: 23%; margin: 1%; }
+    .index-page .post-list .post { width: 25%;}
 }
 @media (min-width: 1200px) and (max-width: 1399px) {
-    .post-list .post { width: 31%; margin: 1%; }
+    .post-list .post { width: 33%; }
 }
 @media (min-width: 1200px) { }
-@media (min-width: 980px) { }
+@media (min-width: 980px) {
+    .post-list .post { padding: 10px; }
+}
 @media (max-width: 979px) {
     #nav .site-links-2 { display: none; }
     .permalink-page {
         #popular {
-            margin: 0 20px 0 40px;
+            margin: 0 15px 0 35px;
             .posts { margin: 15px 0 0 0; }
         }
     }
@@ -1003,8 +1016,9 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
         .post-list { margin: 0 10px 0 10px; }
     }
     .permalink-page {
-        .post-list {
+        #popular {
             margin: 0 5px;
+            .posts { margin: 15px 0 0 0; }
         }
     }
 }
@@ -1044,8 +1058,12 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
     }
 
     .permalink-page {
-        .post-list {
+
+        #popular {
             margin: 0;
+            .post-list {
+                margin: 0 -5px;
+            }
         }
     }
 }
