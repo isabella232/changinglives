@@ -100,7 +100,7 @@ def _post_to_tumblr():
     # message = strip_breaks(message)
 
     name = strip_html(request.form.get('signed_name', None))
-    location = strip_html(request.form.get('location', None))
+    # location = strip_html(request.form.get('location', None))
 
     svg = request.form.get('image', None)
 
