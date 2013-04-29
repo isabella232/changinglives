@@ -49,6 +49,9 @@ def staging():
     env.s3_buckets = app_config.STAGING_S3_BUCKETS
     env.hosts = app_config.STAGING_SERVERS
 
+def development():
+    env.settings = 'development'
+
 """
 Branches
 """
@@ -286,6 +289,20 @@ def install_scout_plugins():
 def generate_new_oauth_tokens():
     tumblr_utils.generate_new_oauth_tokens()
 
+def install_cairosvg():
+    require('settings', provided_by=[production, staging, development])
+    if env.settings == 'development':
+        output = run('python -c "import platform; print platform.dist()"')
+        name = _codename(*eval(output))
+        if name is None:
+            abort(DETECTION_ERROR_MESSAGE)
+
+        puts('%s detected' % name)
+        return name
+
+    if env.settings in ['production', 'staging']:
+        pass
+
 """
 Deployment
 """
@@ -438,6 +455,7 @@ def deploy_aggregates():
     require('settings', provided_by=[production, staging])
     write_aggregates()
     tumblr_utils.deploy_aggregates(env.s3_buckets)
+
 
 """
 Cron jobs
