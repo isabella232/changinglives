@@ -48,7 +48,7 @@ var grid_dots = [];
 var glyph_rects = [];
 var text_paths = [];
 
-var current_grid = '#787878';
+var current_grid = '#17807e';
 var current_glyphs = 'flower-corner';
 var current_font = 'Roboto Condensed';
 var current_text = 'Your\nadvice\nhere';
