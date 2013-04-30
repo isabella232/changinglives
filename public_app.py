@@ -106,6 +106,10 @@ def _post_to_tumblr():
     svg = request.form.get('image', None)
     svg = re.sub('(height|width)=\"[0-9]+\"', '', svg, 2)
 
+    # Fix for duplicate namespaces in IE... 
+    if svg.count('xmlns="http://www.w3.org/2000/svg"') > 1:
+        svg = svg.replace('xmlns="http://www.w3.org/2000/svg"', '', 1)
+    
     file_path = '/uploads/%s/%s_%s' % (
         app_config.PROJECT_SLUG,
         str(time.mktime(datetime.datetime.now().timetuple())).replace('.', ''),
@@ -133,7 +137,7 @@ def _post_to_tumblr():
 
         # These bits build a nicer error page that has the real stack trace on it.
         context = {}
-        context['title'] = 'Tumblr error'
+        context['title'] = 'Error'
         context['message'] = e.output
         return render_template('500.html', **context)
 

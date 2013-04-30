@@ -4,7 +4,7 @@
 </div>
 
 <div class="tumblr-form">
-    <form id="tumblr-form" method="post" enctype="multipart/form-data" action="http://{{ SERVERS[0] }}/{{ PROJECT_SLUG }}/">
+   <form id="tumblr-form" method="post" action="http://{{ SERVERS[0] }}/{{ PROJECT_SLUG }}/">
         <ol>
             <!--
             <li class="form-intro">
@@ -83,27 +83,5 @@ here</textarea>
         </ol>
         <div class="legal">You warrant that whatever phrase/advice you submit ("the submission") is your own creation and that you are not copying or using any slogans, phrases, advice, or intellectual property, or the name, of any other person or entity. By submitting the submission, you grant to NPR any intellectual property rights that may apply to the submission and agree and understand that NPR may make the submission available to itself, member stations, website users and other third parties for editorial content, merchandise, commercial use, promotional uses, and any other use in NPR's sole discretion without any compensation or credit to you.</div>
     </form>
-    <!--[if IE]>
-    <script type="text/javascript">
-        /*
-        * Handle simple form validation for browsers that do not support
-        * the HTML5 "required" attribute on form elements.
-        */
-        $('#tumblr-form').submit(function(event){
-           var $this = $(this);
-           var inputs = [];
-           inputs.push($this.find('textarea').text());
-           inputs.push($this.find("input[type='file']").attr('value'));
-           inputs.push($this.find("input[name='signed_name']").attr('value'));
-           inputs.push($this.find("input[name='location']").attr('value'));
-           _.each(inputs, function(input){
-               if (input === '') {
-                   event.preventDefault();
-                   $this.find('span.gentle-reminder').show();
-               }
-           });
-        });
-    </script>
-    <![endif]-->
 
 </div>
