@@ -274,24 +274,11 @@ header {
         font-size: 17px;
         display: block;
         margin-bottom: 5px;
-
-        &.header { margin-bottom: 5px; }
-        &.instructions {
-            font-weight: normal;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-    }
-    li.form-intro p {
-        margin: 0;
-    }
-    li.form-photo label.instructions {
-        margin-bottom: 15px;
     }
     textarea {
         width: 50%;
         height: 100px;
-        max-width: 300px;
+        min-width: 200px;
         font: 13px/1.5 Arial, Helvetica, sans-serif;
         color: #111;
     }
@@ -1138,6 +1125,9 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
     }
     .tumblr-form {
         .form-photo, .form-options { float: none; width: auto; }
+        .form-photo {
+            padding: 10px 10px 0 10px;
+        }
         .form-customize {
             label { 
                 margin-right: 1%; 
