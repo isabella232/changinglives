@@ -4,81 +4,82 @@
 </div>
 
 <div class="tumblr-form">
-   <form id="tumblr-form" method="post" action="http://{{ SERVERS[0] }}/{{ PROJECT_SLUG }}/">
-        <ol>
-            <!--
-            <li class="form-intro">
-                <h2>This project has now concluded. Thank you for your submissions.</h2>
-            </li>
-            -->
-            <li class="form-photo">
-                <div id="preview"></div>
-                <input type="hidden" name="image">
-            </li>
-            <li class="form-customize">
-                <div class="form-color">
-                    <h3>color</h3>
-                    <input type="radio" name="color" id="color-teal" value="teal" checked="checked" />
-                        <label class="teal active" for="color-teal">Teal</label>
-                    <input type="radio" name="color" id="color-orange" value="orange" />
-                        <label class="orange" for="color-orange">Orange</label>
-                    <input type="radio" name="color" id="color-red" value="red" />
-                        <label class="red" for="color-red">Red</label>
-                    <input type="radio" name="color" id="color-yellow" value="yellow" />
-                        <label class="yellow" for="color-yellow">Yellow</label>
-                    <input type="radio" name="color" id="color-blue" value="blue" />
-                        <label class="blue" for="color-blue">Blue</label>
-                    <input type="radio" name="color" id="color-pink" value="pink" />
-                        <label class="pink" for="color-pink">Pink</label>
-                    <input type="radio" name="color" id="color-purple" value="purple" />
-                        <label class="purple" for="color-purple">Purple</label>
-                    <input type="radio" name="color" id="color-gray" value="gray" />
-                        <label class="gray" for="color-gray">Gray</label>
-                </div>
+    <form id="tumblr-form" method="post" action="http://{{ SERVERS[0] }}/{{ PROJECT_SLUG }}/">
+    
+        <div class="form-photo">
+            <div id="preview"></div>
+            <input type="hidden" name="image">
+        </div>
+        
+        <div class="form-options">
+            <ol>
+                <!--
+                <li class="form-intro">
+                    <h2>This project has now concluded. Thank you for your submissions.</h2>
+                </li>
+                -->
+                <li class="form-customize">
+                    <div class="form-color">
+                        <input type="radio" name="color" id="color-teal" value="teal" checked="checked" />
+                            <label class="teal active" for="color-teal">Teal</label>
+                        <input type="radio" name="color" id="color-orange" value="orange" />
+                            <label class="orange" for="color-orange">Orange</label>
+                        <input type="radio" name="color" id="color-red" value="red" />
+                            <label class="red" for="color-red">Red</label>
+                        <input type="radio" name="color" id="color-yellow" value="yellow" />
+                            <label class="yellow" for="color-yellow">Yellow</label>
+                        <input type="radio" name="color" id="color-blue" value="blue" />
+                            <label class="blue" for="color-blue">Blue</label>
+                        <input type="radio" name="color" id="color-pink" value="pink" />
+                            <label class="pink" for="color-pink">Pink</label>
+                        <input type="radio" name="color" id="color-purple" value="purple" />
+                            <label class="purple" for="color-purple">Purple</label>
+                        <input type="radio" name="color" id="color-gray" value="gray" />
+                            <label class="gray" for="color-gray">Gray</label>
+                    </div>
 
-                <div class="form-typeface">
-                    <h3>typeface</h3>
-                    <input type="radio" name="typeface" id="type-roboto" value="Roboto Condensed" />
-                        <label class="roboto active" for="type-roboto">Advice</label>
-                    <input type="radio" name="typeface" id="type-snippet" value="Snippet" checked="checked" />
-                        <label class="snippet" for="type-snippet">Advice</label>
-                    <input type="radio" name="typeface" id="type-noto" value="Noto Serif" />
-                        <label class="noto" for="type-noto">Advice</label>
-                    <input type="radio" name="typeface" id="type-quicksand" value="Quicksand" />
-                        <label class="quicksand" for="type-quicksand">Advice</label>
-                </div>
+                    <div class="form-typeface">
+                        <input type="radio" name="typeface" id="type-roboto" value="Roboto Condensed" />
+                            <label class="roboto active" for="type-roboto">Advice</label>
+                        <input type="radio" name="typeface" id="type-snippet" value="Snippet" checked="checked" />
+                            <label class="snippet" for="type-snippet">Advice</label>
+                        <input type="radio" name="typeface" id="type-noto" value="Noto Serif" />
+                            <label class="noto" for="type-noto">Advice</label>
+                        <input type="radio" name="typeface" id="type-quicksand" value="Quicksand" />
+                            <label class="quicksand" for="type-quicksand">Advice</label>
+                    </div>
 
-                <div class="form-ornament">
-                    <h3>ornament</h3>
-                    <input type="radio" name="ornament" id="ornament-flower" value="flower-corner" checked="checked" />
-                        <label class="flower-corner active" for="ornament-flower">Flower Corner</label>
-                    <input type="radio" name="ornament" id="ornament-triangle" value="triangle-border" />
-                        <label class="triangle-border" for="ornament-triangle">Triangle Border</label>
-                    <input type="radio" name="ornament" id="ornament-swash" value="swash-border" />
-                        <label class="swash-border" for="ornament-swash">Swash Border</label>
-                    <input type="radio" name="ornament" id="ornament-invaders" value="space-invaders" />
-                        <label class="space-invaders" for="ornament-invaders">Space Invaders</label>
-                    <input type="radio" name="ornament" id="ornament-none" value="no-border" />
-                        <label class="no-border" for="ornament-none">No border</label>
-                </div>
-            </li>
-            <li class="form-message">
-                <textarea name="string">Your
+                    <div class="form-ornament">
+                        <input type="radio" name="ornament" id="ornament-flower" value="flower-corner" checked="checked" />
+                            <label class="flower-corner active" for="ornament-flower">Flower Corner</label>
+                        <input type="radio" name="ornament" id="ornament-triangle" value="triangle-border" />
+                            <label class="triangle-border" for="ornament-triangle">Triangle Border</label>
+                        <input type="radio" name="ornament" id="ornament-swash" value="swash-border" />
+                            <label class="swash-border" for="ornament-swash">Swash Border</label>
+                        <input type="radio" name="ornament" id="ornament-invaders" value="space-invaders" />
+                            <label class="space-invaders" for="ornament-invaders">Space Invaders</label>
+                        <input type="radio" name="ornament" id="ornament-none" value="no-border" />
+                            <label class="no-border" for="ornament-none">No border</label>
+                    </div>
+                </li>
+                <li class="form-message">
+                    <textarea name="string">Your
 advice
 here</textarea>
-            </li>
-            <li class="form-signature">
-                <input type="text" name="signed_name" placeholder="Your Initials" class="signed-name"></input>
-                from
-                <input type="text" name="location" placeholder="Your City And State" class="signed-location"></input>
-            </li>
+                </li>
+                <li class="form-signature">
+                    <input type="text" name="signed_name" placeholder="Your Initials" class="signed-name"></input>
+                    from
+                    <input type="text" name="location" placeholder="Your City And State" class="signed-location"></input>
+                </li>
 
-            <li class="form-submit">
-                <span class="gentle-reminder" style="display: none;">Please add a photo, an explanation, your initials and where you&rsquo;re from. Thanks!</span>
-                <button type="submit" class="btn">Send</button>
-            </li>
-        </ol>
-        <div class="legal">You warrant that whatever phrase/advice you submit ("the submission") is your own creation and that you are not copying or using any slogans, phrases, advice, or intellectual property, or the name, of any other person or entity. By submitting the submission, you grant to NPR any intellectual property rights that may apply to the submission and agree and understand that NPR may make the submission available to itself, member stations, website users and other third parties for editorial content, merchandise, commercial use, promotional uses, and any other use in NPR's sole discretion without any compensation or credit to you.</div>
+                <li class="form-submit">
+                    <span class="gentle-reminder" style="display: none;">Please add a photo, an explanation, your initials and where you&rsquo;re from. Thanks!</span>
+                    <button type="submit" class="btn">Send</button>
+                </li>
+            </ol>
+            <div class="legal">You warrant that whatever phrase/advice you submit ("the submission") is your own creation and that you are not copying or using any slogans, phrases, advice, or intellectual property, or the name, of any other person or entity. By submitting the submission, you grant to NPR any intellectual property rights that may apply to the submission and agree and understand that NPR may make the submission available to itself, member stations, website users and other third parties for editorial content, merchandise, commercial use, promotional uses, and any other use in NPR's sole discretion without any compensation or credit to you.</div>
+        </div>
     </form>
 
 </div>

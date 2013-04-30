@@ -63,6 +63,7 @@ function trimMessages(){
 
 function toggle_header() {
     $b.toggleClass('modal-open');
+    resize_window();
 }
 
 function resize_window() {
