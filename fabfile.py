@@ -344,6 +344,7 @@ def _render_theme():
         context[config] = getattr(app_config, config)
 
     context['SERVERS'] = env.hosts
+    context['S3_BUCKET'] = env.s3_buckets[0]
 
     for TEMPLATE in ['_form.html', '_prompt.html', '_social.html']:
         with open('templates/%s' % TEMPLATE, 'rb') as read_template:
