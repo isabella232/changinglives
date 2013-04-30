@@ -32,6 +32,7 @@ var Y_OFFSET = {
 
 var $b;
 var $form;
+var $s3_bucket;
 var $modal_bg;
 var $modal_btn;
 var $project_hdr;
@@ -118,7 +119,7 @@ function render_glyphs(glyph_set) {
         if (glyph.align == 'left') {
             var x_base = glyph.grid_offset;
         } else if (glyph.align == 'right') {
-            var x_base = (GRID_X_TICKS - glyph.grid_offset) - w; 
+            var x_base = (GRID_X_TICKS - glyph.grid_offset) - w;
         } else if (glyph.align == 'center') {
             var x_base = ((GRID_X_TICKS / 2) - glyph.grid_offset) - (w / 2);
         }
@@ -126,7 +127,7 @@ function render_glyphs(glyph_set) {
         if (glyph.valign == 'top') {
             var y_base = glyph.grid_offset;
         } else if (glyph.valign == 'bottom') {
-            var y_base = (GRID_Y_TICKS - glyph.grid_offset) - h; 
+            var y_base = (GRID_Y_TICKS - glyph.grid_offset) - h;
         } else if (glyph.valign == 'middle') {
             var y_base = ((GRID_Y_TICKS / 2) - glyph.grid_offset) - (h / 2);
         }
@@ -178,20 +179,20 @@ function render_text(font_name, text) {
         var line = lines[i];
 
         var text_path = preview.print(0, 0, line, font, FONT_SIZE, 'middle');
-        
+
         var bbox = text_path.getBBox();
-        text_path.translate(base_width - (bbox.width / 2), 0)
-        
+        text_path.translate(base_width - (bbox.width / 2), 0);
+
         text_paths.push(text_path);
     }
 
-    var base_height = (SVG_HEIGHT / 2) - (lines_height / 2 - Y_OFFSET[font_name])
+    var base_height = (SVG_HEIGHT / 2) - (lines_height / 2 - Y_OFFSET[font_name]);
 
     for (var i = 0; i < text_paths.length; i++) {
         var text_path = text_paths[i];
 
         text_path.translate(0, base_height + LINE_HEIGHT * i);
-        text_path.attr({ fill: FONT_COLOR }); 
+        text_path.attr({ fill: FONT_COLOR });
     }
 }
 
@@ -206,8 +207,9 @@ $(function() {
     $project_iframe = $form.find('iframe');
     $tumblr_form = $("#tumblr-form");
     $preview = $('#preview');
+    $s3_bucket = $('body').attr('data-sss-bucket');
     preview_div = $preview[0];
-    
+
     // Setup Raphael
     if (!Raphael.svg) {
         alert('Your browser doesn\'t support SVG, so this will be broken.');
@@ -221,19 +223,19 @@ $(function() {
         for (var i = 0; i < FONT_NAMES.length; i++) {
             fonts[FONT_NAMES[i]] = preview.getFont(FONT_NAMES[i]);
         }
-        
+
         render_grid(current_grid);
         render_glyphs(current_glyphs);
         render_text(current_font, current_text);
 
         $('textarea[name="string"]').keyup(function(e) {
             current_text = $(this).val();
-            render_text(current_font, current_text);    
+            render_text(current_font, current_text);
         });
 
         $('input[name="color"]').change(function(e) {
             var val = $(this).val();
-            var label = $('label[for="' + $(this).attr('id') + '"]'); 
+            var label = $('label[for="' + $(this).attr('id') + '"]');
 
             $('.form-color label').removeClass('active');
             label.addClass('active');
@@ -246,7 +248,7 @@ $(function() {
 
         $('input[name="typeface"]').change(function(e) {
             var val = $(this).val();
-            var label = $('label[for="' + $(this).attr('id') + '"]'); 
+            var label = $('label[for="' + $(this).attr('id') + '"]');
 
             $('.form-typeface label').removeClass('active');
             label.addClass('active');
@@ -259,7 +261,7 @@ $(function() {
         $('input[name="ornament"]').change(function(e) {
             var val = $(this).val();
             console.log(val);
-            var label = $('label[for="' + $(this).attr('id') + '"]'); 
+            var label = $('label[for="' + $(this).attr('id') + '"]');
 
             $('.form-ornament label').removeClass('active');
             label.addClass('active');
@@ -283,15 +285,15 @@ $(function() {
     }
 
     // Event handlers
-    $modal_btn.click(function() {
+    $modal_btn.on('click', function() {
         toggle_header();
     });
 
-    $project_hdr.click(function() {
+    $project_hdr.on('click', function() {
         toggle_header();
     });
 
-    $modal_bg.click(function() {
+    $modal_bg.on('click', function() {
         toggle_header();
     });
 
@@ -311,7 +313,7 @@ $(function() {
     }
 
     $.ajax({
-        url: "http://stage-apps.npr.org/changing-lives/aggregates.json",
+        url: "http://" + $s3_bucket + "/changing-lives/aggregates.json",
         //url: "http://127.0.0.1:8000/js/aggregates.json",
         context: document.body,
         jsonp: false,
