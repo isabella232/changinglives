@@ -131,8 +131,7 @@ header {
     h1 {
         font: normal 36px/1.1 Arial, Helvetica, sans-serif;
         color: #fff;
-        margin-bottom: 5px;
-        margin-left: -3px;
+        margin-bottom: 22px;
 
         a {
             color: #fff;
@@ -141,22 +140,6 @@ header {
             text-indent: -9999px;
             background: url('@{img-root}/logo.png') no-repeat;
             background-size: 190px 66px;
-        }
-    }
-    h2 {
-        margin-bottom: 22px;
-        margin-left: -6px;
-        color: #bbb;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 16px;
-        text-indent: -999px;
-        background: url('@{img-root}/hed-round-2.png') no-repeat;
-        height: 23px;
-
-        a {
-            display: block;
-            height: 23px;
         }
     }
     p.description, p.more {
@@ -169,7 +152,7 @@ header {
     p.more { margin-bottom: 22px; }
     p.project-credits {
         color: #ccc;
-        margin-top: 15px;
+        margin-top: 22px;
         margin-bottom: 0;
         font-size: 11px;
         font-style: italic;
@@ -179,92 +162,43 @@ header {
         font-weight: bold;
     }
     .project-prompt {
-        border: 1px solid #999;
-        background-color: #eee;
-        margin: 0 -11px 22px -11px;
-        padding: 11px;
+        margin-bottom: 22px;
 
-        h2 {
-            font-weight: bold;
-            color: #333;
-            font-size: 14px;
-            line-height: 1.4;
-            margin-bottom: 5px;
-        }
         p {
-            color: #666;
+            color: #eee;
             font-size: 12px;
             margin-bottom: 5px;
-
-            &.deadline {
-                font-weight: bold;
-                margin-bottom: 11px;
-            }
         }
     }
     #modal-btn {
         cursor: pointer;
         overflow: hidden;
         background-color: #7598c9;
-        height: 38px; /* 44px - padding-top */
-        padding-top: 6px;
+        margin-bottom: 11px;
+        line-height: 66px;
         font-weight: bold;
-        font-size: 13px;
-        line-height: 16px;
+        font-size: 16px;
         padding-right: 10px;
+        padding-left: 0;
         color: #fff;
+        display: block;
+        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 
         &:hover { background-color: #9eb7dd; }
         &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
         span {
             background: url('@{img-root}/btn-post-photo-44.png') no-repeat 50% 50%;
-            width: 44px;
-            height: 44px;
-            border-right: 1px solid #fff;
+            width: 55px;
+            height: 66px;
+            border-right: 1px solid #99b1d7;
             margin-right: 11px;
-            margin-top: -6px; /* the negative of the padding-top on #modal-btn */
             display: inline-block;
             float: left;
         }
     }
-    .mobile-prompt {
-        color: #ccc;
-        font-size: 11px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #999;
-        margin-top: -5px;
-
-        &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
-        span {
-            display: block;
-            width: 18px;
-            height: 33px;
-            background: url('@{img-root}/ico-smartphone.png') no-repeat 50% 50%;
-            float: left;
-            margin-right: 10px;
-        }
-        strong {
-            display: block;
-            color: #eee;
-        }
-        b {
-            background-color: #777;
-            padding: 2px;
-        }
-    }
-    .round-list {
-        padding: 11px 0;
-        border-bottom: 1px solid #999;
-        
-        ul {
-            list-style-type: none;
-        }
-        li {
-            font-size: 12px;
-        }
-    }
 }
-.touch .round-list { display: none; }
 
 
 // SUBMISSION FORM
@@ -276,7 +210,7 @@ header {
     left: 5%;
     width: 90%;
     height: 90%;
-    background-color:#eee;
+    background-color:#888;
     font-size:14px;
 
     .hdr {
@@ -292,7 +226,7 @@ header {
             font-weight: bold;
             font-size: 14px;
             line-height: 44px;
-            padding-right: 10px;
+            padding: 0 11px;
             color: #fff;
         }
         .close {
@@ -421,7 +355,7 @@ header {
             text-indent: -9999px;
             margin: 0;
             cursor: pointer;
-            border: 2px solid #f1f1f1;
+            border: 2px solid #888;
             float: left;
             
             &:hover,
