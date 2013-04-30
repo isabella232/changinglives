@@ -91,7 +91,7 @@
 
 
     </head>
-    <body class="{block:IndexPage}index-page{/block:IndexPage}{block:PermalinkPage}permalink-page{/block:PermalinkPage}">
+    <body class="{block:IndexPage}index-page{/block:IndexPage}{block:PermalinkPage}permalink-page{/block:PermalinkPage}" data-sss-bucket="{{ S3_BUCKET }}">
         <div id="nav">
             <ul class="site-links">
                 <li class="npr"><a href="http://npr.org"><img src="http://media.npr.org/chrome/news/nprlogo_138x46.gif" alt="NPR" /></a></li>
@@ -228,7 +228,7 @@
                                     </div>
                                     <p>
                                         <strong>{{ PROJECT_NAME }}</strong><br />
-                                        This poster was originally published at: {ShortURL} | 
+                                        This poster was originally published at: {ShortURL} |
                                         Create your own at: {{ PROJECT_SHORTLINK }}
                                     </p>
                                 </section>
@@ -286,7 +286,6 @@
         <div class="modal-bg"></div>
         {block:IfUseEndlessScrolling}
         <script type="text/javascript">
-
             var Tumblelog = {};
 
             // AJAX
