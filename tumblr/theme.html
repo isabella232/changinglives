@@ -10,7 +10,6 @@
 
         <!-- Appearance option -->
         <meta name="if:Two column posts" content="1"/>
-        <meta name="if:Show blog title" content="1"/>
         <meta name="if:Show blog description" content="1"/>
         <meta name="if:Show profile photo" content="0"/>
         <meta name="if:Use endless scrolling" content="1"/>
@@ -92,24 +91,12 @@
 
     </head>
     <body class="{block:IndexPage}index-page{/block:IndexPage}{block:PermalinkPage}permalink-page{/block:PermalinkPage}" data-sss-bucket="{{ S3_BUCKET }}">
-        <div id="nav">
-            <ul class="site-links">
-                <li class="npr"><a href="http://npr.org"><img src="http://media.npr.org/chrome/news/nprlogo_138x46.gif" alt="NPR" /></a></li>
-                <li class="news"><a href="http://www.npr.org/sections/news/">News</a></li>
-                <li class="arts"><a href="http://www.npr.org/sections/arts/">Arts &amp; Life</a></li>
-                <li class="music"><a href="http://www.npr.org/music/">Music</a></li>
-                <li class="listen"><a href="http://www.npr.org/listen/">Listen</a></li>
-            </ul>
-        </div>
-
         <section id="container" class="group">
             <header>
                 <div id="blog_info">
 
-                    {block:IfShowBlogTitle}
+                    <div class="npr"><a href="http://www.npr.org">NPR</a></div>
                     <h1><a href="/">{Title}</a></h1>
-                    {/block:IfShowBlogTitle}
-
                     <div class="project-prompt">{{ PROMPT_HTML }}</div>
 
                     <p class="project-credits">
