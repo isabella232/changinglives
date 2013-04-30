@@ -1,1 +1,1 @@
-<p class='signature-name'>By {{ name|default('Anonymous', True) }}{% if location %} from {{ location }}{% endif %}</p>
+<p class='signature-name'>{{ name|default('Anonymous', True) }}{% if location %}, {{ location }}{% endif %}</p>
