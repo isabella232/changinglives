@@ -6,29 +6,38 @@
 <div class="tumblr-form">
    <form id="tumblr-form" method="post" action="http://{{ SERVERS[0] }}/{{ PROJECT_SLUG }}/">
         <ol>
+            <!--
             <li class="form-intro">
-                <!-- <h2>This project has now concluded. Thank you for your submissions.</h2> -->
-                <p>This is some text for the form kicker.</p>
-                </li>
+                <h2>This project has now concluded. Thank you for your submissions.</h2>
+            </li>
+            -->
             <li class="form-photo">
                 <div id="preview"></div>
                 <input type="hidden" name="image">
             </li>
             <li class="form-customize">
                 <div class="form-color">
-                    <h3>Pick a color:</h3>
-                    <input type="radio" name="color" id="color-teal" value="teal" />
-                        <label class="teal" for="color-teal">Teal</label>
-                    <input type="radio" name="color" id="color-red" value="red" />
-                        <label class="red" for="color-red">Red</label>
-                    <input type="radio" name="color" id="color-blue" value="blue" />
-                        <label class="blue" for="color-blue">Blue</label>
+                    <h3>color</h3>
                     <input type="radio" name="color" id="color-gray" value="gray" checked="checked" />
                         <label class="gray active" for="color-gray">Gray</label>
+                    <input type="radio" name="color" id="color-red" value="red" />
+                        <label class="red" for="color-red">Red</label>
+                    <input type="radio" name="color" id="color-orange" value="orange" />
+                        <label class="orange" for="color-orange">Orange</label>
+                    <input type="radio" name="color" id="color-yellow" value="yellow" />
+                        <label class="yellow" for="color-yellow">Yellow</label>
+                    <input type="radio" name="color" id="color-blue" value="blue" />
+                        <label class="blue" for="color-blue">Blue</label>
+                    <input type="radio" name="color" id="color-teal" value="teal" />
+                        <label class="teal" for="color-teal">Teal</label>
+                    <input type="radio" name="color" id="color-pink" value="pink" />
+                        <label class="pink" for="color-pink">Pink</label>
+                    <input type="radio" name="color" id="color-purple" value="purple" />
+                        <label class="purple" for="color-purple">Purple</label>
                 </div>
-                
+
                 <div class="form-typeface">
-                    <h3>Pick a typeface:</h3>
+                    <h3>typeface</h3>
                     <input type="radio" name="typeface" id="type-roboto" value="Roboto Condensed" />
                         <label class="roboto active" for="type-roboto">Advice</label>
                     <input type="radio" name="typeface" id="type-snippet" value="Snippet" />
@@ -38,17 +47,19 @@
                     <input type="radio" name="typeface" id="type-quicksand" value="Quicksand" checked="checked" />
                         <label class="quicksand" for="type-quicksand">Advice</label>
                 </div>
-                
+
                 <div class="form-ornament">
-                    <h3>Pick an ornament:</h3>
-                    <input type="radio" name="ornament" id="ornament-none" value="no-border" checked="checked" />
-                        <label class="no-border" for="ornament-none">No border</label>
-                    <input type="radio" name="ornament" id="ornament-flower" value="flower-corner" />
+                    <h3>ornament</h3>
+                    <input type="radio" name="ornament" id="ornament-flower" value="flower-corner" checked="checked" />
                         <label class="flower-corner active" for="ornament-flower">Flower Corner</label>
-                    <input type="radio" name="ornament" id="ornament-swash" value="swash-border" />
-                        <label class="swash-border" for="ornament-swash">Swash Border</label>
                     <input type="radio" name="ornament" id="ornament-triangle" value="triangle-border" />
                         <label class="triangle-border" for="ornament-triangle">Triangle Border</label>
+                    <input type="radio" name="ornament" id="ornament-swash" value="swash-border" />
+                        <label class="swash-border" for="ornament-swash">Swash Border</label>
+                    <input type="radio" name="ornament" id="ornament-none" value="no-border" />
+                        <label class="no-border" for="ornament-none">No border</label>
+                    <input type="radio" name="ornament" id="ornament-invaders" value="space-invaders" />
+                        <label class="space-invaders" for="ornament-invaders">Space Invaders</label>
                 </div>
             </li>
             <li class="form-message">
@@ -60,7 +71,6 @@ advice
 here</textarea>
             </li>
             <li class="form-signature">
-                <label for="signed_name">By</label>
                 <input type="text" name="signed_name" placeholder="Your Initials" class="signed-name"></input>
                 from
                 <input type="text" name="location" placeholder="Your City And State" class="signed-location"></input>
