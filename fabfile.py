@@ -338,16 +338,18 @@ def _render_theme():
     """
     context = {}
 
+    for config in ['SLUG', 'NAME', 'CREDITS', 'SHORTLINK']:
+        config = 'PROJECT_%s' % config
+        context[config] = getattr(app_config, config)
+
+    context['SERVERS'] = env.hosts
+
     for TEMPLATE in ['_form.html', '_prompt.html', '_social.html']:
         with open('templates/%s' % TEMPLATE, 'rb') as read_template:
             payload = Template(read_template.read())
-            payload = payload.render({'SERVERS': env.hosts})
+            payload = payload.render(context)
             parsed_path = TEMPLATE.split('_')[1].split('.')
             context['%s_%s' % (parsed_path[0].upper(), parsed_path[1].upper())] = payload
-
-    for config in ['NAME', 'CREDITS', 'SHORTLINK']:
-        config = 'PROJECT_%s' % config
-        context[config] = getattr(app_config, config)
 
     context['STATIC_URL'] = 'http://127.0.0.1:8000/'
     context['STATIC_CSS'] = '%sless/tumblr.less' % context['STATIC_URL']
