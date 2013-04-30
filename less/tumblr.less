@@ -245,10 +245,10 @@ header {
     }
 }
 .tumblr-form {
-    position:absolute;
-    top:44px;
-    bottom:0;
-    width:100%;
+    position: absolute;
+    top: 44px;
+    bottom: 0;
+    width: 100%;
     overflow: auto;
     -webkit-overflow-scrolling:touch;
 
@@ -265,15 +265,9 @@ header {
         padding: 0;
         list-style: none;
     }
-    ol > li {
+    li {
         padding: 10px 11px;
-//        max-width: 640px;
-    }
-    ul > li {
-        padding: 0;
-        margin: 0 0 5px 0;
-
-        &:hover { background-color: #eee; }
+        color: #999;
     }
     label {
         font-weight: bold;
@@ -295,10 +289,9 @@ header {
         margin-bottom: 15px;
     }
     textarea {
-        width: 95%;
-        padding: 2%;
+        width: 50%;
         height: 100px;
-        max-width: 600px;
+        max-width: 300px;
         font: 13px/1.5 Arial, Helvetica, sans-serif;
         color: #111;
     }
@@ -333,34 +326,29 @@ header {
             opacity: 1.0;
         }
     }
-    .form-photo { float: left; }
-    .form-customize {
+    .form-photo { 
         float: left;
-    
-        h3 {
-            margin: 0 0 3px 0;
-            font-size: 12px;
-            color: #333;
-            clear: both;
-            padding-top: 16px;
-        }
-        .form-color h3 {
-            padding-top: 0;
-        }
+        width: 50%;
+    }
+    .form-options { 
+        float: right;
+        width: 48%;
+    }
+    .form-customize {
         input[type='radio'] { display: none; }
         label {
             display: inline-block;
-            width: 44px;
-            height: 44px;
+            width: 22px;
+            height: 22px;
             text-indent: -9999px;
-            margin: 0;
+            margin: 0 1px 0 0;
             cursor: pointer;
-            border: 2px solid #888;
+            border: 1px solid #787878;
             float: left;
             
             &:hover,
             &.active {
-                border: 2px solid #F3D469;
+                border: 1px solid #fff;
             }
             
             // ornaments
@@ -369,7 +357,6 @@ header {
             }
             &.swash-border {
                 background: #787878 url('../img/preview-flourish-1.gif') no-repeat 50% 50%;
-                clear: both;
             }
             &.triangle-border {
                 background: #787878 url('../img/preview-flourish-3.gif') no-repeat 50% 50%;
@@ -379,53 +366,53 @@ header {
             }
             &.no-border {
                 background: #787878;
-                clear: both;
             }
             
             // type
             &.roboto {
                 background: #787878 url('../img/preview-roboto.png') no-repeat 50% 50%;
-                width: 88px;
             }
             &.snippet {
                 background: #787878 url('../img/preview-snippet.png') no-repeat 50% 50%;
-                width: 88px;
             }
             &.noto {
                 background: #787878 url('../img/preview-noto.png') no-repeat 50% 50%;
-                width: 88px;
-                clear: both;
             }
             &.quicksand {
                 background: #787878 url('../img/preview-quicksand.png') no-repeat 50% 50%;
-                width: 88px;
             }
             
             // colors
             &.teal { background-color: #17807e; }
             &.orange { background-color: #db811c; }
-            &.red { background-color: #A23520; clear: both; }
+            &.red { background-color: #A23520; }
             &.yellow { background-color: #d9b431; }
-            &.blue { background-color: #3D7FA6; clear: both; }
+            &.blue { background-color: #3D7FA6; }
             &.pink { background-color: #ca3d79; }
-            &.purple { background-color: #9777b1; clear: both; }
+            &.purple { background-color: #9777b1; }
             &.gray { background-color: #787878; }
         }
+        .form-color, .form-typeface, .form-ornament {
+            margin-bottom: 3px;
+
+            &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
+        }
+        
         .form-typeface label {
-            clear: both;
+            width: 88px;
         }
     }
     .form-message { clear: both; }
     .legal {
         padding: 16px 11px 11px 11px;
         font-size: 11px;
-        color: #666;
+        color: #999;
         font-style: italic;
         max-width: 600px;
     }    
 }
 #preview { 
-    width: 640px;
+    width: 100%;
 }
 .modal-bg {
     display: none;
@@ -652,8 +639,6 @@ header {
         &:hover { color: #bccae5; }
     }
 }
-.round1 .post_info li.round-wrap .round1 { display: inline-block; }
-.round2 .post_info li.round-wrap .round2 { display: inline-block; }
 
 
 /* Baselines */
@@ -966,7 +951,6 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
         }
     }
 }
-
 @media (min-width: 768px) {
     .index-page {
         .post-list {
@@ -974,7 +958,6 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
         }
     }
 }
-
 @media (min-width: 980px) {
     .post-list .post { padding: 10px; }
 
@@ -984,27 +967,12 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
         }
     }
 }
-
 @media (max-width: 979px) {
     #nav .site-links-2 { display: none; }
     .permalink-page {
         #popular {
             margin: 0 15px 0 35px;
             .posts { margin: 15px 0 0 0; }
-        }
-    }
-}
-@media (max-width: 900px) {
-    .tumblr-form {
-        .form-photo, .form-customize { float: none; margin-left: 0; }
-        .form-customize {
-            h3 { padding-top: 0; }
-            div { 
-                width: 33%; float: left;
-            }
-            label.snippet, label.quicksand { clear: none; }
-            label, .form-typeface label { width: 40%; margin-right: 2%; }
-            &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
         }
     }
 }
@@ -1076,11 +1044,6 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
             }
         }
     }
-    .tumblr-form .form-customize {
-        div, div.form-typeface { width: 33%; }
-        label, .form-typeface label { width: 40%; margin-right: 2%; }
-    }
-    #preview { width: 100%; }
 }
 @media (max-width: 480px) {
     #nav .site-links {
@@ -1092,15 +1055,7 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
     .post_info li {
         float: none;
         margin-bottom: 3px;
-        
-        &.round-wrap .round {
-            border-right: none;
-            margin-right: 0;
-            padding-right: 0;
-        }
     }
-    .round1 .post_info li.round-wrap .round1 { display: block; }
-    .round2 .post_info li.round-wrap .round2 { display: block; }
     #footer { padding-left: 10px; margin-left: 0; margin-right: 0; }
     .post-list {
         .post {
@@ -1109,17 +1064,24 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
             p.message { height: auto; overflow: visible; }
         }
     }
-    #project-form {
-        font-size:12px;
-    }
-
     .permalink-page {
         .post .media { margin-left: -18px; margin-right: -18px; }
         #popular { margin: 0; }
     }
+    .tumblr-form {
+        .form-photo, .form-options { float: none; width: auto; }
+        .form-customize {
+            label { 
+                margin-right: 1%; 
+                height: 44px;
+            }
+            .form-color label { width: 10%; }
+            .form-typeface label { width: 23%; }
+            .form-ornament label { width: 17%; }
+            &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
+        }
+    }
 }
-
-
 
 .post .post_info {
     width: 100%;
