@@ -20,6 +20,28 @@
         <meta name="if:Show copyright in footer" content="0"/>
         <meta name="text:Disqus Shortname" content="" />
 
+        {block:PermalinkPage}
+        <!-- add these meta tags for facebook -->
+
+        <meta property="og:title" content="TK Hed"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:url" content="{Permalink}"/>
+        <meta property="og:image" content="{PhotoURL-HighRes}"/>
+        <meta property="og:site_name" content="NPR.org"/>
+        <meta property="fb:admins" content="TK 12 char app ID"/>
+        <meta property="og:description" content="TK Dek or Guff"/>
+        <meta property="og:article:published_time" content="TK ISO 8601 pubdate">
+
+        <!-- add these meta tags for twitter -->
+
+        <meta property="twitter:site" content="@NPR">
+        <meta property="twitter:card" content="summary">
+        <meta property="twitter:url" content="{Permalink}">
+        <meta property="twitter:title" content="TK Hed">
+        <meta property="twitter:description" content="TK Dek or Guff">
+        <meta property="twitter:image" content="{PhotoURL-HighRes}">
+        {/block:PermalinkPage}
+
         <link rel="shortcut icon" href="http://www.npr.org/favicon.ico" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{RSS}"/>
 
@@ -190,9 +212,15 @@
                                             </a>
                                         </div>
                                     {/block:ContentSource}
-                                    
-                                    <div class="btn btn-print"><a href="javascript:window.print();">Print This Poster</a></div>
-                                    <div class="btn"><a href="mailto:tumblr@npr.org?subject=Please moderate this post {PostID}&body={Permalink}">Report this</a></div>
+
+                                    <ul class="post_info social">
+                                        <li class="share">Share This</li>
+                                        <li class="facebook"><a rel="external" href="https://www.facebook.com/dialog/feed?app_id=138837436154588&amp;link={Permalink}&picture={PhotoURL-HighRes}&name=She Works: Note To Self&redirect_uri={Permalink}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Post', 'She Works: Note To Self']);" title="Like This Page On Facebook"><span></span>Facebook</a></li>
+                                        <li class="twitter"><a rel="external" href="http://twitter.com/share?text=Dinner+is+hard.&amp;url={Permalink}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Post', 'She Works: Note To Self']);" title="Share This Page On Twitter"><span></span>Twitter</a></li>
+                                        <li class="print"><a href="javascript:window.print();"><span></span>Print This Poster</a></li>
+                                        <li class="report"><a href="mailto:tumblr@npr.org?subject=Please moderate this post {PostID}&body={Permalink}"><span></span>Report this</a></li>
+                                    </ul>
+
                                 </section>
                                 <section class="for-print">
                                     <div class="npr-logo">
