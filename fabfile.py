@@ -194,6 +194,8 @@ def setup():
     clone_repo()
     checkout_latest()
     install_requirements()
+    install_cairosvg()
+
     if env.get('deploy_web_services', False):
         deploy_confs()
 
@@ -304,9 +306,9 @@ def install_cairosvg():
 
     if env.settings in ['production', 'staging']:
         with settings(warn_only=True):
-            local('sudo apt-get install python-cairo')
-            local('%(virtualenv_path)s/bin/pip install cairosvg' % env)
-            local('ln -s /usr/lib/python2.7/dist-packages/cairo %(virtualenv_path)s/lib/python2.7/site-packages/cairo')
+            sudo('apt-get install python-cairo')
+            run('%(virtualenv_path)s/bin/pip install cairosvg' % env)
+            run('ln -s /usr/lib/python2.7/dist-packages/cairo %(virtualenv_path)s/lib/python2.7/site-packages/cairo' % env)
 
 """
 Deployment
