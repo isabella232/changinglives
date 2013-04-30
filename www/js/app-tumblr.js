@@ -117,19 +117,19 @@ function render_glyphs(glyph_set) {
         var h = bitmap.length;
 
         if (glyph.align == 'left') {
-            var x_base = glyph.grid_offset;
+            var x_base = glyph.grid_offset_x;
         } else if (glyph.align == 'right') {
-            var x_base = (GRID_X_TICKS - glyph.grid_offset) - w;
+            var x_base = (GRID_X_TICKS - glyph.grid_offset_x) - w;
         } else if (glyph.align == 'center') {
-            var x_base = ((GRID_X_TICKS / 2) - glyph.grid_offset) - (w / 2);
+            var x_base = ((GRID_X_TICKS / 2) + glyph.grid_offset_x) - (w / 2);
         }
 
         if (glyph.valign == 'top') {
-            var y_base = glyph.grid_offset;
+            var y_base = glyph.grid_offset_y;
         } else if (glyph.valign == 'bottom') {
-            var y_base = (GRID_Y_TICKS - glyph.grid_offset) - h;
+            var y_base = (GRID_Y_TICKS - glyph.grid_offset_y) - h;
         } else if (glyph.valign == 'middle') {
-            var y_base = ((GRID_Y_TICKS / 2) - glyph.grid_offset) - (h / 2);
+            var y_base = ((GRID_Y_TICKS / 2) + glyph.grid_offset_y) - (h / 2);
         }
 
         for (var y = 0; y < h; y++) {
