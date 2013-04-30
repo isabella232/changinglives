@@ -193,6 +193,7 @@ def setup():
     setup_virtualenv()
     clone_repo()
     checkout_latest()
+    create_log_file()
     install_requirements()
     install_cairosvg()
 
