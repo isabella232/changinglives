@@ -51,6 +51,8 @@ def staging():
 
 def development():
     env.settings = 'development'
+    env.s3_buckets = app_config.STAGING_S3_BUCKETS
+    env.hosts = app_config.STAGING_SERVERS
 
 """
 Branches
@@ -357,7 +359,7 @@ def _render_theme():
     context['STATIC_CSS'] = '%sless/tumblr.less' % context['STATIC_URL']
     context['STATIC_PRINT_CSS'] = '%sless/tumblr-print.less' % context['STATIC_URL']
 
-    if env.settings == 'production':
+    if env.settings in ['production', 'staging']:
         context['STATIC_URL'] = 'http://%s/%s/' % (env.s3_buckets[0], env.deployed_name)
         context['STATIC_CSS'] = '%scss/tumblr.less.css' % context['STATIC_URL']
         context['STATIC_PRINT_CSS'] = '%scss/tumblr-print.less.css' % context['STATIC_URL']
