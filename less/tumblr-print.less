@@ -3,25 +3,26 @@
 //@img-root: 'http://apps.npr.org/she-works/img';
 
 .permalink-page {
-    #nav, header, #project-form, .modal-bg, footer, .caption, .post_info { display: none; }
+    #nav, header, #project-form, .modal-bg, footer, .post-pagination, .caption, .post_info, #popular, #tumblr_controls { display: none; }
     #container { max-width: none; }
     #posts {
         padding: 0;
     
         .post { 
-            max-width: none; margin: 0;
+            max-width: none;
+            margin: 0;
+            padding-top: 75px;
         
             .wrap { padding: 0; border: none; -webkit-box-shadow: none; box-shadow: none; }
 
             .media img { 
                 max-height: none;
-                width: 94%;
+                width: 100%;
                 height: auto;
                 display: block;
                 margin: 0 auto;
             }
             .for-print { 
-                width: 94%;
                 margin: 0 auto;
                 padding-top: 11px;
                 display: block;
@@ -38,4 +39,8 @@
             }
         }
     }
+}
+
+@page {
+    size: portrait;
 }
