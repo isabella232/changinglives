@@ -240,10 +240,6 @@ header {
     input[type='text'] {
         padding: 5px 10px;
     }
-    input[type='radio'] {
-        margin-right: 10px;
-        margin-top: -6px;
-    }
     button[type='submit'] {
         background-color: #7598c9;
         border: none;
@@ -270,72 +266,65 @@ header {
         width: 48%;
     }
     .form-customize {
+        padding-top: 0;
+    
         input[type='radio'] { display: none; }
         label {
             display: inline-block;
-            width: 22px;
-            height: 22px;
-            text-indent: -9999px;
-            margin: 0 1px 0 0;
+            margin: 0;
             cursor: pointer;
-            border: 1px solid #787878;
             float: left;
-
-            &:hover,
-            &.active {
-                border: 1px solid #fff;
+            
+            span { 
+                border: 1px solid #444;
+                display: block;
+                text-indent: -9999px;
+                height: 33px;
+                opacity: .5;
+            }
+            &:hover, &.active {
+                span { 
+                    border-color: #fff;
+                    opacity: 1;
+                }
             }
 
             // ornaments
-            &.flower-corner {
-                background: #787878 url('../img/preview-corner-1.gif') no-repeat 50% 50%;
-            }
-            &.swash-border {
-                background: #787878 url('../img/preview-flourish-1.gif') no-repeat 50% 50%;
-            }
-            &.triangle-border {
-                background: #787878 url('../img/preview-flourish-3.gif') no-repeat 50% 50%;
-            }
-            &.space-invaders {
-                background: #787878 url('../img/preview-invaders.gif') no-repeat 50% 50%;
-            }
-            &.no-border {
-                background: #787878;
-            }
+            &.flower-corner span   { background-image: url('@{img-root}/preview-corner-1.gif'); }
+            &.swash-border span    { background-image: url('@{img-root}/preview-flourish-1.gif'); }
+            &.triangle-border span { background-image: url('@{img-root}/preview-flourish-3.gif'); }
+            &.space-invaders span  { background-image: url('@{img-root}/preview-invaders.gif'); }
+            &.no-border span       { background-image: none; }
 
             // type
-            &.roboto {
-                background: #787878 url('../img/preview-roboto.png') no-repeat 50% 50%;
-            }
-            &.snippet {
-                background: #787878 url('../img/preview-snippet.png') no-repeat 50% 50%;
-            }
-            &.noto {
-                background: #787878 url('../img/preview-noto.png') no-repeat 50% 50%;
-            }
-            &.quicksand {
-                background: #787878 url('../img/preview-quicksand.png') no-repeat 50% 50%;
-            }
+            &.roboto span    { background-image: url('@{img-root}/preview-roboto.png'); }
+            &.snippet span   { background-image: url('@{img-root}/preview-snippet.png'); }
+            &.noto span      { background-image: url('@{img-root}/preview-noto.png'); }
+            &.quicksand span { background-image: url('../img/preview-quicksand.png'); }
 
             // colors
-            &.teal { background-color: #17807e; }
-            &.orange { background-color: #db811c; }
-            &.red { background-color: #A23520; }
-            &.yellow { background-color: #d9b431; }
-            &.blue { background-color: #3D7FA6; }
-            &.pink { background-color: #ca3d79; }
-            &.purple { background-color: #9777b1; }
-            &.gray { background-color: #787878; }
+            &.teal span   { background-color: #17807e; }
+            &.orange span { background-color: #db811c; }
+            &.red span    { background-color: #A23520; }
+            &.yellow span { background-color: #d9b431; }
+            &.blue span   { background-color: #3D7FA6; }
+            &.pink span   { background-color: #ca3d79; }
+            &.purple span { background-color: #9777b1; }
+            &.gray span   { background-color: #787878; }
         }
         .form-color, .form-typeface, .form-ornament {
             margin-bottom: 3px;
 
+            span { 
+                background-color: #787878;
+                background-repeat: no-repeat;
+                background-position: 50% 50%;
+            }
             &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
         }
-
-        .form-typeface label {
-            width: 88px;
-        }
+        .form-color label    { width: 12.5%; }
+        .form-typeface label { width: 25%; }
+        .form-ornament label { width: 20%; }
     }
     .form-message { clear: both; }
     .legal {
@@ -890,49 +879,6 @@ ol.notes {
     }
 }
 
-.touch .index-page {
-    ul.timestamp {
-        margin: 3px 6px 6px 6px;
-
-        li { margin: 0; }
-    }
-    #posts .post {
-        p.message {
-            height: 50px;
-            overflow: hidden;
-        }
-    }
-}
-@-webkit-keyframes caption-slide {
-   from { bottom: -200px }
-   to   { bottom: 0; }
-}
-@-moz-keyframes caption-slide {
-   from { bottom: -200px }
-   to   { bottom: 0; }
-}
-.no-touch .post-list {
-    .post {
-        .caption.excerpt {
-            background: #000;
-            background: rgba(0,0,0,.7);
-            position: absolute;
-            bottom: -200px; left: 0;
-
-            p { color: #fff; }
-            a { display: block; }
-        }
-        .post_info { display: none; }
-        &:hover .caption.excerpt {
-            -webkit-animation-name: caption-slide;
-            -webkit-animation-duration: .25s;
-            -moz-animation-name: caption-slide;
-            -moz-animation-duration: .25s;
-            bottom: 0;
-        }
-    }
-}
-
 
 // CLEARING FLOATS
 header:after, #container:after, .caption_and_post_info:after, footer:after .buttons:after {
@@ -1054,18 +1000,9 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
     }
     .tumblr-form {
         .form-photo, .form-options { float: none; width: auto; }
-        .form-photo {
-            padding: 10px 10px 0 10px;
-        }
-        .form-customize {
-            label {
-                margin-right: 1%;
-                height: 44px;
-            }
-            .form-color label { width: 10%; }
-            .form-typeface label { width: 23%; }
-            .form-ornament label { width: 17%; }
-            &:after { visibility: hidden; display: block; content: ""; clear: both; height: 0; }
-        }
+        .form-photo { padding: 11px; }
+        .form-customize { padding-bottom: 6px; }
+        textarea { width: 96%; padding: 2%; border: none; }
+        input[type='text'] { border: none; }
     }
 }

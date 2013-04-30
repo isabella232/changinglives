@@ -239,7 +239,7 @@ $(function() {
 
             $('.form-color label').removeClass('active');
             label.addClass('active');
-            current_grid = label.css('background-color');
+            current_grid = label.find('span').css('background-color');
 
             render_grid(current_grid);
             render_glyphs(current_glyphs);
