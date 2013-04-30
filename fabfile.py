@@ -193,7 +193,10 @@ def setup():
     setup_virtualenv()
     clone_repo()
     checkout_latest()
+    create_log_file()
     install_requirements()
+    install_cairosvg()
+
     if env.get('deploy_web_services', False):
         deploy_confs()
 
@@ -304,9 +307,9 @@ def install_cairosvg():
 
     if env.settings in ['production', 'staging']:
         with settings(warn_only=True):
-            local('sudo apt-get install python-cairo')
-            local('%(virtualenv_path)s/bin/pip install cairosvg' % env)
-            local('ln -s /usr/lib/python2.7/dist-packages/cairo %(virtualenv_path)s/lib/python2.7/site-packages/cairo')
+            sudo('apt-get install python-cairo')
+            run('%(virtualenv_path)s/bin/pip install cairosvg' % env)
+            run('ln -s /usr/lib/python2.7/dist-packages/cairo %(virtualenv_path)s/lib/python2.7/site-packages/cairo' % env)
 
 """
 Deployment
@@ -336,16 +339,18 @@ def _render_theme():
     """
     context = {}
 
+    for config in ['SLUG', 'NAME', 'CREDITS', 'SHORTLINK']:
+        config = 'PROJECT_%s' % config
+        context[config] = getattr(app_config, config)
+
+    context['SERVERS'] = env.hosts
+
     for TEMPLATE in ['_form.html', '_prompt.html', '_social.html']:
         with open('templates/%s' % TEMPLATE, 'rb') as read_template:
             payload = Template(read_template.read())
-            payload = payload.render({'SERVERS': env.hosts})
+            payload = payload.render(context)
             parsed_path = TEMPLATE.split('_')[1].split('.')
             context['%s_%s' % (parsed_path[0].upper(), parsed_path[1].upper())] = payload
-
-    for config in ['NAME', 'CREDITS', 'SHORTLINK']:
-        config = 'PROJECT_%s' % config
-        context[config] = getattr(app_config, config)
 
     context['STATIC_URL'] = 'http://127.0.0.1:8000/'
     context['STATIC_CSS'] = '%sless/tumblr.less' % context['STATIC_URL']
