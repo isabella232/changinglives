@@ -296,6 +296,10 @@ $(function() {
         toggle_header();
     });
 
+    $(document).keyup(function(e) {
+      if (e.keyCode == 27) { $b.removeClass('modal-open'); }
+    });
+
     // Startup
     trimMessages();
 
