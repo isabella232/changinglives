@@ -14,7 +14,7 @@ PROJECT_SLUG = 'changing-lives'
 REPOSITORY_NAME = 'changinglives'
 CONFIG_NAME = PROJECT_SLUG.replace('-', '').upper()
 
-PROJECT_CREDITS = 'Jeremy Bowers, Brian Boyer, Danny DeBelius, Christopher Groskopf, Alyson Hurt and Selena Simmons-Duffin / NPR'
+PROJECT_CREDITS = 'Jeremy Bowers, Danny DeBelius, Kitty Eisele, Christopher Groskopf, Alyson Hurt, Claire O\'Neill and Selena Simmons-Duffin / NPR'
 PROJECT_SHORTLINK = 'npr.org/foo'
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
@@ -54,7 +54,7 @@ NPR_DFP = {
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
-TUMBLR_TAGS = 'ford,sass,hoopy,frood,magrathea'
+TUMBLR_TAGS = 'women, workplace, advice'
 TUMBLR_FILENAME = 'www/live-data/%s-data.json' % PROJECT_SLUG
 
 # LOG_PATH = '/var/log/%s.log' % PROJECT_SLUG
@@ -94,8 +94,15 @@ def configure_targets(deployment_target):
         S3_BUCKETS = PRODUCTION_S3_BUCKETS
         SERVERS = PRODUCTION_SERVERS
         DEBUG = False
-        TUMBLR_URL = 'nprchanginglives.tumblr.com'
+        TUMBLR_URL = 'she-works.tumblr.com'
         TUMBLR_BLOG_ID = PROJECT_SLUG
+    elif deployment_target == 'development':
+        blog_id = os.environ.get('DEVELOPMENT_BLOG_ID', None)
+        S3_BUCKETS = ['127.0.0.1:8000']
+        SERVERS = ['127.0.0.1:8001']
+        DEBUG = True
+        TUMBLR_URL = '%s.tumblr.com' % blog_id
+        TUMBLR_BLOG_ID = blog_id
     else:
         S3_BUCKETS = STAGING_S3_BUCKETS
         SERVERS = STAGING_SERVERS
