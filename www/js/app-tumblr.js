@@ -33,7 +33,6 @@ var Y_OFFSET = {
 
 var $b;
 var $form;
-var $s3_bucket;
 var $modal_bg;
 var $modal_btn;
 var $project_hdr;
@@ -54,6 +53,8 @@ var current_grid = '#17807e';
 var current_glyphs = 'flower-corner';
 var current_font = 'Roboto Condensed';
 var current_text = 'Your\nadvice\nhere';
+
+var s3_bucket;
 
 function trimMessages(){
     $("body.index-page .post .message").each(function(i,v){
@@ -208,8 +209,8 @@ $(function() {
     $project_iframe = $form.find('iframe');
     $tumblr_form = $("#tumblr-form");
     $preview = $('#preview');
-    $s3_bucket = $('body').attr('data-sss-bucket');
     preview_div = $preview[0];
+    s3_bucket = $('body').attr('data-sss-bucket');
 
     // Setup Raphael
     if (!Raphael.svg) {
@@ -314,8 +315,7 @@ $(function() {
     }
 
     $.ajax({
-        url: "http://" + $s3_bucket + "/changing-lives/aggregates.json",
-        //url: "http://127.0.0.1:8000/js/aggregates.json",
+        url: "live-data/aggregates.json",
         context: document.body,
         jsonp: false,
         dataType: 'jsonp',

@@ -245,7 +245,7 @@ def write_aggregates():
     popular_output = sorted(popular_output, key=lambda post: post['note_count'], reverse=True)
 
     # Call funtion to write file.
-    return_obj['popular'] = _render_output_template(popular_output, 'templates/_post_list.html', 'www/aggregates_popular.html')
+    return_obj['popular'] = _render_output_template(popular_output, 'templates/_post_list.html', 'www/live-data/aggregates_popular.html')
 
     featured_list = sorted(post_list, key=lambda post: post['timestamp'], reverse=True)
 
@@ -262,9 +262,9 @@ def write_aggregates():
     featured_output = sorted(featured_output, key=lambda post: post['timestamp'], reverse=True)
 
     # Call funtion to write file.
-    return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_post_list.html', 'www/aggregates_featured.html')
+    return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_post_list.html', 'www/live-data/aggregates_featured.html')
 
-    with open('www/aggregates.json', 'wb') as json_file:
+    with open('www/live-data/aggregates.json', 'wb') as json_file:
         json_file.write("aggregateCallback(%s)" % json.dumps(return_obj))
 
 
@@ -273,7 +273,7 @@ def deploy_aggregates(s3_buckets):
     Control function for deploying the aggregate files.
     """
     file_name = 'aggregates.json'
-    file_path = 'www/%s' % file_name
+    file_path = 'www/live-data/%s' % file_name
     _deploy_file(s3_buckets, file_path, file_name)
 
 
