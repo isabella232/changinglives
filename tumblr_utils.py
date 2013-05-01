@@ -109,6 +109,10 @@ def fetch_posts():
     print "Starting."
     # Set constants
     secrets = app_config.get_secrets()
+
+    print 'Secrets obtained.'
+    print secrets
+
     base_url = 'http://api.tumblr.com/v2/blog/%s.tumblr.com/posts/photo' % app_config.TUMBLR_BLOG_ID
     key_param = '?api_key=%s' % secrets['TUMBLR_APP_KEY']
     limit_param = '&limit=20'
@@ -118,6 +122,9 @@ def fetch_posts():
 
     # Figure out the total number of posts.
     r = requests.get(base_url + key_param)
+
+    print 'Requesting %s' % base_url + key_param
+
     total_count = int(json.loads(r.content)['response']['total_posts'])
     print "%s total posts available." % total_count
 
