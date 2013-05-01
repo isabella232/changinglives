@@ -119,7 +119,7 @@
                             {block:Photo}
                             <section class="media">
                                  <a href="{Permalink}" class="link">
-                                    <img src="{PhotoURL-HighRes}" />
+                                    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/>
                                  </a>
                             </section>
                             {/block:Photo}
@@ -134,14 +134,14 @@
 
                             {block:Photo}
                             <section class="top media" style="display:block;">
-                                 <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
+                                 <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/>
                             </section>
                             {/block:Photo}
 
                             <section class="group caption_and_post_info
                                 {block:Photo} after_top_part isphoto{/block:Photo}
                             ">
-                                
+
 
                                 {block:Text}
                                 <section class="caption group">
