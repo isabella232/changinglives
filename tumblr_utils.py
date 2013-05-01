@@ -156,11 +156,13 @@ def fetch_posts():
     return post_list
 
 
-def _deploy_file(s3_buckets, file_path, file_name):
+def _deploy_file(s3_buckets, local_path, s3_path):
     """
     Generic function for deploying a file to arbitrary S3 buckets.
     """
-    with open(file_path, 'r') as html_output:
+    file_name = os.path.split(local_path)[1]
+
+    with open(local_path, 'r') as html_output:
         with gzip.open(file_name + '.gz', 'wb') as f:
             f.write(html_output.read())
 
@@ -168,7 +170,7 @@ def _deploy_file(s3_buckets, file_path, file_name):
         conn = boto.connect_s3()
         bucket = conn.get_bucket(bucket)
         key = boto.s3.key.Key(bucket)
-        key.key = '%s/%s' % (app_config.PROJECT_SLUG, file_name)
+        key.key = '%s/%s' % (app_config.PROJECT_SLUG, s3_path)
         key.set_contents_from_filename(
             file_name + '.gz',
             policy='public-read',
@@ -245,7 +247,7 @@ def write_aggregates():
     popular_output = sorted(popular_output, key=lambda post: post['note_count'], reverse=True)
 
     # Call funtion to write file.
-    return_obj['popular'] = _render_output_template(popular_output, 'templates/_post_list.html', 'www/aggregates_popular.html')
+    return_obj['popular'] = _render_output_template(popular_output, 'templates/_post_list.html', 'www/live-data/aggregates_popular.html')
 
     featured_list = sorted(post_list, key=lambda post: post['timestamp'], reverse=True)
 
@@ -262,9 +264,9 @@ def write_aggregates():
     featured_output = sorted(featured_output, key=lambda post: post['timestamp'], reverse=True)
 
     # Call funtion to write file.
-    return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_post_list.html', 'www/aggregates_featured.html')
+    return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_post_list.html', 'www/live-data/aggregates_featured.html')
 
-    with open('www/aggregates.json', 'wb') as json_file:
+    with open('www/live-data/aggregates.json', 'wb') as json_file:
         json_file.write("aggregateCallback(%s)" % json.dumps(return_obj))
 
 
@@ -273,8 +275,8 @@ def deploy_aggregates(s3_buckets):
     Control function for deploying the aggregate files.
     """
     file_name = 'aggregates.json'
-    file_path = 'www/%s' % file_name
-    _deploy_file(s3_buckets, file_path, file_name)
+    file_path = 'www/live-data/%s' % file_name
+    _deploy_file(s3_buckets, file_path, 'live-data/%s' % file_name)
 
 
 def write_test_posts():
