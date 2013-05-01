@@ -156,11 +156,13 @@ def fetch_posts():
     return post_list
 
 
-def _deploy_file(s3_buckets, file_path, file_name):
+def _deploy_file(s3_buckets, local_path, s3_path):
     """
     Generic function for deploying a file to arbitrary S3 buckets.
     """
-    with open(file_path, 'r') as html_output:
+    file_name = os.path.split(local_path)[1]
+
+    with open(local_path, 'r') as html_output:
         with gzip.open(file_name + '.gz', 'wb') as f:
             f.write(html_output.read())
 
@@ -168,7 +170,7 @@ def _deploy_file(s3_buckets, file_path, file_name):
         conn = boto.connect_s3()
         bucket = conn.get_bucket(bucket)
         key = boto.s3.key.Key(bucket)
-        key.key = '%s/%s' % (app_config.PROJECT_SLUG, file_name)
+        key.key = '%s/%s' % (app_config.PROJECT_SLUG, s3_path)
         key.set_contents_from_filename(
             file_name + '.gz',
             policy='public-read',
@@ -274,7 +276,7 @@ def deploy_aggregates(s3_buckets):
     """
     file_name = 'aggregates.json'
     file_path = 'www/live-data/%s' % file_name
-    _deploy_file(s3_buckets, file_path, file_name)
+    _deploy_file(s3_buckets, file_path, 'live-data/%s' % file_name)
 
 
 def write_test_posts():
