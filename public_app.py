@@ -106,10 +106,10 @@ def _post_to_tumblr():
     svg = request.form.get('image', None)
     svg = re.sub('(height|width)=\"[0-9]+\"', '', svg, 2)
 
-    # Fix for duplicate namespaces in IE... 
+    # Fix for duplicate namespaces in IE...
     if svg.count('xmlns="http://www.w3.org/2000/svg"') > 1:
         svg = svg.replace('xmlns="http://www.w3.org/2000/svg"', '', 1)
-    
+
     file_path = '/uploads/%s/%s_%s' % (
         app_config.PROJECT_SLUG,
         str(time.mktime(datetime.datetime.now().timetuple())).replace('.', ''),
@@ -122,7 +122,11 @@ def _post_to_tumblr():
     with open('/var/www%s' % svg_path, 'wb') as f:
         f.write(svg.encode('utf-8'))
 
-    command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
+    if app_config.DEPLOYMENT_TARGET == 'development':
+        command = 'cairosvg /var/www/%s -f png -o /var/www%s' % (svg_path, png_path)
+    else:
+        command = '/home/ubuntu/apps/changing-lives/virtualenv/bin/cairosvg /var/www%s -f png -o /var/www%s' % (svg_path, png_path)
+
     args = shlex.split(command)
 
     try:
@@ -130,6 +134,7 @@ def _post_to_tumblr():
         # This is nice. I'm also piping stderr to stdout so we can see a trace if we want.
         # I am not logging the trace because we need the log to be single lines for continuity.
         subprocess.check_output(args, stderr=subprocess.STDOUT)
+
     except subprocess.CalledProcessError, e:
         # If we encounter a CalledProcessError, log the output.
         logger.error('%s %s %s http://%s%s reader(%s) (times in EST)' % (
@@ -137,7 +142,7 @@ def _post_to_tumblr():
 
         # These bits build a nicer error page that has the real stack trace on it.
         context = {}
-        context['title'] = 'Error'
+        context['title'] = 'CairoSVG is unhappy.'
         context['message'] = e.output
         return render_template('500.html', **context)
 
