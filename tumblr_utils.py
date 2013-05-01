@@ -8,6 +8,7 @@ from sets import *
 import urlparse
 
 import boto
+from boto.s3.connection import S3Connection
 from jinja2 import Template
 import oauth2 as oauth
 import requests
@@ -174,7 +175,8 @@ def _deploy_file(s3_buckets, local_path, s3_path):
             f.write(html_output.read())
 
     for bucket in s3_buckets:
-        conn = boto.connect_s3()
+        # conn = boto.connect_s3()
+        conn = S3Connection(os.environ.get('AWS_ACESS_KEY_ID', None), os.environ.get('AWS_SECRET_ACCESS_KEY', None))
         bucket = conn.get_bucket(bucket)
         key = boto.s3.key.Key(bucket)
         key.key = '%s/%s' % (app_config.PROJECT_SLUG, s3_path)
