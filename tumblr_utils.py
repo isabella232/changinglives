@@ -8,6 +8,7 @@ from sets import *
 import urlparse
 
 import boto
+from boto.s3.connection import S3Connection
 from jinja2 import Template
 import oauth2 as oauth
 import requests
@@ -109,6 +110,10 @@ def fetch_posts():
     print "Starting."
     # Set constants
     secrets = app_config.get_secrets()
+
+    print 'Secrets obtained.'
+    print secrets
+
     base_url = 'http://api.tumblr.com/v2/blog/%s.tumblr.com/posts/photo' % app_config.TUMBLR_BLOG_ID
     key_param = '?api_key=%s' % secrets['TUMBLR_APP_KEY']
     limit_param = '&limit=20'
@@ -118,6 +123,9 @@ def fetch_posts():
 
     # Figure out the total number of posts.
     r = requests.get(base_url + key_param)
+
+    print 'Requesting %s' % base_url + key_param
+
     total_count = int(json.loads(r.content)['response']['total_posts'])
     print "%s total posts available." % total_count
 
@@ -167,7 +175,8 @@ def _deploy_file(s3_buckets, local_path, s3_path):
             f.write(html_output.read())
 
     for bucket in s3_buckets:
-        conn = boto.connect_s3()
+        # conn = boto.connect_s3()
+        conn = S3Connection(os.environ.get('AWS_ACESS_KEY_ID', None), os.environ.get('AWS_SECRET_ACCESS_KEY', None))
         bucket = conn.get_bucket(bucket)
         key = boto.s3.key.Key(bucket)
         key.key = '%s/%s' % (app_config.PROJECT_SLUG, s3_path)
