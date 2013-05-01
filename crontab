@@ -1,1 +1,2 @@
 * * * * * ubuntu bash /home/ubuntu/apps/changing-lives/repository/cron.sh fab $DEPLOYMENT_TARGET deploy_aggregates
+* * * * * ubuntu bash /home/ubuntu/apps/changing-lives/repository/cron.sh fab $DEPLOYMENT_TARGET cron_test
