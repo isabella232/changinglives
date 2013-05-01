@@ -32,6 +32,7 @@ gzip
 
 node_modules
 www/aggregates_*.html
+www/aggregates.json
 www/live-data/aggregates.json
 www/*.html
 www/css/*.min.css
