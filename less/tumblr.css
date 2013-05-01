@@ -39,7 +39,7 @@ header{width:220px;}
 .tumblr-form-wrap input{font:13px/1.5 Arial,Helvetica,sans-serif;color:#111;}.tumblr-form-wrap input.signed-name{width:70px;}
 .tumblr-form-wrap input.signed-location{margin-left:0;}
 .tumblr-form-wrap input[type='text']{padding:5px 10px;}
-.tumblr-form-wrap button[type='submit']{background-color:#7598c9;border:none;line-height:44px;height:44px;color:#fff;padding:0 20px;font-size:12px;cursor:pointer;}.tumblr-form-wrap button[type='submit']:hover{opacity:0.7;}
+.tumblr-form-wrap button[type='submit']{background-color:#7598c9;border:none;font-family:Helvetica,Arial,sans-serif;line-height:44px;height:44px;color:#fff;padding:0 20px;font-size:12px;cursor:pointer;}.tumblr-form-wrap button[type='submit']:hover{opacity:0.7;}
 .tumblr-form-wrap button[type='submit']:disabled{background-color:#becfe6;cursor:default;opacity:1.0;}
 .tumblr-form-wrap .form-photo{float:left;width:50%;}
 .tumblr-form-wrap .form-options{float:right;width:48%;}
