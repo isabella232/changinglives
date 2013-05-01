@@ -110,6 +110,10 @@ function render_glyphs(glyph_set) {
 
     var glyphs = GLYPH_SETS[glyph_set];
 
+    if (typeof(glyphs) === 'undefined'){
+        return;
+    }
+
     for (var i = 0; i < glyphs.length; i++) {
         var glyph = glyphs[i];
         var bitmap = glyph.bitmap;
