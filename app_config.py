@@ -96,7 +96,7 @@ def configure_targets(deployment_target):
         DEBUG = False
         TUMBLR_URL = 'she-works.tumblr.com'
         TUMBLR_BLOG_ID = PROJECT_SLUG
-    if deployment_target == 'development':
+    elif deployment_target == 'development':
         blog_id = os.environ.get('DEVELOPMENT_BLOG_ID', None)
         S3_BUCKETS = ['127.0.0.1:8000']
         SERVERS = ['127.0.0.1:8001']
