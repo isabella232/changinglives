@@ -14,7 +14,7 @@ var GLYPH_Y_MARGIN = GRID_Y_PITCH * GLYPH_RECT_MARGIN;
 
 var FONT_NAMES = ['Roboto Condensed', 'Snippet', 'Noto Serif', 'Quicksand'];
 var FONT_COLOR = '#fff';
-var FONT_SIZE = 300;
+var FONT_SIZE = 220;
 var LINE_HEIGHT = FONT_SIZE;
 
 var X_OFFSET = {
@@ -239,7 +239,7 @@ $(function() {
 
             $('.form-color label').removeClass('active');
             label.addClass('active');
-            current_grid = label.css('background-color');
+            current_grid = label.find('span').css('background-color');
 
             render_grid(current_grid);
             render_glyphs(current_glyphs);
