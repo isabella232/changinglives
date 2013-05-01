@@ -14,67 +14,62 @@ em{font-style:italic;}
 .btn{background-color:#7598c9;line-height:44px;display:inline-block;padding:0 20px;-webkit-font-smoothing:antialiased;font-weight:bold;cursor:pointer;font-size:12px;}.btn:hover{opacity:.7;}
 .btn a{color:#fff;}
 .caption .btn a{color:#fff;}
-#nav{background-color:#e0e0e0;height:44px;overflow:hidden;border-bottom:2px solid #fff;}#nav ul{list-style:none;margin:0;padding:0;}#nav ul li{float:left;height:44px;line-height:44px;margin-left:22px;font-size:12px;}#nav ul li:first-child{margin-left:0;}
-#nav a,#nav a:link,#nav a:visited{color:#6d8ac4;font-weight:bold;text-transform:lowercase;}
-#nav a:hover,#nav a:active{color:#bccae5;}
-#nav .site-links{float:left;margin-left:30px;}
-#nav .site-links-2{float:right;margin-right:120px;}
-#nav .npr img{margin:10px 0 0 0;width:61px;}
-#nav .stations{padding-left:22px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAG4nAABzrwAA92wAAIZNAABt8wAA6sIAADA+AAAYLjTjngYAAAGBSURBVHjapJO7UQMxEIa/u6GAowO7AptRAeAKODowoSJ8qRXYDhTbJFaIqQB3YMitwVQAHeAOjuQXozkYE7AzmpX2oX38u0XbtgC4EJcA3pqGE9S1KyWcAxPgjb/pDZjIh2K63veAV+DZW3PjQhwCQ2/NphN5DBy8NQcX4hNwBVyUQA1UQONCrIAdMPgl8gDYyaaRT11M1/udahq5ECfAHXChj5dyboCtMr331qxciLvvHgAv4pfA1ltzlHOls5RsK5tvn5J/UplFTr/WWZ1HndSfupMtxXS9nyjdvozfgQ2w6ASbAWPZVbJrShkfszpHwnoGfOrMJBtl/TkCm6Jt2zRIM+A24e9CfM/De2v62Tw8AAtvzbyUcg6sEv4uxBroqeuPQE+yNA8r+XCWRch34Fo8wZhk2+6uFGmZspGtVPdBWQB8AEPgXD34AWNOKdWhoFzonutOfnAnnjKodM91v5fgQuwJ31PU99Z8pMdZRzkWH3lrnju9udKmjoF5kn8NAFaQnhYx4i5jAAAAAElFTkSuQmCC) no-repeat 0% 50%;}
-#nav .shop{padding-left:18px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAICAYAAAAvOAWIAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAG11AABzoAAA97wAAIT6AAB5yAAA7p8AADFuAAAPXaV5P1wAAAB/SURBVHjafM6xCUJBEITh7x1WYA/mmtiSuZGI+NIXGRrYgRVoERYiiBe9yORMVjkOdGH4l2F22G57vBVkzII/J6HDGU+Uf0pxtMMDCwxR0NIkwhk9LrhjimVDqXrpFMGMFa4Nv82wxzz2EtzUrJvXwTF+/GgM/1WHDw1bf3gPAMfKIptJWVXJAAAAAElFTkSuQmCC) no-repeat 0% 50%;}
 #container{display:table;height:100%;min-height:800px;width:100%;}
 header{display:table-cell;width:220px;vertical-align:top;}
 #post-wrap{display:table-cell;vertical-align:top;}
-#blog_info{padding:30px 0 30px 30px;position:fixed;width:190px;}#blog_info h1{font:normal 36px/1.1 Arial,Helvetica,sans-serif;color:#fff;margin-bottom:22px;}#blog_info h1 a{color:#fff;display:block;height:70px;text-indent:-9999px;background:url('http://localhost:8000/img/logo.png') no-repeat;background-size:190px 66px;}
-#blog_info p.description,#blog_info p.more{color:#ccc;margin-bottom:11px;font-size:13px;}#blog_info p.description strong,#blog_info p.more strong{color:#ededed;}
-#blog_info p.more{margin-bottom:22px;}
+#blog_info{padding:30px 0 30px 20px;position:fixed;width:200px;}#blog_info h1{font:normal 36px/1.1 Arial,Helvetica,sans-serif;color:#fff;margin-bottom:22px;}#blog_info h1 a{color:#fff;display:block;height:70px;text-indent:-9999px;background:url('../img/logo.png') no-repeat;background-size:190px 66px;}
+#blog_info .npr a{display:block;text-indent:-9999px;background:url('../img/npr-logo-20.png') no-repeat 0 0;height:20px;margin-bottom:11px;opacity:.7;}#blog_info .npr a:hover{opacity:.5;}
 #blog_info p.project-credits{color:#999;margin-top:22px;margin-bottom:0;font-size:11px;font-style:italic;}
 #blog_info a{color:#bbc9e5;font-weight:bold;}
 #blog_info .project-prompt{margin-bottom:22px;}#blog_info .project-prompt p{color:#eee;font-size:12px;margin-bottom:5px;}
 #blog_info #modal-btn{cursor:pointer;overflow:hidden;background-color:#7598c9;margin-bottom:11px;line-height:66px;font-weight:bold;font-size:16px;padding-right:10px;padding-left:0;color:#fff;display:block;-webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);-moz-box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);}#blog_info #modal-btn:hover{background-color:#9eb7dd;}
 #blog_info #modal-btn:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
-#blog_info #modal-btn span{background:url('http://localhost:8000/img/btn-post-photo-44.png') no-repeat 50% 50%;width:55px;height:66px;border-right:1px solid #99b1d7;margin-right:11px;display:inline-block;float:left;}
+#blog_info #modal-btn span{background:url('../img/btn-post-sign-44.gif') no-repeat 50% 50%;width:55px;height:66px;border-right:1px solid #99b1d7;margin-right:11px;display:inline-block;float:left;}
 #project-form{display:none;z-index:1050;position:fixed;top:5%;left:5%;width:90%;height:90%;background-color:#444;font-size:14px;}#project-form .hdr{cursor:pointer;overflow:hidden;background-color:#7598c9;height:44px;position:relative;}#project-form .hdr:hover{background-color:#9eb7dd;}
 #project-form .hdr:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
 #project-form .hdr h3{font-weight:bold;font-size:14px;line-height:44px;padding:0 11px;color:#fff;}
 #project-form .hdr .close{color:#fff;cursor:pointer;position:absolute;top:8px;right:8px;font-size:12px;line-height:14px;font-weight:bold;padding:5px 7px;border:1px solid #fff;opacity:.5;}
-.tumblr-form{position:absolute;top:44px;bottom:0;width:100%;overflow:auto;-webkit-overflow-scrolling:touch;}.tumblr-form h2{color:#333;font-style:italic;}
-.tumblr-form form{margin:0;padding:0;}
-.tumblr-form ul,.tumblr-form ol{margin:0;padding:0;list-style:none;}
-.tumblr-form li{padding:10px 11px;color:#999;}
-.tumblr-form label{font-weight:bold;font-size:17px;display:block;margin-bottom:5px;}
-.tumblr-form textarea{width:50%;height:100px;min-width:200px;font:13px/1.5 Arial,Helvetica,sans-serif;color:#111;}
-.tumblr-form input{font:13px/1.5 Arial,Helvetica,sans-serif;color:#111;}.tumblr-form input.signed-name{width:70px;}
-.tumblr-form input.signed-location{margin-left:0;}
-.tumblr-form input[type='text']{padding:5px 10px;}
-.tumblr-form input[type='radio']{margin-right:10px;margin-top:-6px;}
-.tumblr-form button[type='submit']{background-color:#7598c9;border:none;line-height:44px;height:44px;color:#fff;padding:0 20px;font-size:12px;cursor:pointer;}.tumblr-form button[type='submit']:hover{opacity:0.7;}
-.tumblr-form button[type='submit']:disabled{background-color:#becfe6;cursor:default;opacity:1.0;}
-.tumblr-form .form-photo{float:left;width:50%;}
-.tumblr-form .form-options{float:right;width:48%;}
-.tumblr-form .form-customize input[type='radio']{display:none;}
-.tumblr-form .form-customize label{display:inline-block;width:22px;height:22px;text-indent:-9999px;margin:0 1px 0 0;cursor:pointer;border:1px solid #787878;float:left;}.tumblr-form .form-customize label:hover,.tumblr-form .form-customize label.active{border:1px solid #fff;}
-.tumblr-form .form-customize label.flower-corner{background:#787878 url('../img/preview-corner-1.gif') no-repeat 50% 50%;}
-.tumblr-form .form-customize label.swash-border{background:#787878 url('../img/preview-flourish-1.gif') no-repeat 50% 50%;}
-.tumblr-form .form-customize label.triangle-border{background:#787878 url('../img/preview-flourish-3.gif') no-repeat 50% 50%;}
-.tumblr-form .form-customize label.space-invaders{background:#787878 url('../img/preview-invaders.gif') no-repeat 50% 50%;}
-.tumblr-form .form-customize label.no-border{background:#787878;}
-.tumblr-form .form-customize label.roboto{background:#787878 url('../img/preview-roboto.png') no-repeat 50% 50%;}
-.tumblr-form .form-customize label.snippet{background:#787878 url('../img/preview-snippet.png') no-repeat 50% 50%;}
-.tumblr-form .form-customize label.noto{background:#787878 url('../img/preview-noto.png') no-repeat 50% 50%;}
-.tumblr-form .form-customize label.quicksand{background:#787878 url('../img/preview-quicksand.png') no-repeat 50% 50%;}
-.tumblr-form .form-customize label.teal{background-color:#17807e;}
-.tumblr-form .form-customize label.orange{background-color:#db811c;}
-.tumblr-form .form-customize label.red{background-color:#A23520;}
-.tumblr-form .form-customize label.yellow{background-color:#d9b431;}
-.tumblr-form .form-customize label.blue{background-color:#3D7FA6;}
-.tumblr-form .form-customize label.pink{background-color:#ca3d79;}
-.tumblr-form .form-customize label.purple{background-color:#9777b1;}
-.tumblr-form .form-customize label.gray{background-color:#787878;}
-.tumblr-form .form-customize .form-color,.tumblr-form .form-customize .form-typeface,.tumblr-form .form-customize .form-ornament{margin-bottom:3px;}.tumblr-form .form-customize .form-color:after,.tumblr-form .form-customize .form-typeface:after,.tumblr-form .form-customize .form-ornament:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
-.tumblr-form .form-customize .form-typeface label{width:88px;}
-.tumblr-form .form-message{clear:both;}
-.tumblr-form .legal{padding:16px 11px 11px 11px;font-size:11px;color:#999;font-style:italic;max-width:600px;}
+#tumblr-form{padding:11px;}
+.tumblr-form-wrap{position:absolute;top:44px;bottom:0;width:100%;overflow:auto;-webkit-overflow-scrolling:touch;}.tumblr-form-wrap h2{color:#333;font-style:italic;}
+.tumblr-form-wrap form{margin:0;padding:0;}
+.tumblr-form-wrap ul,.tumblr-form-wrap ol{margin:0;padding:0;list-style:none;}
+.tumblr-form-wrap li{padding:10px 11px;color:#999;}
+.tumblr-form-wrap label{font-weight:bold;font-size:17px;display:block;margin-bottom:5px;}
+.tumblr-form-wrap textarea{width:50%;height:100px;min-width:200px;font:13px/1.5 Arial,Helvetica,sans-serif;color:#111;}
+.tumblr-form-wrap input{font:13px/1.5 Arial,Helvetica,sans-serif;color:#111;}.tumblr-form-wrap input.signed-name{width:70px;}
+.tumblr-form-wrap input.signed-location{margin-left:0;}
+.tumblr-form-wrap input[type='text']{padding:5px 10px;}
+.tumblr-form-wrap button[type='submit']{background-color:#7598c9;border:none;line-height:44px;height:44px;color:#fff;padding:0 20px;font-size:12px;cursor:pointer;}.tumblr-form-wrap button[type='submit']:hover{opacity:0.7;}
+.tumblr-form-wrap button[type='submit']:disabled{background-color:#becfe6;cursor:default;opacity:1.0;}
+.tumblr-form-wrap .form-photo{float:left;width:50%;}
+.tumblr-form-wrap .form-options{float:right;width:48%;}
+.tumblr-form-wrap .form-customize{padding-top:0;}.tumblr-form-wrap .form-customize input[type='radio']{display:none;}
+.tumblr-form-wrap .form-customize label{display:inline-block;margin:0;cursor:pointer;float:left;}.tumblr-form-wrap .form-customize label span{border:1px solid #444;display:block;text-indent:-9999px;height:33px;opacity:.5;}
+.tumblr-form-wrap .form-customize label:hover span,.tumblr-form-wrap .form-customize label.active span{border-color:#fff;opacity:1;}
+.tumblr-form-wrap .form-customize label.flower-corner span{background-image:url('../img/preview-corner-1.gif');}
+.tumblr-form-wrap .form-customize label.swash-border span{background-image:url('../img/preview-flourish-1.gif');}
+.tumblr-form-wrap .form-customize label.triangle-border span{background-image:url('../img/preview-flourish-3.gif');}
+.tumblr-form-wrap .form-customize label.space-invaders span{background-image:url('../img/preview-invaders.gif');}
+.tumblr-form-wrap .form-customize label.no-border span{background-image:none;}
+.tumblr-form-wrap .form-customize label.roboto span{background-image:url('../img/preview-roboto.png');}
+.tumblr-form-wrap .form-customize label.snippet span{background-image:url('../img/preview-snippet.png');}
+.tumblr-form-wrap .form-customize label.noto span{background-image:url('../img/preview-noto.png');}
+.tumblr-form-wrap .form-customize label.quicksand span{background-image:url('../img/preview-quicksand.png');}
+.tumblr-form-wrap .form-customize label.teal span{background-color:#17807e;}
+.tumblr-form-wrap .form-customize label.orange span{background-color:#db811c;}
+.tumblr-form-wrap .form-customize label.red span{background-color:#A23520;}
+.tumblr-form-wrap .form-customize label.yellow span{background-color:#d9b431;}
+.tumblr-form-wrap .form-customize label.blue span{background-color:#3D7FA6;}
+.tumblr-form-wrap .form-customize label.pink span{background-color:#ca3d79;}
+.tumblr-form-wrap .form-customize label.purple span{background-color:#9777b1;}
+.tumblr-form-wrap .form-customize label.gray span{background-color:#787878;}
+.tumblr-form-wrap .form-customize .form-color,.tumblr-form-wrap .form-customize .form-typeface,.tumblr-form-wrap .form-customize .form-ornament{margin-bottom:3px;}.tumblr-form-wrap .form-customize .form-color span,.tumblr-form-wrap .form-customize .form-typeface span,.tumblr-form-wrap .form-customize .form-ornament span{background-color:#787878;background-repeat:no-repeat;background-position:50% 50%;}
+.tumblr-form-wrap .form-customize .form-color:after,.tumblr-form-wrap .form-customize .form-typeface:after,.tumblr-form-wrap .form-customize .form-ornament:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
+.tumblr-form-wrap .form-customize .form-color label{width:12.5%;}
+.tumblr-form-wrap .form-customize .form-typeface label{width:25%;}
+.tumblr-form-wrap .form-customize .form-ornament label{width:20%;}
+.tumblr-form-wrap .form-message{clear:both;}
+.tumblr-form-wrap .legal{padding:16px 11px 11px 11px;font-size:11px;color:#999;font-style:italic;max-width:600px;}
 #preview{width:100%;}
 .modal-bg{display:none;position:fixed;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:1040;background:#666;background:rgba(0, 0, 0, 0.8);}
 #post-wrap h2{margin:20px 20px -17px 33px;color:#ddd;font-weight:normal;font-size:24px;text-transform:lowercase;}
@@ -110,7 +105,7 @@ header{display:table-cell;width:220px;vertical-align:top;}
 .caption p:empty{display:none;}
 .caption a{color:#4774cc;}.caption a.disquscomments{font-size:14px;}
 .caption .btn{width:100%;margin-bottom:3px;}
-.post-pagination{margin-bottom:11px;}.post-pagination a{display:block;font-size:12px;color:#999;}.post-pagination a:hover{color:#787878;}
+.post-pagination{margin:11px 0;}.post-pagination a{display:block;font-size:12px;color:#999;}.post-pagination a:hover{color:#787878;}
 .post-pagination a.previous-post{float:left;}
 .post-pagination a.next-post{float:right;}
 .post-pagination:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
@@ -123,11 +118,11 @@ header{display:table-cell;width:220px;vertical-align:top;}
 .tag:active{background:rgba(71, 116, 204, 0.2);}
 .tag span{color:#4c4c4c;display:table-cell;}
 .post_notes{clear:both;margin-top:22px;}.post_notes h4{font-weight:600;font-size:18px;margin-bottom:11px;}
-ol.notes{color:#ccc;font-size:13px;text-align:left;list-style-type:none;border-top:solid 1px #E6E6E6;-webkit-font-smoothing:subpixel-antialiased !important;margin:auto;}ol.notes li.note{border-bottom:solid 1px #aaa;padding:9px 0 10px 0;}ol.notes li.note:last-child{border-width:0px;}
+ol.notes{color:#ccc;font-size:13px;text-align:left;list-style-type:none;border-top:solid 1px #E6E6E6;-webkit-font-smoothing:subpixel-antialiased !important;margin:auto;}ol.notes li.note{border-bottom:solid 1px #E6E6E6;padding:9px 0 10px 0;}ol.notes li.note:last-child{border-width:0px;}
 ol.notes li.note img.avatar{width:16px;height:16px;border-radius:3px;vertical-align:-4px;margin-right:6px;}
 ol.notes li.note blockquote{border-color:#eee;padding:4px 10px;margin:10px 0px 0px 25px;}ol.notes li.note blockquote a{text-decoration:none;}
 ol.notes a{color:#bbb;text-decoration:underline;}ol.notes a:hover{color:#fff;}
-#footer{-webkit-font-smoothing:subpixel-antialiased;margin:0 20px 0 40px;}#footer .copyright{width:50%;float:left;}
+#footer{-webkit-font-smoothing:subpixel-antialiased;margin:10px 20px 20px 40px;}#footer .copyright{width:50%;float:left;}
 #footer .pagination-index a{display:inline-block;background-color:#ebebeb;font-size:12px;text-transform:lowercase;font-weight:bold;padding:0 20px;line-height:44px;}#footer .pagination-index a:hover{color:#bccae5;}
 #footer .pagination{width:230px;text-align:right;float:right;position:relative;}
 .pagination .buttons{width:113px;height:30px;margin:-2px 0 0 30px;float:right;position:absolute;top:0;right:0;z-index:10;}.pagination .buttons.disabled{z-index:9;}
@@ -147,12 +142,5 @@ ol.notes a{color:#bbb;text-decoration:underline;}ol.notes a:hover{color:#fff;}
 .post-list .post .caption.excerpt .signature-name,.post-list .post .caption.excerpt .footnote{display:none;}
 .permalink-page #popular{margin:0 0 0 30px;}.permalink-page #popular .post-list{max-width:1020px;margin:0;}
 .permalink-page #popular h2{margin:0 0 10px 10px;}
-.touch .index-page ul.timestamp{margin:3px 6px 6px 6px;}.touch .index-page ul.timestamp li{margin:0;}
-.touch .index-page #posts .post p.message{height:50px;overflow:hidden;}
-.touch #blog_info .mobile-prompt{display:none;}
-@-webkit-keyframes caption-slide{from{bottom:-200px;} to{bottom:0;}}@-moz-keyframes caption-slide{from{bottom:-200px;} to{bottom:0;}}.no-touch .post-list .post .caption.excerpt{background:#000;background:rgba(0, 0, 0, 0.7);position:absolute;bottom:-200px;left:0;}.no-touch .post-list .post .caption.excerpt p{color:#fff;}
-.no-touch .post-list .post .caption.excerpt a{display:block;}
-.no-touch .post-list .post .post_info{display:none;}
-.no-touch .post-list .post:hover .caption.excerpt{-webkit-animation-name:caption-slide;-webkit-animation-duration:.25s;-moz-animation-name:caption-slide;-moz-animation-duration:.25s;bottom:0;}
 header:after,#container:after,.caption_and_post_info:after,footer:after .buttons:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
-@media (min-width:1600px){.index-page .post-list .post{width:20%;} #container{min-height:1800px;}}@media (min-width:1400px) and (max-width:1599px){.index-page .post-list .post{width:25%;}}@media (min-width:1200px) and (max-width:1399px){.post-list .post{width:33%;}}@media (min-width:980px) and (max-width:1200px){.permalink-page #popular{margin:0 10px 0 30px;}}@media (min-width:768px){.index-page .post-list{margin:15px 0 0 30px;}}@media (min-width:980px){.post-list .post{padding:10px;} .index-page .post-list{margin:15px 0 0 25px;}}@media (max-width:979px){#nav .site-links-2{display:none;} .permalink-page #popular{margin:0 15px 0 35px;}.permalink-page #popular .posts{margin:15px 0 0 0;}}@media (max-width:767px){#nav .site-links{margin-left:20px;} #container{display:block;width:100%;} #blog_info{padding:33px 20px 20px 20px;} header,#post-wrap{display:block;width:auto;} #blog_info{padding:33px 20px 0 20px;position:static;width:auto;}#blog_info h1{margin-bottom:22px;}#blog_info h1 a{background:url('http://localhost:8000/img/logo.png') no-repeat;background-size:300px 105px;height:105px;} #blog_info .project-prompt{margin-bottom:0;} #blog_info #modal-btn{height:44px;padding-top:0;font-size:14px;line-height:44px;}#blog_info #modal-btn span{margin-top:0;height:44px;} #blog_info .mobile-prompt{margin-top:0;padding-bottom:0;border-bottom:0;}#blog_info .mobile-prompt p{padding-top:8px;} #blog_info .mobile-prompt strong{display:inline;} #post-wrap h2{margin:11px 20px;} #project-form{top:2%;left:2%;width:96%;height:96%;} .index-page header{margin-bottom:11px;} .index-page #blog_info{padding-bottom:11px;} .index-page #blog_info .project-prompt{margin-bottom:11px;} .permalink-page #popular{margin:0 5px;}.permalink-page #popular .posts{margin:15px 0 0 0;} .permalink-page #posts{padding:0 10px;} .permalink-page .post .caption_and_post_info.isphoto{width:auto;float:none;margin-top:15px;} .permalink-page .post .media{float:none;width:auto;}}@media (max-width:480px){#nav .site-links li{display:none;} #nav .site-links .npr{display:block;} #blog_info h1{font-size:36px;} .post .wrap{padding:15px;} .post_info li{float:none;margin-bottom:3px;} #footer{padding-left:10px;margin-left:0;margin-right:0;} .post-list .post{width:auto;margin:0 0 20px 0;float:none;}.post-list .post p.message{height:auto;overflow:visible;} .permalink-page #popular{margin:0;} .tumblr-form .form-photo,.tumblr-form .form-options{float:none;width:auto;} .tumblr-form .form-photo{padding:10px 10px 0 10px;} .tumblr-form .form-customize label{margin-right:1%;height:44px;} .tumblr-form .form-customize .form-color label{width:10%;} .tumblr-form .form-customize .form-typeface label{width:23%;} .tumblr-form .form-customize .form-ornament label{width:17%;} .tumblr-form .form-customize:after{visibility:hidden;display:block;content:"";clear:both;height:0;}}
+@media (min-width:1600px){.index-page .post-list .post{width:20%;} #container{min-height:1800px;}}@media (min-width:1400px) and (max-width:1599px){.index-page .post-list .post{width:25%;}}@media (min-width:1200px) and (max-width:1399px){.post-list .post{width:33%;}}@media (min-width:980px) and (max-width:1200px){.permalink-page #popular{margin:0 10px 0 30px;}}@media (min-width:768px){.index-page .post-list{margin:15px 0 0 30px;} .permalink-page #post-wrap{padding-top:30px;}}@media (min-width:980px){.post-list .post{padding:10px;} .index-page .post-list{margin:15px 0 0 25px;}}@media (max-width:979px){.permalink-page #popular{margin:0 15px 0 35px;}.permalink-page #popular .posts{margin:15px 0 0 0;}}@media (max-width:767px){#container{display:block;width:100%;} #blog_info{padding:33px 20px 20px 20px;} header,#post-wrap{display:block;width:auto;} #blog_info{padding:33px 20px 0 20px;position:static;width:auto;}#blog_info h1{margin-bottom:22px;}#blog_info h1 a{background:url('../img/logo.png') no-repeat;background-size:280px 98px;height:98px;} #blog_info .project-prompt{margin-bottom:0;} #post-wrap h2{margin:11px 20px;} #project-form{top:2%;left:2%;width:96%;height:96%;} .index-page header{margin-bottom:11px;} .index-page #blog_info{padding-bottom:11px;} .index-page #blog_info .project-prompt{margin-bottom:11px;} .index-page .post-list{padding:0 10px;} .permalink-page #popular{margin:0 15px;}.permalink-page #popular .posts{margin:15px 0 0 0;} .permalink-page #posts{padding:0 20px;} .permalink-page .post .caption_and_post_info.isphoto{width:auto;float:none;margin-top:15px;} .permalink-page .post .media{float:none;width:auto;}}@media (max-width:480px){#blog_info h1{font-size:36px;} .post .wrap{padding:15px;} .post_info li{float:none;margin-bottom:3px;} #footer{padding-left:10px;margin-left:0;margin-right:0;} .post-list .post{width:auto;margin:0 0 20px;float:none;}.post-list .post p.message{height:auto;overflow:visible;} #popular .post-list .post{width:50%;float:left;margin:0;} #tumblr-form{padding:0;} .tumblr-form-wrap .form-photo,.tumblr-form-wrap .form-options{float:none;width:auto;} .tumblr-form-wrap .form-photo{padding:11px;} .tumblr-form-wrap .form-customize{padding-bottom:6px;} .tumblr-form-wrap textarea{width:96%;padding:2%;border:none;} .tumblr-form-wrap input[type='text']{border:none;}}
