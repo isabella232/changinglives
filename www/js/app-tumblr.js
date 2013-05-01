@@ -54,8 +54,6 @@ var current_glyphs = 'flower-corner';
 var current_font = 'Roboto Condensed';
 var current_text = 'Your\nadvice\nhere';
 
-var s3_bucket;
-
 function trimMessages(){
     $("body.index-page .post .message").each(function(i,v){
         var message = $(v);
@@ -210,7 +208,6 @@ $(function() {
     $tumblr_form = $("#tumblr-form");
     $preview = $('#preview');
     preview_div = $preview[0];
-    s3_bucket = $('body').attr('data-sss-bucket');
 
     // Setup Raphael
     if (!Raphael.svg) {
@@ -315,7 +312,7 @@ $(function() {
     }
 
     $.ajax({
-        url: "live-data/aggregates.json",
+        url: "http://" + APP_CONFIG.S3_BUCKETS[0] + "/" + APP_CONFIG.PROJECT_SLUG + "/live-data/aggregates.json",
         context: document.body,
         jsonp: false,
         dataType: 'jsonp',
