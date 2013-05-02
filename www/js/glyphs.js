@@ -48,7 +48,7 @@ var BITMAPS = {
 
 
 var GLYPH_SETS = {
-    'no-space': [],
+    'no-border': [],
     'space-invaders': [{
         bitmap: BITMAPS.INVADERS,
         align: 'center',

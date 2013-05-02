@@ -110,10 +110,6 @@ function render_glyphs(glyph_set) {
 
     var glyphs = GLYPH_SETS[glyph_set];
 
-    if (typeof(glyphs) === 'undefined'){
-        return;
-    }
-
     for (var i = 0; i < glyphs.length; i++) {
         var glyph = glyphs[i];
         var bitmap = glyph.bitmap;
@@ -263,7 +259,6 @@ $(function() {
 
         $('input[name="ornament"]').change(function(e) {
             var val = $(this).val();
-            console.log(val);
             var label = $('label[for="' + $(this).attr('id') + '"]');
 
             $('.form-ornament label').removeClass('active');
@@ -284,6 +279,12 @@ $(function() {
             $('input[name="image"]').val($preview.html());
 
             return true;
+        });
+
+        $tumblr_form.find('input').keypress(function(e) {
+            if (e.which == 13) {
+                return false;
+            }
         });
     }
 
