@@ -1,0 +1,9 @@
+.permalink-page #nav,.permalink-page header,.permalink-page #project-form,.permalink-page .modal-bg,.permalink-page footer,.permalink-page .post-pagination,.permalink-page .footnote,.permalink-page .caption,.permalink-page .post_info,.permalink-page .post_notes,.permalink-page .post-pagination,.permalink-page #popular,.permalink-page #tumblr_controls,.permalink-page #disqus_thread{display:none;}
+.permalink-page #container{max-width:none;}
+.permalink-page #posts{padding:0;}.permalink-page #posts .post{max-width:none;margin:0;padding-top:75px;}.permalink-page #posts .post p{font:12px/1.4 Arial,Helvetica,sans-serif;margin-right:106px;color:#666;}.permalink-page #posts .post p strong{font-weight:bold;}
+.permalink-page #posts .post p.signature-name{font-size:24px;}
+.permalink-page #posts .post .wrap{padding:0;border:none;-webkit-box-shadow:none;box-shadow:none;}
+.permalink-page #posts .post .media img{max-height:none;width:100%;height:auto;display:block;margin:0 auto;}
+.permalink-page #posts .post .for-print{margin:0 auto;padding-top:11px;display:block;}.permalink-page #posts .post .for-print .npr-logo{float:right;}
+.permalink-page #posts .post .for-print:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
+@page {size:portrait;}
