@@ -146,11 +146,14 @@ def _post_to_tumblr():
         context['message'] = e.output
         return render_template('500.html', **context)
 
+    image_url = 'http://%s%s' % (app_config.SERVERS[0], png_path)
+    zazzle_url = app_config.ZAZZLE_URL % urllib.quote(image_url) 
+
     context = {
         'name': name,
         'location': location,
         'app_config': app_config,
-        'image_url_urlencoded': urllib.quote('http://%s%s' % (app_config.SERVERS[0], png_path))
+        'zazzle_url': zazzle_url 
     }
 
     caption = render_template('caption.html', **context)
