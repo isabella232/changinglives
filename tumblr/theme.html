@@ -175,17 +175,17 @@
                                         </li>
                                     </ul>
                                     <ul class="post_info social">
-                                        <li class="print"><a href="javascript:window.print();"><span></span>Print This Poster</a></li>
-                                        <li class="facebook"><a rel="external" href="https://www.facebook.com/dialog/feed?app_id=138837436154588&amp;link={Permalink}&picture={PhotoURL-HighRes}&name=She Works: Note To Self&redirect_uri={Permalink}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Post', 'She Works: Note To Self']);" title="Like This Page On Facebook"><span></span>Share On Facebook</a></li>
-                                        <li class="twitter"><a rel="external" href="http://twitter.com/share?text=Dinner+is+hard.&amp;url={Permalink}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Post', 'She Works: Note To Self']);" title="Share This Page On Twitter"><span></span>Share On Twitter</a></li>
+                                        <li class="print"><a href="javascript:window.print();"><span></span>Print this poster</a></li>
+                                        <li class="facebook"><a rel="external" href="https://www.facebook.com/dialog/feed?app_id=138837436154588&amp;link={Permalink}&picture={PhotoURL-HighRes}&name=She Works: Note To Self&redirect_uri={Permalink}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Post', 'She Works: Note To Self']);" title="Like This Page On Facebook"><span></span>Share on Facebook</a></li>
+                                        <li class="twitter"><a rel="external" href="http://twitter.com/share?text=Dinner+is+hard.&amp;url={Permalink}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Post', 'She Works: Note To Self']);" title="Share This Page On Twitter"><span></span>Share on Twitter</a></li>
                                         <li class="report"><a href="mailto:tumblr@npr.org?subject=Please moderate this post {PostID}&body={Permalink}"><span></span>Is this inappropriate?</a></li>
                                     </ul>
 
                                     <!-- BACK/NEXT PAGINATION FOR PERMALINK PAGES -->
                                     {block:PermalinkPagination}
                                     <section class="post-pagination">
-                                        {block:NextPost}<a href="{NextPost}" class="previous-post">&#171; Previous Post</a>{/block:NextPost}
-                                        {block:PreviousPost}<a href="{PreviousPost}" class="next-post">Next Post &#187;</a>{/block:PreviousPost}
+                                        {block:NextPost}<a href="{NextPost}" class="previous-post">&#171; previous post</a>{/block:NextPost}
+                                        {block:PreviousPost}<a href="{PreviousPost}" class="next-post">next post &#187;</a>{/block:PreviousPost}
                                     </section>
                                     {/block:PermalinkPagination}
 
@@ -194,6 +194,7 @@
                                     <div class="npr-logo">
                                         <img src="{{ STATIC_URL }}img/npr-logo-transparent.png" alt="" />
                                     </div>
+                                    {Caption}
                                     <p>
                                         <strong>{{ PROJECT_NAME }}</strong> is part of a special series on the changing lives of women.</p>
                                     <p>
