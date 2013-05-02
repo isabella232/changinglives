@@ -280,6 +280,12 @@ $(function() {
 
             return true;
         });
+
+        $tumblr_form.find('input').keypress(function(e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });
     }
 
     // Event handlers
