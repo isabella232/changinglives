@@ -211,7 +211,13 @@ $(function() {
 
     // Setup Raphael
     if (!Raphael.svg) {
-        alert('Your browser doesn\'t support SVG, so this will be broken.');
+        $svg_warning = $('<div class="svg-warning"><h2>We\'re sorry, you can\'t make a sign using this web browser.<br /> Try using Google Chrome or Mozilla Firefox.</h2></div>');
+        $('.tumblr-form-wrap')
+            .addClass('opaque')
+            .before($svg_warning);
+        $('#tumblr-form input, #tumblr-form button').each(function(){
+            $(this).attr("disabled", "disabled");
+        });
     } else {
         var width = $preview.width();
         var height = $preview.height();
@@ -319,6 +325,7 @@ $(function() {
             $('.tumblr-form').html('<p>Sorry, iOS versions older than 6 are not supported.');
         }
     }
+    $('#posts, #post-wrap h2').hide();
 
     $.ajax({
         url: "http://" + APP_CONFIG.S3_BUCKETS[0] + "/" + APP_CONFIG.PROJECT_SLUG + "/live-data/aggregates.json",
@@ -335,6 +342,17 @@ $(function() {
         }
         $popular = $('<div id="popular"></div>');
         $popular.html(data.popular).insertBefore($container).prepend('<h2>Popular Advice</h2>');
+
+
+        $popular.find(".post").fadeTo(0,0);
+
+        var delay = 0;
+        $popular.show();
+        $popular.find(".post").each(function(i) {
+          delay = (i + 1) * 350;
+          $(this).delay(delay).fadeTo(750,1);
+        });
+        $('#posts, #post-wrap h2').show();
     });
 });
 
