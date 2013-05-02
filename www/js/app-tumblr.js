@@ -75,7 +75,9 @@ function resize_window() {
 
     $preview.height(height);
 
-    preview.setSize(width, height);
+    if(typeof(preview) !== 'undefined'){
+        preview.setSize(width, height);
+    }
 }
 
 function render_grid(color) {
@@ -279,8 +281,9 @@ $(function() {
         $tumblr_form.submit(function(e) {
             var btn = $('.form-submit button');
 
-            btn.text('Sending, please wait...');
-            // btn.attr('disabled', 'disabled');
+            btn.addClass('loading')
+               .text('Sending, please wait...')
+               .attr('disabled', 'disabled');
 
             $('input[name="image"]').val($preview.html());
 
