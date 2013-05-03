@@ -61,9 +61,8 @@ em { font-style: italic; }
 }
 .caption .btn a { color: #fff; }
 
-.visible-phone {
-    display: none;
-}
+.visible-phone,
+.visible-tablet { display: none; }
 
 // MAIN CONTENT
 #container {
@@ -1061,6 +1060,7 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
     }
 }
 @media (max-width: 767px) {
+    .visible-tablet { display: block; }
     #container { display: block; width: 100%; }
     header, #post-wrap { margin-left: 0; width: auto; }
     #blog_info {
@@ -1093,6 +1093,15 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
         .form-message,
         .form-signature,
         .legal { padding: 11px 110px 11px 11px; }
+
+        .form-message {
+            padding: 0 110px 11px 11px;
+            h4 {
+                text-transform: none;
+                font-size: 12px;
+                padding: 0 0 10px;
+            }
+        }
         .form-customize { padding-bottom: 6px; }
         textarea { width: 100%; border: none; min-width: 0; }
         input[type='text'] { border: none; max-width: 150px; }
