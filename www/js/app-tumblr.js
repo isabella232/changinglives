@@ -213,11 +213,14 @@ $(function() {
 
     // Setup Raphael
     if (!Raphael.svg) {
-        $svg_warning = $('<div class="svg-warning"><h2>We\'re sorry, you can\'t make a sign using this web browser.<br /> Try using Google Chrome or Mozilla Firefox.</h2></div>');
-        $('.tumblr-form-wrap')
+        $svg_warning = $('<div class="svg-warning"><h2>We\'re sorry, you can\'t make a sign using this web browser.<br /> Try using Google Chrome or Mozilla Firefox. <br><span class="close btn">Okay</span></h2></div>');
+        $form.find('.tumblr-form-wrap')
             .addClass('opaque')
             .before($svg_warning);
-        $('#tumblr-form input, #tumblr-form button').each(function(){
+        $svg_warning.on('click', function(){
+            $b.removeClass('modal-open');
+        });
+        $form.find('input, button').each(function(){
             $(this).attr("disabled", "disabled");
         });
     } else {
