@@ -144,6 +144,8 @@ def _post_to_tumblr():
         context['message'] = e.output
         return render_template('500.html', **context)
 
+    zazzle_url = None
+
     if app_config.ZAZZLE_ENABLE:
         zazzle_png_path = zazzlify_png(png_path, name, location)
 
@@ -154,7 +156,7 @@ def _post_to_tumblr():
         'name': name,
         'location': location,
         'ZAZZLE_ENABLE': app_config.ZAZZLE_ENABLE,
-        'zazzle_url': zazzle_url or None
+        'zazzle_url': zazzle_url
     }
 
     caption = render_template('caption.html', **context)
