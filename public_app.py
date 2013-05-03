@@ -98,11 +98,6 @@ def _post_to_tumblr():
     # Request is a global. Import it down here where we need it.
     from flask import request
 
-    # These should match the form fields.
-    # message = strip_html(request.form.get('message', None))
-    # message = escape(message)
-    # message = strip_breaks(message)
-
     name = strip_html(request.form.get('signed_name', None))
     location = strip_html(request.form.get('location', None))
 
@@ -152,12 +147,12 @@ def _post_to_tumblr():
     zazzle_png_path = zazzlify_png(png_path, name, location)
 
     image_url = 'http://%s%s' % (app_config.SERVERS[0], zazzle_png_path)
-    zazzle_url = app_config.ZAZZLE_URL % urllib.quote(image_url) 
+    zazzle_url = app_config.ZAZZLE_URL % urllib.quote(image_url)
 
     context = {
         'name': name,
         'location': location,
-        'zazzle_url': zazzle_url 
+        'zazzle_url': zazzle_url
     }
 
     caption = render_template('caption.html', **context)
@@ -202,12 +197,12 @@ def zazzlify_png(png_path, name, location):
     path, filename = os.path.split(png_path)
     zazzle_path = '%s/zazzle_%s' % (path, filename)
 
-    border = 128 
+    border = 128
     size = 2048
 
     png = Image.open('/var/www/%s' % png_path)
     zazzle_png = Image.new('RGBA', (size + border * 2, size + border * 2), (0, 0, 0, 0))
-    zazzle_png.paste(png, (border, border)) 
+    zazzle_png.paste(png, (border, border))
 
     draw = ImageDraw.Draw(zazzle_png)
     font = ImageFont.truetype('NotoSerif-Regular.ttf', 50)
