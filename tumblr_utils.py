@@ -116,6 +116,8 @@ def fetch_posts():
     new_limit = limit
     post_list = []
 
+    print base_url + key_param
+
     # Figure out the total number of posts.
     r = requests.get(base_url + key_param)
     total_count = int(json.loads(r.content)['response']['total_posts'])

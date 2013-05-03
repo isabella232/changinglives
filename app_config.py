@@ -52,6 +52,7 @@ NPR_DFP = {
     'TARGET': '\/news_politics;storyid=171421875'
 }
 
+ZAZZLE_ENABLE = False
 ZAZZLE_URL = 'http://www.zazzle.com/api/create/at-238133727124364209?rf=238133727124364209&ax=Linkover&pd=149518003391913590&fwd=ProductPage&ed=false&tc=&ic=&t_image_iid=%s'
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
@@ -97,7 +98,7 @@ def configure_targets(deployment_target):
         SERVERS = PRODUCTION_SERVERS
         DEBUG = False
         TUMBLR_URL = 'she-works.tumblr.com'
-        TUMBLR_BLOG_ID = PROJECT_SLUG
+        TUMBLR_BLOG_ID = 'she-works'
     elif deployment_target == 'development':
         blog_id = os.environ.get('DEVELOPMENT_BLOG_ID', None)
         S3_BUCKETS = ['127.0.0.1:8000']
