@@ -323,20 +323,23 @@ p.project-credits {
         font-weight: bold;
         font-size: 17px;
         display: block;
-        margin-bottom: 5px;
     }
     textarea {
         width: 50%;
         height: 100px;
         min-width: 200px;
-        font: 13px/1.5 Arial, Helvetica, sans-serif;
+        padding: 11px;
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+        font: 16px/1.5 Arial, Helvetica, sans-serif;
         color: #111;
     }
     input {
-        font: 13px/1.5 Arial, Helvetica, sans-serif;
+        font: 16px/1.5 Arial, Helvetica, sans-serif;
         color: #111;
 
-        &.signed-name { width: 70px; }
+        &.signed-name { width: 100px; }
         &.signed-location { margin-left: 0; }
     }
     input[type='text'] {
@@ -372,7 +375,7 @@ p.project-credits {
             font: normal 18px/1 Helvetica,Arial,sans-serif;
             text-transform: lowercase;
             color: #eee;
-            padding: 10px 11px;
+            padding: 10px 0;
         }
     }
     .form-customize {
@@ -381,22 +384,20 @@ p.project-credits {
         input[type='radio'] { display: none; }
         label {
             display: inline-block;
-            margin: 0;
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+            padding: 1px;
             cursor: pointer;
             float: left;
             
             span { 
-                border: 1px solid #444;
+                box-sizing: border-box;
+                border: 1px solid #787878;
                 display: block;
                 text-indent: -9999px;
                 height: 50px;
                 opacity: 0.7;
-            }
-            &:hover, &.active {
-                span { 
-                    border-color: #fff;
-                    opacity: 1;
-                }
             }
 
             // ornaments
@@ -413,19 +414,25 @@ p.project-credits {
             &.quicksand span { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAsCAYAAADy8T8XAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RDQwMEIwRDZBNjA5MTFFMjk1NjY5QzdCMzQxRjA2MDEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RDQwMEIwRDdBNjA5MTFFMjk1NjY5QzdCMzQxRjA2MDEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpENDAwQjBENEE2MDkxMUUyOTU2NjlDN0IzNDFGMDYwMSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpENDAwQjBENUE2MDkxMUUyOTU2NjlDN0IzNDFGMDYwMSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjGBod0AAAKhSURBVHja7FrtjeMgEHWsNEALbAm+EtyCrwS2BLuEuIS4hKSEpISkhLiEuAQv6B6SFw0fNs79mpGetMEwDI+ZYUB7mOe5YNkuJVPABDKBTCATyMIEMoFMIBPIwgQygUwgE8iyRo6Bb0JDajwjOkyfZvF70hg17gnjJiBFqP7Gxlrjmji+cdomjJ0S+7tyD3lgq3FJMMxMorCQGr/PGm/oEAH97YrNvmlUTluFuYuIIxh7XsR4hfY2YV0UZGHeAz14zf+kCfQxaAG3vdK4aDzwN/X9HdFtUcMeqv0WGGfnOGmIgO4HsQbfun6hDHiVkQ5MbxET+n8RyhfCE58IdZWgy/QZVs4v4bUd4EsVxr4/Gv2eh4jNK1cYLzLybAcjT8S3IYFACXvWEnjGmOGTh0jpyRl2x0eQ2GTO00GHJAiUES9XgUTvkwroiw9L6QlfG17WxVXmPBP0UBvRRzZIbSCi3kD6bmWMm28GhJ9ckLo1J1Kp4IqTkMpTytnMNflv3IGfUHQYu6YjMUASdZXNhV2mQRXRNi709zscHkVmznY9WXq+GZuHY2K+GXCS5hLoK64HJP3eMV5sJPC5E4lDLH2URP67egwqMg+TJlJKuPqbjBN0zCi/Nh8izaJ2mgnIDKNqT2rwlTQiI3xteIn/QWLpLNKE6MGDr401oViE5xQhsALRlrycU7TzFPAfIVAs8l8oLNbWhNaj7wmliL3Yt5ne9yvJe+7A1L28ySGwwSJjR39KTWhDx5Q+DyzkO9GeHvqnhFegVC/ssIlnrFMsIs4+JqjNZQ8uxWcNlXixfxOXblde0CkTdS5xW2GLfbCI9ROw87Gw8Y2xKvBIEpP2wP+dtf9VjoUJZAKZQCaQhQlkAplAJpCFCWQCmUAmkMUrPwIMAGJjlh1egTm4AAAAAElFTkSuQmCC'); }
 
             // colors
-            &.teal span   { background-color: #17807e; }
-            &.orange span { background-color: #db811c; }
-            &.red span    { background-color: #A23520; }
-            &.yellow span { background-color: #d9b431; }
-            &.blue span   { background-color: #3D7FA6; }
-            &.pink span   { background-color: #ca3d79; }
-            &.purple span { background-color: #9777b1; }
-            &.gray span   { background-color: #787878; }
+            &.teal span   { background-color: #17807e; border-color: #17807e; }
+            &.orange span { background-color: #db811c; border-color: #db811c; }
+            &.red span    { background-color: #A23520; border-color: #A23520; }
+            &.yellow span { background-color: #d9b431; border-color: #d9b431; }
+            &.blue span   { background-color: #3D7FA6; border-color: #3D7FA6; }
+            &.pink span   { background-color: #ca3d79; border-color: #ca3d79; }
+            &.purple span { background-color: #9777b1; border-color: #9777b1; }
+            &.gray span   { background-color: #787878; border-color: #787878; }
+
+            &:hover,
+            &.active {
+                span {
+                    border-color: #fff;
+                    opacity: 1;
+                }
+            }
         }
         .form-color, .form-typeface, .form-ornament {
-            margin-bottom: 3px;
-
-            span { 
+            span {
                 background-color: #787878;
                 background-repeat: no-repeat;
                 background-position: 50% 50%;
@@ -1126,13 +1133,56 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
     // .permalink-page {
     //     #popular { margin: 0; }
     // }
-    #tumblr-form { padding: 0; }
+    #tumblr-form { padding: 0; position: relative; }
     .tumblr-form-wrap {
         .form-photo, .form-options { float: none; width: auto; }
-        .form-photo { padding: 11px; }
+        .form-photo,
+        .form-message,
+        .form-signature,
+        .legal { padding: 11px 110px 11px 11px; }
         .form-customize { padding-bottom: 6px; }
-        textarea { width: 96%; padding: 2%; border: none; }
-        input[type='text'] { border: none; }
+        textarea { width: 100%; border: none; min-width: 0; }
+        input[type='text'] { border: none; max-width: 150px; }
+        textarea,
+        input[type='text'] {
+            -webkit-border-radius: 0;
+               -moz-border-radius: 0;
+                    border-radius: 0;
+        }
+
+        .form-customize {
+            width: 92px;
+            position: absolute;
+            right: 0;
+            top: 11px;
+
+            .form-typeface,
+            .form-ornament {
+                label,
+                label span {
+                    width: 100%;
+                    height: 44px;
+                }
+
+                label { margin-bottom: 2px; }
+            }
+
+            .form-color {
+                width: 92px;
+                label,
+                label span {
+                    display: inline-block;
+                    width: 44px;
+                    height: 44px;
+                }
+                label {
+                    &:nth-child(odd) {
+                        margin-right: 2px;
+                    }
+                    margin-bottom: 2px;
+                }
+            }
+        }
     }
 
     .permalink-page p.project-credits {
