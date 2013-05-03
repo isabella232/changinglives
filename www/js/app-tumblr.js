@@ -198,6 +198,38 @@ function render_text(font_name, text) {
     }
 }
 
+function render_popular(post_list){
+    /*
+     * Render popular posts
+     */
+
+    $popular = $('<div id="popular"></div>');
+    var fade_count = 0;
+    var delay = 0;
+
+    if ($b.hasClass('index-page')){
+        $container = $('#post-wrap h2');
+    } else {
+        $container = $('#footer');
+    }
+
+    $popular.html(post_list).insertBefore($container).prepend('<h2>Popular Advice</h2>');
+    $popular.find(".post").fadeTo(0,0);
+    $popular.find(".post").each(function(i) {
+      fade_count += 1;
+      delay = (fade_count) * 350;
+      $(this).delay(delay).fadeTo(750,1);
+    });
+
+    $('.index-page #posts').show();
+
+    $('.index-page #posts .post, .index-page #post-wrap h2').each(function(i) {
+        fade_count += 1;
+        delay = (fade_count) * 350;
+        $(this).delay(delay).fadeTo(750,1);
+    });
+}
+
 $(function() {
     // jQuery refs
     $b = $('body');
@@ -282,11 +314,16 @@ $(function() {
         });
 
         $tumblr_form.submit(function(e) {
-            var btn = $('.form-submit button');
+            $loading_modal = $('<div class="loading-modal"><h2>Sending, please wait.</h2></div>');
 
-            btn.addClass('loading')
+            $form.addClass('loading')
+               .find('.form-submit button')
                .text('Sending, please wait...')
                .attr('disabled', 'disabled');
+
+            $b.append($loading_modal);
+            $loading_modal.find('h2').css('margin-top',0);
+            $loading_modal.fadeTo(0,0).fadeTo(500,0.9);
 
             $('input[name="image"]').val($preview.html());
 
@@ -331,7 +368,9 @@ $(function() {
             $('.tumblr-form').html('<p>Sorry, iOS versions older than 6 are not supported.');
         }
     }
-    $('#posts, #post-wrap h2').hide();
+
+    $('.index-page #posts').hide();
+    $('.index-page #posts .post, .index-page #post-wrap h2').fadeTo(0,0);
 
     $.ajax({
         url: "http://" + APP_CONFIG.S3_BUCKETS[0] + "/" + APP_CONFIG.PROJECT_SLUG + "/live-data/aggregates.json",
@@ -341,24 +380,7 @@ $(function() {
         crossDomain: true,
         jsonpCallback: "aggregateCallback"
     }).done(function(data) {
-        if ($b.hasClass('index-page')){
-            $container = $('#post-wrap h2');
-        } else {
-            $container = $('#footer');
-        }
-        $popular = $('<div id="popular"></div>');
-        $popular.html(data.popular).insertBefore($container).prepend('<h2>Popular Advice</h2>');
-
-
-        $popular.find(".post").fadeTo(0,0);
-
-        var delay = 0;
-        $popular.show();
-        $popular.find(".post").each(function(i) {
-          delay = (i + 1) * 350;
-          $(this).delay(delay).fadeTo(750,1);
-        });
-        $('#posts, #post-wrap h2').show();
+        render_popular(data.popular);
     });
 });
 
