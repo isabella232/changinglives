@@ -348,13 +348,6 @@ def _render_theme():
     context['SERVERS'] = env.hosts
     context['S3_BUCKET'] = env.s3_buckets[0]
 
-    for TEMPLATE in ['_form.html', '_prompt.html', '_social.html']:
-        with open('templates/%s' % TEMPLATE, 'rb') as read_template:
-            payload = Template(read_template.read())
-            payload = payload.render(context)
-            parsed_path = TEMPLATE.split('_')[1].split('.')
-            context['%s_%s' % (parsed_path[0].upper(), parsed_path[1].upper())] = payload
-
     context['STATIC_URL'] = 'http://127.0.0.1:8000/'
     context['STATIC_CSS'] = '%sless/tumblr.less' % context['STATIC_URL']
     context['STATIC_PRINT_CSS'] = '%sless/tumblr-print.less' % context['STATIC_URL']
@@ -363,6 +356,13 @@ def _render_theme():
         context['STATIC_URL'] = 'http://%s/%s/' % (env.s3_buckets[0], env.deployed_name)
         context['STATIC_CSS'] = '%scss/tumblr.less.css' % context['STATIC_URL']
         context['STATIC_PRINT_CSS'] = '%scss/tumblr-print.less.css' % context['STATIC_URL']
+
+    for TEMPLATE in ['_form.html', '_prompt.html', '_social.html']:
+        with open('templates/%s' % TEMPLATE, 'rb') as read_template:
+            payload = Template(read_template.read())
+            payload = payload.render(context)
+            parsed_path = TEMPLATE.split('_')[1].split('.')
+            context['%s_%s' % (parsed_path[0].upper(), parsed_path[1].upper())] = payload
 
     with open('tumblr/theme.html', 'rb') as read_template:
         payload = Template(read_template.read())
