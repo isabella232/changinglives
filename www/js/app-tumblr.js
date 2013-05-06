@@ -361,12 +361,15 @@ $(function() {
     resize_window();
 
     if (/iP(hone|od|ad)/.test(navigator.platform)) {
+
         var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
         var version = parseInt(v[1]);
 
         if (version < 6) {
             $('.tumblr-form').html('<p>Sorry, iOS versions older than 6 are not supported.');
         }
+
+        FastClick.attach(document.body);
     }
 
     $('.index-page #posts').hide();
