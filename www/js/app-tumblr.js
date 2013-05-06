@@ -369,7 +369,7 @@ $(function() {
             $('.tumblr-form').html('<p>Sorry, iOS versions older than 6 are not supported.');
         }
 
-        FastClick.attach(document.body);
+        //FastClick.attach(document.body);
     }
 
     $('.index-page #posts').hide();
