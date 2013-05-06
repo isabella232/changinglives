@@ -466,6 +466,7 @@ def write_aggregates():
 
 def deploy_aggregates():
     require('settings', provided_by=[production, staging])
+    app_config.configure_targets(env.get('settings', None))
     write_aggregates()
     tumblr_utils.deploy_aggregates(env.s3_buckets)
 
