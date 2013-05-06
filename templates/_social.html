@@ -1,8 +1,22 @@
-<meta name="twitter:card" content="summary">
-<meta property="og:title" content="{Title}" />
-<meta property="og:url" content="http://cookyourcupboard.tumblr.com/" />
-<meta property="og:type" content="article" />
-<meta property="og:description" content="Confounded in the kitchen? With a little help, your strange and surplus food could be dinner! Please submit a photo or make suggestions. We'll ask chefs about our favorites on NPR's Morning Edition." />
-<meta property="og:image" content="http://apps.npr.org/cook-your-cupboard/img/casa-fiesta.jpg" />
+{block:PermalinkPage}
+{block:Posts}
+<!-- add these meta tags for facebook -->
+<meta property="og:url" content="{Permalink}"/>
+<meta property="og:image" content="{PhotoURL-500}"/>
+<meta property="og:article:published_time" content="{block:Date}{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}{/block:Date}">
+{/block:Posts}
+{/block:PermalinkPage}
+
+{block:IndexPage}
+<!-- add these meta tags for facebook -->
+<meta property="og:url" content="{Permalink}"/>
+<meta property="og:image" content="{PhotoURL-500}"/>
+<meta property="og:article:published_time" content="2013-05-07">
+
+{/block:IndexPage}
+
+<meta property="og:type" content="article"/>
 <meta property="og:site_name" content="NPR.org" />
+<meta property="og:title" content="She Works: Note To Self"/>
+<meta property="og:description" content="We want to hear from women: What&rsquo;s your note to self &ndash; a piece of advice that&rsquo;s helped you at work?"/>
 <meta property="fb:app_id" content="138837436154588" />
