@@ -422,7 +422,6 @@ p.project-credits {
             &.purple span { background-color: #9777b1; border-color: #9777b1; }
             &.gray span   { background-color: #787878; border-color: #787878; }
 
-            &:hover,
             &.active {
                 span {
                     border-color: #fff;
@@ -454,6 +453,19 @@ p.project-credits {
         max-width: 600px;
     }
 }
+
+// Only apply hover styles to no-touch devices
+.no-touch .tumblr-form-wrap {
+    .form-customize {
+        label:hover {
+            span {
+                border-color: #fff;
+                opacity: 1;
+            }
+        }
+    }
+}
+
 #preview {
     width: 100%;
 }
