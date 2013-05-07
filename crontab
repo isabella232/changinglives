@@ -1,1 +1,1 @@
-*/15 * * * * ubuntu bash /home/ubuntu/apps/changing-lives/repository/cron.sh fab $DEPLOYMENT_TARGET deploy_aggregates
+*/5 * * * * . ~/.bash_profile; bash /home/ubuntu/apps/changing-lives/repository/cron.sh fab $DEPLOYMENT_TARGET deploy_aggregates >/var/log/changing-lives-crontab.log 2>&1
