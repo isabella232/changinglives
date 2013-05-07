@@ -14,7 +14,7 @@ PROJECT_SLUG = 'changing-lives'
 REPOSITORY_NAME = 'changinglives'
 CONFIG_NAME = PROJECT_SLUG.replace('-', '').upper()
 
-PROJECT_CREDITS = 'Jeremy Bowers, Brian Boyer, Danny DeBelius, Kitty Eisele, Christopher Groskopf, Alyson Hurt and Selena Simmons-Duffin / NPR'
+PROJECT_CREDITS = 'Jeremy Bowers, Danny DeBelius, Kitty Eisele, Christopher Groskopf, Alyson Hurt and Selena Simmons-Duffin / NPR'
 PROJECT_SHORTLINK = 'npr.org/sheworks'
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
@@ -52,7 +52,7 @@ NPR_DFP = {
     'TARGET': '\/news_politics;storyid=171421875'
 }
 
-ZAZZLE_ENABLE = False
+ZAZZLE_ENABLE = True 
 ZAZZLE_URL = 'http://www.zazzle.com/api/create/at-238133727124364209?rf=238133727124364209&ax=Linkover&pd=149518003391913590&fwd=ProductPage&ed=false&tc=&ic=&t_image_iid=%s'
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'

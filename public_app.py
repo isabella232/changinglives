@@ -210,15 +210,27 @@ def zazzlify_png(png_path, name, location):
 
     draw = ImageDraw.Draw(zazzle_png)
     font = ImageFont.truetype('NotoSerif-Regular.ttf', 50)
-    draw.rectangle((border, size + border, border + size, size + border * 2), fill='rgb(0,0,0)')
 
-    draw.text((border, border + size), '%s, %s' % (name, location), (255, 255, 255), font=font)
+    attribution = ''
+
+    if name and location:
+        attribution = '%s, %s' % (name, location)
+    elif name:
+        attribution = name
+    elif location:
+        attribution = 'Anonymous, %s' % location
+
+    draw.text((border, border + size), attribution, (255, 255, 255), font=font)
     draw.text((border, border + size + 64), 'she-works.tumblr.com', (255, 255, 255), font=font)
 
-    zazzle_png.show()
-    zazzle_png.save('/var/www/%s' % zazzle_path)
+    logo = Image.open('www/img/npr-logo-transparent.png')
+    zazzle_png.paste(logo, (size, size + border + 10))
 
-    print '/var/www/%s' % zazzle_path
+    if app_config.DEPLOYMENT_TARGET == 'development':
+        zazzle_png.show()
+        print '/var/www/%s' % zazzle_path
+
+    zazzle_png.save('/var/www/%s' % zazzle_path)
 
     return zazzle_path
 
