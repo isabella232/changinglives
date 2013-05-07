@@ -14,7 +14,7 @@ PROJECT_SLUG = 'changing-lives'
 REPOSITORY_NAME = 'changinglives'
 CONFIG_NAME = PROJECT_SLUG.replace('-', '').upper()
 
-PROJECT_CREDITS = 'Jeremy Bowers, Brian Boyer, Danny DeBelius, Kitty Eisele, Christopher Groskopf, Alyson Hurt and Selena Simmons-Duffin / NPR'
+PROJECT_CREDITS = 'Jeremy Bowers, Danny DeBelius, Kitty Eisele, Christopher Groskopf, Alyson Hurt and Selena Simmons-Duffin / NPR'
 PROJECT_SHORTLINK = 'npr.org/sheworks'
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
