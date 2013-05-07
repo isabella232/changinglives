@@ -72,7 +72,7 @@
 
 
     </head>
-    <body class="{block:IndexPage}index-page{/block:IndexPage}{block:PermalinkPage}permalink-page{/block:PermalinkPage}{block:TagPage} tag-page{/block:TagPage}">
+    <body class="{block:IndexPage}index-page{/block:IndexPage}{block:PermalinkPage}permalink-page{/block:PermalinkPage}{block:TagPage} tag-page {URLSafeTag}{/block:TagPage}">
         <section id="container" class="group">
             <header>
                 <div id="blog_info">
@@ -85,12 +85,16 @@
                         Credits: {{ PROJECT_CREDITS }}<br />
                         Questions? Problems? E-mail <a href="mailto:tumblr@npr.org">tumblr@npr.org</a>.
                     </p>
+
+                    <p class="tag-link"><a href="/tagged/nsfw">Prefer your advice salty? &raquo;</a></p>
                 </div>
             </header>
 
             <section id="post-wrap">
 
                 {block:IndexPage}<h2>Fresh Advice{block:TagPage} Tagged {Tag}{/block:TagPage}</h2>{/block:IndexPage}
+
+                {block:TagPage}<p class="editors-note">Advice not fit for the homepage, as selected by NPR's "Note To Self" editors.</p>{/block:TagPage}
                 <ul id="posts" class="posts{block:IndexPage} post-list{/block:IndexPage}">
                 <!-- START POSTS -->
                 {block:Posts}

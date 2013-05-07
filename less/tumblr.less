@@ -84,6 +84,11 @@ p.project-credits {
     font-style: italic;
 }
 
+.tag-link {
+    margin-top: 22px;
+    font-size: 12px;
+}
+
 
 // HEADER
 #blog_info {
@@ -490,6 +495,13 @@ p.project-credits {
         font-weight: normal;
         font-size: 24px;
         text-transform: lowercase;
+    }
+
+    .editors-note {
+        margin: 20px 20px 5px 33px;
+        color: #999;
+        font-size: 16px;
+        text-transform: none;
     }
 }
 
@@ -1010,6 +1022,14 @@ ol.notes {
 }
 
 .tag-page {
+
+    &.nsfw,
+    &.NSFW {
+        .tag-link {
+            display: none;
+        }
+    }
+
     .post {
         &.nsfw,
         &.NSFW {
@@ -1122,7 +1142,8 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
         .project-prompt { margin-bottom: 0; }
     }
     #post-wrap {
-        h2 { margin: 0 20px; }
+        h2,
+        .editors-note { margin: 0 20px; }
     }
     #project-form {
         top: 2%;
