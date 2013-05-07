@@ -156,7 +156,7 @@ def fetch_posts():
                 elif 'nsfw' in post['tags']:
                     pass
                 else:
-                    print post['tags']
+                    post_list.append(post)
             except KeyError:
                 pass
 
