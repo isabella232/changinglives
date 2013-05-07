@@ -461,6 +461,7 @@ def write_test_posts():
 
 
 def write_aggregates():
+    app_config.configure_targets(env.get('settings', None))
     tumblr_utils.write_aggregates()
 
 
