@@ -151,7 +151,13 @@ def fetch_posts():
 
         for post in posts['response']['posts']:
             try:
-                post_list.append(post)
+                if 'NSFW' in post['tags']:
+                    pass
+                elif 'nsfw' in post['tags']:
+                    pass
+                else:
+                    post_list.append(post)
+                    print post['tags']
             except KeyError:
                 pass
 
