@@ -204,8 +204,8 @@ function render_popular(post_list){
      */
 
     $popular = $('<div id="popular"></div>');
-    var fade_count = 0;
-    var delay = 0;
+    // var fade_count = 0;
+    // var delay = 0;
 
     if ($b.hasClass('index-page')){
         $container = $('#post-wrap h2');
@@ -214,20 +214,20 @@ function render_popular(post_list){
     }
 
     $popular.html(post_list).insertBefore($container).prepend('<h2>Popular Advice</h2>');
-    $popular.find(".post").fadeTo(0,0);
-    $popular.find(".post").each(function(i) {
-      fade_count += 1;
-      delay = (fade_count) * 350;
-      $(this).delay(delay).fadeTo(750,1);
-    });
+    // $popular.find(".post").fadeTo(0,0);
+    // $popular.find(".post").each(function(i) {
+    //   fade_count += 1;
+    //   delay = (fade_count) * 350;
+    //   $(this).delay(delay).fadeTo(750,1);
+    // });
 
-    $('.index-page #posts').show();
+    // $('.index-page #posts').show();
 
-    $('.index-page #posts .post, .index-page #post-wrap h2').each(function(i) {
-        fade_count += 1;
-        delay = (fade_count) * 350;
-        $(this).delay(delay).fadeTo(750,1);
-    });
+    // $('.index-page #posts .post, .index-page #post-wrap h2').each(function(i) {
+    //     fade_count += 1;
+    //     delay = (fade_count) * 350;
+    //     $(this).delay(delay).fadeTo(750,1);
+    // });
 }
 
 $(function() {
@@ -372,8 +372,8 @@ $(function() {
         //FastClick.attach(document.body);
     }
 
-    $('.index-page #posts').hide();
-    $('.index-page #posts .post, .index-page #post-wrap h2').fadeTo(0,0);
+    // $('.index-page #posts').hide();
+    // $('.index-page #posts .post, .index-page #post-wrap h2').fadeTo(0,0);
 
     $.ajax({
         url: "http://" + APP_CONFIG.S3_BUCKETS[0] + "/" + APP_CONFIG.PROJECT_SLUG + "/live-data/aggregates.json",
