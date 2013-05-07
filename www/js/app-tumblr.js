@@ -213,7 +213,9 @@ function render_popular(post_list){
         $container = $('#footer');
     }
 
-    $popular.html(post_list).insertBefore($container).prepend('<h2>Popular Advice</h2>');
+    if (!$b.hasClass('tag-page')){
+        $popular.html(post_list).insertBefore($container).prepend('<h2>Popular Advice</h2>');
+    }
     // $popular.find(".post").fadeTo(0,0);
     // $popular.find(".post").each(function(i) {
     //   fade_count += 1;

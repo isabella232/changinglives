@@ -72,7 +72,7 @@
 
 
     </head>
-    <body class="{block:IndexPage}index-page{/block:IndexPage}{block:PermalinkPage}permalink-page{/block:PermalinkPage}">
+    <body class="{block:IndexPage}index-page{/block:IndexPage}{block:PermalinkPage}permalink-page{/block:PermalinkPage}{block:TagPage} tag-page{/block:TagPage}">
         <section id="container" class="group">
             <header>
                 <div id="blog_info">
@@ -90,7 +90,7 @@
 
             <section id="post-wrap">
 
-                {block:IndexPage}<h2>Fresh Advice</h2>{/block:IndexPage}
+                {block:IndexPage}<h2>Fresh Advice{block:TagPage} Tagged {Tag}{/block:TagPage}</h2>{/block:IndexPage}
                 <ul id="posts" class="posts{block:IndexPage} post-list{/block:IndexPage}">
                 <!-- START POSTS -->
                 {block:Posts}
