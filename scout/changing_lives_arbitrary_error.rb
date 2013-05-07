@@ -1,8 +1,7 @@
 class ChangingLivesPostErrors < Scout::Plugin
   def build_report
 
-    # log_file_path = '/var/log/changing-lives.log'
-    log_file_path = 'data/test.log'
+    log_file_path = '/var/log/changing-lives.log'
 
     # First, decide if we're running for the first time or not.
     if not memory(:count)
