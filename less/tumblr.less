@@ -519,7 +519,8 @@ p.project-credits {
     margin: 15px 0 30px 0;
     max-width: 1000px;
 
-    &.nsfw {
+    &.nsfw,
+    &.NSFW {
         display: none;
     }
 
@@ -1004,6 +1005,15 @@ ol.notes {
         }
         h2 {
             margin: 0 0 10px 10px;
+        }
+    }
+}
+
+.tag-page {
+    .post {
+        &.nsfw,
+        &.NSFW {
+            display: block;
         }
     }
 }
