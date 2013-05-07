@@ -513,6 +513,15 @@ p.project-credits {
     }
 }
 
+.index-page {
+    .post {
+        &.nsfw,
+        &.NSFW {
+            display: none;
+        }
+    }
+}
+
 .posts {
     color: #4C4C4C;
     position: relative;
@@ -538,11 +547,6 @@ p.project-credits {
     list-style-type: none;
     margin: 15px 0 30px 0;
     max-width: 1000px;
-
-    &.nsfw,
-    &.NSFW {
-        display: none;
-    }
 
     .wrap {
         padding: 22px;
