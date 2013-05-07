@@ -214,7 +214,7 @@ def zazzlify_png(png_path, name, location):
     attribution = ''
 
     if name and location:
-        attribution = '%s, %s' (name, location)
+        attribution = '%s, %s' % (name, location)
     elif name:
         attribution = name
     elif location:
