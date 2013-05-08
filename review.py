@@ -19,6 +19,8 @@ unmapped_svg_urls = list()
 mapped_tumblr_urls = list()
 unmapped_tumblr_urls = list()
 
+next_tumblr = 0
+
 def setup():
     with open('data/review.csv') as f:
         reader = csv.DictReader(f, fieldnames=CSV_HEADERS)
@@ -71,7 +73,24 @@ def setup():
 
 @app.route('/')
 def review():
-    tumblr_url = unmapped_tumblr_urls[0]
+    from flask import request
+
+    global next_tumblr
+
+    if request.args.get('match', None):
+        svg_url = unmapped_svg_urls.pop(0)
+        tumblr_url = unmapped_tumblr_urls.pop(next_tumblr)
+
+        svg_map[svg_url] = (True, tumblr_url)
+
+        mapped_svg_urls.append(svg_url)
+        mapped_tumblr_urls.append(tumblr_url)
+
+        next_tumblr = 0
+    elif request.args.get('next', None):
+        next_tumblr += 1
+
+    tumblr_url = unmapped_tumblr_urls[next_tumblr]
     svg_url = unmapped_svg_urls[0]
 
     context = make_context()
