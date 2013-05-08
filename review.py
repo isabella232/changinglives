@@ -80,7 +80,7 @@ def write_csv():
             writer.writerow([svg_url, svg_map[svg_url][0], svg_map[svg_url][1]])
 
         for svg_url in unmapped_svg_urls:
-            writer.write_row([svg_url, False, ''])
+            writer.writerow([svg_url, False, ''])
             
 @app.route('/')
 def review():
