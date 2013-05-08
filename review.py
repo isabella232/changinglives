@@ -60,10 +60,11 @@ def setup():
             svg_url = error_match.group(1)
             svg_map[svg_url] = (True, '')
 
-            try:
+            if svg_url not in mapped_svg_urls:
+                mapped_svg_urls.append(svg_url)
+            
+            if svg_url in unmapped_svg_urls:
                 unmapped_svg_urls.remove(svg_url)
-            except:
-                pass
 
             continue
 
@@ -71,6 +72,16 @@ def setup():
 
         unmapped_tumblr_urls.append(tumblr_url)
 
+def write_csv():
+    with open('data/review.csv', 'w') as f:
+        writer = csv.writer(f)
+
+        for svg_url in mapped_svg_urls:
+            writer.writerow([svg_url, svg_map[svg_url][0], svg_map[svg_url][1]])
+
+        for svg_url in unmapped_svg_urls:
+            writer.write_row([svg_url, False, ''])
+            
 @app.route('/')
 def review():
     from flask import request
@@ -85,6 +96,8 @@ def review():
 
         mapped_svg_urls.append(svg_url)
         mapped_tumblr_urls.append(tumblr_url)
+
+        write_csv()
 
         next_tumblr = 0
     elif request.args.get('next', None):
