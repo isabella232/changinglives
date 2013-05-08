@@ -52,6 +52,9 @@ def setup():
         if not match:
             error_match = re.search('(http.*) reader', line)
 
+            if not error_match:
+                continue
+
             svg_url = error_match.group(1)
             svg_map[svg_url] = (True, '')
 
