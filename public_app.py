@@ -203,6 +203,7 @@ def zazzlify_png(png_path, name, location):
 
     border = 128
     size = 2048
+    text_color = (0, 0, 0)
 
     png = Image.open('/var/www/%s' % png_path)
     zazzle_png = Image.new('RGBA', (size + border * 2, size + border * 2), (0, 0, 0, 0))
@@ -220,8 +221,8 @@ def zazzlify_png(png_path, name, location):
     elif location:
         attribution = 'Anonymous, %s' % location
 
-    draw.text((border, border + size), attribution, (255, 255, 255), font=font)
-    draw.text((border, border + size + 64), 'she-works.tumblr.com', (255, 255, 255), font=font)
+    draw.text((border, border + size), attribution, text_color, font=font)
+    draw.text((border, border + size + 64), 'she-works.tumblr.com', text_color, font=font)
 
     logo = Image.open('www/img/npr-logo-transparent.png')
     zazzle_png.paste(logo, (size, size + border + 10))

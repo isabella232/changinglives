@@ -53,7 +53,7 @@ NPR_DFP = {
 }
 
 ZAZZLE_ENABLE = True 
-ZAZZLE_URL = 'http://www.zazzle.com/api/create/at-238133727124364209?rf=238133727124364209&ax=Linkover&pd=149518003391913590&fwd=ProductPage&ed=false&tc=&ic=&t_image_iid=%s'
+ZAZZLE_URL = 'http://www.zazzle.com/api/create/at-238133727124364209?rf=238133727124364209&ax=Linkover&pd=149724325609852763&fwd=ProductPage&ed=false&tc=&ic=&t_image_iid=%s'
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
