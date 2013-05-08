@@ -60,8 +60,7 @@ GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 TUMBLR_TAGS = 'women, workplace, advice'
 TUMBLR_FILENAME = 'www/live-data/%s-data.json' % PROJECT_SLUG
 
-# LOG_PATH = '/var/log/%s.log' % PROJECT_SLUG
-LOG_PATH = 'data/test.log'
+LOG_PATH = '/var/log/%s.log' % PROJECT_SLUG
 
 def get_secrets():
     """
