@@ -41,7 +41,6 @@ var $project_iframe;
 var $tumblr_form;
 var $preview;
 var $totebag;
-var $zazzle_url;
 var preview_div;
 var preview;
 
@@ -247,7 +246,6 @@ $(function() {
     $post = $('li.post');
     $preview = $('#preview');
     $totebag = $('li.totebag');
-    $zazzle_url = $('#zazzle-url');
     preview_div = $preview[0];
 
     // Setup Raphael
@@ -345,19 +343,17 @@ $(function() {
     }
 
     // Totebags
-    if ($zazzle_url.length > 0) {
-        if (!$post.hasClass('notote')) {
-            var path = location.pathname;
-            var parts = path.split('/');
-            var tumblr_id = parts[parts.length - 1];
-            console.log(tumblr_id);
+    if (!$post.hasClass('notote')) {
+        var path = location.pathname;
+        var parts = path.split('/');
+        var tumblr_id = parts[parts.length - 1];
+        console.log(tumblr_id);
 
-            var zazzle_url = 'http://' + APP_CONFIG.SERVERS[0] + '/' + APP_CONFIG.PROJECT_SLUG + '/' + tumblr_id + '.png'; 
-            console.log(zazzle_url);
+        var zazzle_url = 'http://' + APP_CONFIG.SERVERS[0] + '/' + APP_CONFIG.PROJECT_SLUG + '/' + tumblr_id + '.png'; 
+        console.log(zazzle_url);
 
-            $totebag.find('a').attr('href', APP_CONFIG.ZAZZLE_URL.replace('%s', zazzle_url));
-            $totebag.show();
-        }
+        $totebag.find('a').attr('href', APP_CONFIG.ZAZZLE_URL.replace('%s', zazzle_url));
+        $totebag.show();
     }
 
     // Event handlers
