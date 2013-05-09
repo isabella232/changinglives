@@ -40,7 +40,7 @@ for row in rows:
         path, filename = os.path.split(svg_url)
         zazzle_url = os.path.join(path, 'zazzle_' + filename.replace('svg', 'png'))
 
-        caption += '\n<input id="zazzle_url" type="hidden" value="%s">' % zazzle_url
+        caption += '\n<input id="zazzle_url" type="hidden" value="%s"i />' % zazzle_url
 
         try:
             post = t.post('post/edit', blog_url=app_config.TUMBLR_URL, params={ 'id': post_id, 'caption': caption })

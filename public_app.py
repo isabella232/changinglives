@@ -149,8 +149,7 @@ def _post_to_tumblr():
     if app_config.ZAZZLE_ENABLE:
         zazzle_png_path = zazzlify_png(png_path, name, location)
 
-        image_url = 'http://%s%s' % (app_config.SERVERS[0], zazzle_png_path)
-        zazzle_url = app_config.ZAZZLE_URL % urllib.quote(image_url) 
+        zazzle_url = 'http://%s%s' % (app_config.SERVERS[0], zazzle_png_path)
 
     context = {
         'name': name,
