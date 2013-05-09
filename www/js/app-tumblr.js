@@ -345,7 +345,7 @@ $(function() {
     }
 
     // Totebags
-    if ($zazzle_url.length > 0 and $post.length == 1) {
+    if ($zazzle_url.length > 0 && $post.length == 1) {
         if (!$post.eq(0).hasClass('notote')) {
             var zazzle_url = encodeURIComponent($zazzle_url.val());
 
