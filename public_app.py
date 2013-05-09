@@ -7,7 +7,6 @@ import re
 import shlex
 import subprocess
 import time
-import urllib
 
 from flask import Flask, redirect, render_template
 import Image
@@ -144,18 +143,9 @@ def _post_to_tumblr():
         context['message'] = e.output
         return render_template('500.html', **context)
 
-    zazzle_url = None
-
-    if app_config.ZAZZLE_ENABLE:
-        zazzle_png_path = zazzlify_png(png_path, name, location)
-
-        zazzle_url = 'http://%s%s' % (app_config.SERVERS[0], zazzle_png_path)
-
     context = {
         'name': name,
         'location': location,
-        'ZAZZLE_ENABLE': app_config.ZAZZLE_ENABLE,
-        'zazzle_url': zazzle_url
     }
 
     caption = render_template('caption.html', **context)
@@ -190,15 +180,18 @@ def _post_to_tumblr():
         context['message'] = '%s\n%s' % (e.error_code, e.msg)
         return render_template('500.html', **context)
 
+    if app_config.ZAZZLE_ENABLE:
+        zazzlify_png(png_path, tumblr_post['id'], name, location)
+
     return redirect('%s#posts' % tumblr_url, code=301)
 
 
-def zazzlify_png(png_path, name, location):
+def zazzlify_png(png_path, tumblr_id, name, location):
     """
     Add a footer and border to the PNG for Zazzle.
     """
     path, filename = os.path.split(png_path)
-    zazzle_path = '%s/zazzle_%s' % (path, filename)
+    zazzle_path = '%s/%s.png' % (path, tumblr_id)
 
     border = 128
     size = 2048
@@ -237,8 +230,6 @@ def zazzlify_png(png_path, name, location):
         print '/var/www/%s' % zazzle_path
 
     zazzle_png.save('/var/www/%s' % zazzle_path)
-
-    return zazzle_path
 
 
 if __name__ == '__main__':
