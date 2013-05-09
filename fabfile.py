@@ -198,6 +198,7 @@ def setup():
     create_log_file()
     install_requirements()
     install_cairosvg()
+    install_pil()
 
     if env.get('deploy_web_services', False):
         deploy_confs()
@@ -251,6 +252,17 @@ def install_requirements():
     require('settings', provided_by=[production, staging])
 
     run('%(virtualenv_path)s/bin/pip install -U -r %(repo_path)s/requirements.txt' % env)
+
+def install_pil():
+    """
+    On Ubuntu installing encoder support for PIL requires symlinking some libraries.
+    """
+    require('settings', provided_by=[production, staging])
+
+    sudo('apt-get install -y libjpeg8-dev libfreetype6-dev zlib1g-dev')
+    sudo('ln -sf /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib/')
+    sudo('ln -sf /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/')
+    sudo('ln -sf /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/')
 
 def install_crontab():
     """
@@ -309,7 +321,7 @@ def install_cairosvg():
 
     if env.settings in ['production', 'staging']:
         with settings(warn_only=True):
-            sudo('apt-get install python-cairo')
+            sudo('apt-get install -y python-cairo')
             run('%(virtualenv_path)s/bin/pip install cairosvg' % env)
             run('ln -s /usr/lib/python2.7/dist-packages/cairo %(virtualenv_path)s/lib/python2.7/site-packages/cairo' % env)
 

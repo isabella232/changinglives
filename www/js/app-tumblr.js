@@ -40,6 +40,7 @@ var $project_wrap;
 var $project_iframe;
 var $tumblr_form;
 var $preview;
+var $totebag;
 var preview_div;
 var preview;
 
@@ -241,8 +242,10 @@ $(function() {
     $project_hdr = $form.find('.hdr');
     $project_wrap = $form.find('.project-iframe-wrapper');
     $project_iframe = $form.find('iframe');
-    $tumblr_form = $("#tumblr-form");
+    $tumblr_form = $('#tumblr-form');
+    $post = $('li.post');
     $preview = $('#preview');
+    $totebag = $('li.totebag');
     preview_div = $preview[0];
 
     // Setup Raphael
@@ -337,6 +340,20 @@ $(function() {
                 return false;
             }
         });
+    }
+
+    // Totebags
+    if (!$post.hasClass('notote')) {
+        var path = location.pathname;
+        var parts = path.split('/');
+        var tumblr_id = parts[parts.length - 2];
+        console.log(tumblr_id);
+
+        var zazzle_url = 'http://' + APP_CONFIG.SERVERS[0] + '/uploads/' + APP_CONFIG.PROJECT_SLUG + '/' + tumblr_id + '.png'; 
+        console.log(zazzle_url);
+
+        $totebag.find('a').attr('href', APP_CONFIG.ZAZZLE_URL.replace('%s', zazzle_url));
+        $totebag.show();
     }
 
     // Event handlers

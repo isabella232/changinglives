@@ -7,18 +7,15 @@ import re
 import shlex
 import subprocess
 import time
-import urllib
 
 from flask import Flask, redirect, render_template
-import Image
-import ImageDraw
-import ImageFont
 from jinja2.filters import do_mark_safe
 from tumblpy import Tumblpy
 from tumblpy import TumblpyError
 from werkzeug import secure_filename
 
 import app_config
+from zazzle import zazzlify_png
 
 app = Flask(app_config.PROJECT_NAME)
 app.config['PROPAGATE_EXCEPTIONS'] = True
@@ -144,19 +141,9 @@ def _post_to_tumblr():
         context['message'] = e.output
         return render_template('500.html', **context)
 
-    zazzle_url = None
-
-    if app_config.ZAZZLE_ENABLE:
-        zazzle_png_path = zazzlify_png(png_path, name, location)
-
-        image_url = 'http://%s%s' % (app_config.SERVERS[0], zazzle_png_path)
-        zazzle_url = app_config.ZAZZLE_URL % urllib.quote(image_url) 
-
     context = {
         'name': name,
         'location': location,
-        'ZAZZLE_ENABLE': app_config.ZAZZLE_ENABLE,
-        'zazzle_url': zazzle_url
     }
 
     caption = render_template('caption.html', **context)
@@ -181,6 +168,9 @@ def _post_to_tumblr():
         tumblr_url = u"http://%s/%s" % (app_config.TUMBLR_URL, tumblr_post['id'])
         logger.info('200 %s reader(%s) (times in EST)' % (tumblr_url, name))
 
+        if app_config.ZAZZLE_ENABLE:
+            zazzlify_png(png_path, tumblr_post['id'], name, location)
+
         return redirect(tumblr_url, code=301)
 
     except TumblpyError, e:
@@ -189,38 +179,10 @@ def _post_to_tumblr():
         context = {}
         context['title'] = 'Tumblr error'
         context['message'] = '%s\n%s' % (e.error_code, e.msg)
+
         return render_template('500.html', **context)
 
     return redirect('%s#posts' % tumblr_url, code=301)
-
-
-def zazzlify_png(png_path, name, location):
-    """
-    Add a footer and border to the PNG for Zazzle.
-    """
-    path, filename = os.path.split(png_path)
-    zazzle_path = '%s/zazzle_%s' % (path, filename)
-
-    border = 128
-    size = 2048
-
-    png = Image.open('/var/www/%s' % png_path)
-    zazzle_png = Image.new('RGBA', (size + border * 2, size + border * 2), (0, 0, 0, 0))
-    zazzle_png.paste(png, (border, border))
-
-    draw = ImageDraw.Draw(zazzle_png)
-    font = ImageFont.truetype('NotoSerif-Regular.ttf', 50)
-    draw.rectangle((border, size + border, border + size, size + border * 2), fill='rgb(0,0,0)')
-
-    draw.text((border, border + size), '%s, %s' % (name, location), (255, 255, 255), font=font)
-    draw.text((border, border + size + 64), 'she-works.tumblr.com', (255, 255, 255), font=font)
-
-    zazzle_png.show()
-    zazzle_png.save('/var/www/%s' % zazzle_path)
-
-    print '/var/www/%s' % zazzle_path
-
-    return zazzle_path
 
 
 if __name__ == '__main__':
