@@ -349,7 +349,7 @@ $(function() {
         var tumblr_id = parts[parts.length - 2];
         console.log(tumblr_id);
 
-        var zazzle_url = 'http://' + APP_CONFIG.SERVERS[0] + '/' + APP_CONFIG.PROJECT_SLUG + '/' + tumblr_id + '.png'; 
+        var zazzle_url = 'http://' + APP_CONFIG.SERVERS[0] + '/uploads/' + APP_CONFIG.PROJECT_SLUG + '/' + tumblr_id + '.png'; 
         console.log(zazzle_url);
 
         $totebag.find('a').attr('href', APP_CONFIG.ZAZZLE_URL.replace('%s', zazzle_url));
