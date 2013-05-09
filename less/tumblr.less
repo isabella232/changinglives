@@ -619,7 +619,50 @@ p.project-credits {
             background-repeat: none;
         }
         .totebag {
-            display: none;
+            margin-top: 20px;
+            position: relative;
+
+            a { 
+                display: block;
+                border: 1px solid #dadada;
+                padding: 22px 11px;
+            }
+            .totebag-text {
+                display: block;
+                width: 139px;
+                height: 105px;
+                text-indent: -9999px;
+                background: url('@{img-root}/tote-bag-text.png') no-repeat;
+            }
+            .totebag-holder {
+                display: block;
+                position: absolute;
+                top: -10px;
+                right: 0px;
+                width: 87px;
+                height: 136px;
+                text-indent: -9999px;
+                background: url('@{img-root}/tote-bag-bg.png') no-repeat;
+                float: right;
+            }
+            .totebag-sample {
+                display: block;
+                position: absolute;
+                top: 65px;
+                left: 16px;
+                width: 54px;
+                height: 54px;
+                
+                img { 
+                    width: 100%; 
+                    height: 100%;
+                    margin: 0;
+                    display: block;
+                }
+            }
+        
+        
+//            display: none;
         }
         .facebook span,
         .twitter span {
