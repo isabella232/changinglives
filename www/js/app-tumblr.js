@@ -346,9 +346,7 @@ $(function() {
 
     // Totebags
     if ($zazzle_url.length > 0) {
-        console.log("Found zazzle url");
         if (!$post.hasClass('notote')) {
-            console.log("No #notote");
             var zazzle_url = encodeURIComponent($zazzle_url.val());
 
             $totebag.find('a').attr('href', APP_CONFIG.ZAZZLE_URL.replace('%s', zazzle_url));
