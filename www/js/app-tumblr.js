@@ -346,7 +346,7 @@ $(function() {
     if (!$post.hasClass('notote')) {
         var path = location.pathname;
         var parts = path.split('/');
-        var tumblr_id = parts[parts.length - 1];
+        var tumblr_id = parts[parts.length - 2];
         console.log(tumblr_id);
 
         var zazzle_url = 'http://' + APP_CONFIG.SERVERS[0] + '/' + APP_CONFIG.PROJECT_SLUG + '/' + tumblr_id + '.png'; 
