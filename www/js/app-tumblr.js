@@ -243,8 +243,8 @@ $(function() {
     $project_hdr = $form.find('.hdr');
     $project_wrap = $form.find('.project-iframe-wrapper');
     $project_iframe = $form.find('iframe');
-    $tumblr_form = $("#tumblr-form");
-    $post = $("li.post");
+    $tumblr_form = $('#tumblr-form');
+    $post = $('li.post');
     $preview = $('#preview');
     $totebag = $('li.totebag');
     $zazzle_url = $('#zazzle-url');
@@ -346,7 +346,7 @@ $(function() {
 
     // Totebags
     if ($zazzle_url.length > 0 and $post.length == 1) {
-        if (!$post.eq(0).hasClass('notote') {
+        if (!$post.eq(0).hasClass('notote')) {
             var zazzle_url = encodeURIComponent($zazzle_url.val());
 
             $totebag.find('a').attr('href', APP_CONFIG.ZAZZLE_URL.replace('%s', zazzle_url));
