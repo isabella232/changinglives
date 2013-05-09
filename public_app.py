@@ -170,6 +170,9 @@ def _post_to_tumblr():
         tumblr_url = u"http://%s/%s" % (app_config.TUMBLR_URL, tumblr_post['id'])
         logger.info('200 %s reader(%s) (times in EST)' % (tumblr_url, name))
 
+        if app_config.ZAZZLE_ENABLE:
+            zazzlify_png(png_path, tumblr_post['id'], name, location)
+
         return redirect(tumblr_url, code=301)
 
     except TumblpyError, e:
@@ -178,10 +181,8 @@ def _post_to_tumblr():
         context = {}
         context['title'] = 'Tumblr error'
         context['message'] = '%s\n%s' % (e.error_code, e.msg)
-        return render_template('500.html', **context)
 
-    if app_config.ZAZZLE_ENABLE:
-        zazzlify_png(png_path, tumblr_post['id'], name, location)
+        return render_template('500.html', **context)
 
     return redirect('%s#posts' % tumblr_url, code=301)
 
