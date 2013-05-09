@@ -12,15 +12,11 @@ with open('data/review_plus.csv') as f:
 for row in rows:
     svg_url, status, tumblr_url, name, location = row
 
-    svg_path = svg_url.replace('http://%s' % app_config.SERVERS[0], '/var/www/uploads')
-    path, filename = os.path.split(svg_path)
-    zazzle_path = os.path.join(path, 'zazzle_' + filename.replace('svg', 'png'))
+    svg_path = svg_url.replace('http://%s/' % app_config.SERVERS[0], '')
+    png_path = svg_path.replace('svg', 'png')
+    path, filename = os.path.split(png_path)
+    zazzle_path = os.path.join(path, 'zazzle_' + filename)
 
-    print svg_path
     print zazzle_path
 
-    if os.path.exists(zazzle_path):
-        print 'Skipping'
-        continue
-
-        #zazzlify_png(png_path, name, location)
+    zazzlify_png(png_path, name, location)
