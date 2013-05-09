@@ -22,6 +22,8 @@ for row in rows:
     svg_url, status, tumblr_url = row
 
     if not tumblr_url:
+	row.append('')
+	row.append('')
         continue
 
     post_id = tumblr_url.split('/')[-1]
@@ -31,7 +33,9 @@ for row in rows:
         post = t.get('posts', blog_url=app_config.TUMBLR_URL, params={ 'id': post_id })
     except TumblpyError, e:
         print 'GET error %s: %s %s' % (post_id, e.error_code, e.msg)
-        continue
+        row.append('')
+        row.append('')
+	continue
 
     caption = post['posts'][0]['caption']
 
