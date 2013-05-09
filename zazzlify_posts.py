@@ -27,7 +27,7 @@ for row in rows:
         try:
             post = t.get('posts', blog_url=app_config.TUMBLR_URL, params={ 'id': post_id })
         except TumblpyError, e:
-            print 'Error %s: %s %s' % (post_id, e.error_code, e.msg)
+            print 'GET error %s: %s %s' % (post_id, e.error_code, e.msg)
             continue
 
         caption = post['posts'][0]['caption']
@@ -42,5 +42,9 @@ for row in rows:
 
         caption += '\n<input id="zazzle_url" type="hidden" value="%s">' % zazzle_url
 
-        print caption
+        try:
+            post = t.post('post/edit', blog_url=app_config.TUMBLR_URL, params={ 'id': post_id, 'caption': caption })
+        except TumblpyError, e:
+            print 'POST error %s: %s %s' % (post_id, e.error_code, e.msg)
+            continue
 
