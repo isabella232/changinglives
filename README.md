@@ -271,6 +271,8 @@ For running cron jobs:
 
 You can configure your EC2 instance to both run Web services and execute cron jobs; just set both environment variables in the fabfile.
 
+**Note:** The `Knockout-29.otf` font must be manually installed on the servers at `/home/ubuntu/apps/changing-lives/repository/Knockout-29.otf`. It can not be installed automatically due to licensing restrictions.
+
 Install cron jobs
 -----------------
 
