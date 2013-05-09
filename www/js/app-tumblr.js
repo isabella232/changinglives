@@ -348,6 +348,7 @@ $(function() {
         var zazzle_url = $zazzle_url.val();
 
         $totebag.find('a').attr('href', zazzle_url);
+        $totebag.show();
     }
 
     // Event handlers
