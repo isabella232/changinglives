@@ -345,9 +345,9 @@ $(function() {
 
     // Totebags
     if ($zazzle_url.length > 0) {
-        var zazzle_url = $zazzle_url.val();
+        var zazzle_url = encodeURIComponent($zazzle_url.val());
 
-        $totebag.find('a').attr('href', zazzle_url);
+        $totebag.find('a').attr('href', APP_CONFIG.ZAZZLE_URL.replace('%s', zazzle_url));
         $totebag.show();
     }
 
