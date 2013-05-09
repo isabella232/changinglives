@@ -170,13 +170,11 @@
                                         <li class="report"><a href="mailto:tumblr@npr.org?subject=Please moderate this post {PostID}&body={Permalink}"><span></span>Is this inappropriate?</a></li>
                                         <li class="totebag">
                                             <a href="">
-                                                <span class="totebag-text">
-                                                    Put This On A Tote Bag. Your $15 purchase supports NPR.
-                                                </span>
-                                                
-                                                <span class="totebag-holder">
-                                                    <span class="totebag-sample"><img src="{PhotoURL-75sq}" alt="sample image" /></span>
-                                                </span>
+                                                <div class="totebag-holder">
+                                                    <img src="{{ STATIC_URL }}/img/tote-bag-bg.png" alt="" class="totebag-bag" />
+                                                    <img src="{PhotoURL-75sq}" alt="" class="totebag-sample" />
+                                                </div>
+                                                <img src="{{ STATIC_URL }}/img/tote-bag-text.png" alt="Put This On A Tote Bag. Your $15 purchase supports NPR." class="totebag-text" />
                                             </a>
                                         </li>
                                     </ul>
