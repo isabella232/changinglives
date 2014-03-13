@@ -52,12 +52,12 @@ NPR_DFP = {
     'TARGET': '\/news_politics;storyid=171421875'
 }
 
-ZAZZLE_ENABLE = True 
+ZAZZLE_ENABLE = True
 ZAZZLE_URL = 'http://www.zazzle.com/api/create/at-238133727124364209?rf=238133727124364209&ax=Linkover&pd=149615259297020689&fwd=ProductPage&ed=false&tc=&ic=&t_image_iid=%s'
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
-TUMBLR_TAGS = 'women, workplace, advice'
+TUMBLR_TAGS = 'women, workplace, advice, money'
 TUMBLR_FILENAME = 'www/live-data/%s-data.json' % PROJECT_SLUG
 
 LOG_PATH = '/var/log/%s.log' % PROJECT_SLUG
