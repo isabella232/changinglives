@@ -59,6 +59,7 @@ GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
 TUMBLR_TAGS = 'women, workplace, advice, money'
 TUMBLR_FILENAME = 'www/live-data/%s-data.json' % PROJECT_SLUG
+TUMBLR_POST_LIMIT = 150
 
 LOG_PATH = '/var/log/%s.log' % PROJECT_SLUG
 

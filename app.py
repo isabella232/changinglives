@@ -9,8 +9,16 @@ from flask import Flask, Markup, abort, render_template
 
 import app_config
 from render_utils import flatten_app_config, make_context
+import tumblr_utils
 
 app = Flask(app_config.PROJECT_NAME)
+
+@app.route('/email.html')
+def _email():
+    context = make_context()
+    context['posts'] = tumblr_utils.post_limit()
+
+    return render_template('email.html', **context)
 
 # Example application views
 @app.route('/tumblr-form.html')

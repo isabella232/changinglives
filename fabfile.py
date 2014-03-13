@@ -483,6 +483,11 @@ def deploy_aggregates():
     write_aggregates()
     tumblr_utils.deploy_aggregates(env.s3_buckets)
 
+def post_limit():
+    require('settings', provided_by=[production, staging])
+    app_config.configure_targets(env.get('settings', None))
+    tumblr_utils.post_limit()
+
 
 """
 Cron jobs
