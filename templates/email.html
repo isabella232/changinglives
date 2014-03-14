@@ -1,6 +1,5 @@
 <h2>{{ posts|length }} new posts yesterday.</h2>
 
-
 <table>
     <tr>
         <th>Date</th>
@@ -9,7 +8,7 @@
 {% for post in posts %}
     <tr>
         <td>{{ post.date }}</td>
-        <td>{% for photo in post.photos %}<img height="150" width="150" src="{{ photo.original_size.url }}" />{% endfor %}</td>
+        <td>{{ post.caption|safe }}</td>
     </tr>
 {% endfor %}
 </table>
