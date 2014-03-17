@@ -27,7 +27,7 @@ S3_BUCKETS = []
 SERVERS = []
 DEBUG = True
 
-NUMBER_OF_AGGREGATES = 12
+NUMBER_OF_AGGREGATES = 15
 
 PROJECT_DESCRIPTION = 'An opinionated project template for client-side apps.'
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
@@ -51,9 +51,6 @@ NPR_DFP = {
     'STORY_ID': '171421875',
     'TARGET': '\/news_politics;storyid=171421875'
 }
-
-ZAZZLE_ENABLE = True
-ZAZZLE_URL = 'http://www.zazzle.com/api/create/at-238133727124364209?rf=238133727124364209&ax=Linkover&pd=149615259297020689&fwd=ProductPage&ed=false&tc=&ic=&t_image_iid=%s'
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
