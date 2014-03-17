@@ -108,7 +108,7 @@ def configure_targets(deployment_target):
         TUMBLR_BLOG_ID = 'staging-%s' % PROJECT_SLUG
 
     else:
-        blog_id = os.environ.get('DEVELOPMENT_BLOG_ID', None)
+        blog_id = os.environ.get('DEVELOPMENT_BLOG_ID', 'staging-%s' % PROJECT_SLUG)
         S3_BUCKETS = ['127.0.0.1:8000']
         SERVERS = ['127.0.0.1:8001']
         DEBUG = True
