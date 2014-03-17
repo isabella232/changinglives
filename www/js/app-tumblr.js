@@ -40,7 +40,6 @@ var $project_wrap;
 var $project_iframe;
 var $tumblr_form;
 var $preview;
-var $totebag;
 var preview_div;
 var preview;
 
@@ -245,7 +244,6 @@ $(function() {
     $tumblr_form = $('#tumblr-form');
     $post = $('li.post');
     $preview = $('#preview');
-    $totebag = $('li.totebag');
     preview_div = $preview[0];
 
     // Setup Raphael

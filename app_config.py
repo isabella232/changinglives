@@ -9,13 +9,14 @@ They will be exposed to users. Use environment variables instead.
 
 import os
 
-PROJECT_NAME = 'She Works: Note To Self'
+PROJECT_NAME = 'She Works: Her Money'
 PROJECT_SLUG = 'changing-lives'
 REPOSITORY_NAME = 'changinglives'
 CONFIG_NAME = PROJECT_SLUG.replace('-', '').upper()
 
 PROJECT_CREDITS = 'Jeremy Bowers, Danny DeBelius, Kitty Eisele, Christopher Groskopf, Alyson Hurt and Selena Simmons-Duffin / NPR'
 PROJECT_SHORTLINK = 'npr.org/sheworks'
+FACEBOOK_SHORTLINK = 'www.npr.org/sheworks' # Prevent circular reference (#251)
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
 PRODUCTION_SERVERS = ['54.214.20.225']
@@ -27,9 +28,9 @@ S3_BUCKETS = []
 SERVERS = []
 DEBUG = True
 
-NUMBER_OF_AGGREGATES = 12
+NUMBER_OF_AGGREGATES = 15
 
-PROJECT_DESCRIPTION = 'An opinionated project template for client-side apps.'
+PROJECT_DESCRIPTION = 'Financial wisdom you can print! Create a motivational poster and hang it somewhere with NPR\'s She Works project.'
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 
 COPY_GOOGLE_DOC_KEY = '0AlXMOHKxzQVRdHZuX1UycXplRlBfLVB0UVNldHJYZmc'
@@ -51,8 +52,6 @@ NPR_DFP = {
     'STORY_ID': '171421875',
     'TARGET': '\/news_politics;storyid=171421875'
 }
-
-ZAZZLE_ENABLE = False
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
