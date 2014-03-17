@@ -59,7 +59,7 @@ TUMBLR_TAGS = 'women, workplace, advice, money'
 TUMBLR_FILENAME = 'www/live-data/%s-data.json' % PROJECT_SLUG
 TUMBLR_POST_LIMIT = 150
 
-ADMIN_EMAILS = ['sheworks@npr.org']
+ADMIN_EMAILS = ['jbowers@npr.org']
 
 LOG_PATH = '/var/log/%s.log' % PROJECT_SLUG
 

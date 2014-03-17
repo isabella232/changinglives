@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import datetime
 from glob import glob
 import os
 
@@ -8,7 +9,9 @@ from jinja2 import Template
 
 import app
 import app_config
+from boto import ses
 from etc import github
+import pytz
 import tumblr_utils
 
 """
@@ -484,17 +487,18 @@ def deploy_aggregates():
     tumblr_utils.deploy_aggregates(env.s3_buckets)
 
 
-def send_email(addresses, payload):
-    payload = app._email()
-    addresses = app_config.ADMIN_EMAILS
-    connection = boto.ses.connect_to_region('us-east-1')
-    connection.send_email(
-        'NPR News Apps <nprapps@npr.org>',
-        'She Works: %s report' % (datetime.datetime.now(pytz.utc).replace(tzinfo=pytz.utc).strftime('%m/%d') - datetime.timedelta(days=1)),
-        None,
-        addresses,
-        html_body=payload,
-        format='html')
+def send_email():
+    with app.app.test_request_context():
+        payload = app._email()
+        addresses = app_config.ADMIN_EMAILS
+        connection = ses.connect_to_region('us-east-1')
+        connection.send_email(
+            'NPR News Apps <nprapps@npr.org>',
+            'She Works: %s report' % (datetime.datetime.now(pytz.utc).replace(tzinfo=pytz.utc) - datetime.timedelta(days=1)).strftime('%m/%d'),
+            None,
+            addresses,
+            html_body=payload,
+            format='html')
 
 
 """
