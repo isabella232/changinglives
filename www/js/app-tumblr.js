@@ -342,18 +342,6 @@ $(function() {
         });
     }
 
-    // Totebags
-    if (!$post.hasClass('notote')) {
-        var path = location.pathname;
-        var parts = path.split('/');
-        var tumblr_id = parts[parts.length - 2];
-
-        var zazzle_url = 'http://' + APP_CONFIG.SERVERS[0] + '/uploads/' + APP_CONFIG.PROJECT_SLUG + '/' + tumblr_id + '.png'; 
-
-        $totebag.find('a').attr('href', APP_CONFIG.ZAZZLE_URL.replace('%s', zazzle_url));
-        $totebag.show();
-    }
-
     // Event handlers
     $modal_btn.on('click', function() {
         toggle_header();

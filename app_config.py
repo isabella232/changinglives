@@ -52,14 +52,15 @@ NPR_DFP = {
     'TARGET': '\/news_politics;storyid=171421875'
 }
 
-ZAZZLE_ENABLE = True
-ZAZZLE_URL = 'http://www.zazzle.com/api/create/at-238133727124364209?rf=238133727124364209&ax=Linkover&pd=149615259297020689&fwd=ProductPage&ed=false&tc=&ic=&t_image_iid=%s'
+ZAZZLE_ENABLE = False
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
 TUMBLR_TAGS = 'women, workplace, advice, money'
 TUMBLR_FILENAME = 'www/live-data/%s-data.json' % PROJECT_SLUG
 TUMBLR_POST_LIMIT = 150
+
+ADMIN_EMAILS = ['sheworks@npr.org']
 
 LOG_PATH = '/var/log/%s.log' % PROJECT_SLUG
 
@@ -100,20 +101,20 @@ def configure_targets(deployment_target):
         TUMBLR_URL = 'she-works.tumblr.com'
         TUMBLR_BLOG_ID = 'she-works'
 
-    elif deployment_target == 'development':
+    elif deployment_target == 'staging':
+        S3_BUCKETS = STAGING_S3_BUCKETS
+        SERVERS = STAGING_SERVERS
+        DEBUG = True
+        TUMBLR_URL = 'staging-%s.tumblr.com' % PROJECT_SLUG
+        TUMBLR_BLOG_ID = 'staging-%s' % PROJECT_SLUG
+
+    else:
         blog_id = os.environ.get('DEVELOPMENT_BLOG_ID', None)
         S3_BUCKETS = ['127.0.0.1:8000']
         SERVERS = ['127.0.0.1:8001']
         DEBUG = True
         TUMBLR_URL = '%s.tumblr.com' % blog_id
         TUMBLR_BLOG_ID = blog_id
-
-    else:
-        S3_BUCKETS = STAGING_S3_BUCKETS
-        SERVERS = STAGING_SERVERS
-        DEBUG = True
-        TUMBLR_URL = 'staging-%s.tumblr.com' % PROJECT_SLUG
-        TUMBLR_BLOG_ID = 'staging-%s' % PROJECT_SLUG
 
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
