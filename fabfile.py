@@ -483,10 +483,18 @@ def deploy_aggregates():
     write_aggregates()
     tumblr_utils.deploy_aggregates(env.s3_buckets)
 
-def post_limit():
-    require('settings', provided_by=[production, staging])
-    app_config.configure_targets(env.get('settings', None))
-    tumblr_utils.post_limit()
+
+def send_email(addresses, payload):
+    payload = app._email()
+    addresses = app_config.ADMIN_EMAILS
+    connection = boto.ses.connect_to_region('us-east-1')
+    connection.send_email(
+        'NPR News Apps <nprapps@npr.org>',
+        'She Works: %s report' % (datetime.datetime.now(pytz.utc).replace(tzinfo=pytz.utc).strftime('%m/%d') - datetime.timedelta(days=1)),
+        None,
+        addresses,
+        html_body=payload,
+        format='html')
 
 
 """

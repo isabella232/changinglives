@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 
+import datetime
 import json
 from mimetypes import guess_type
+import os
 import urllib
 
+from dateutil.parser import *
 import envoy
 from flask import Flask, Markup, abort, render_template
+import pytz
 
 import app_config
 from render_utils import flatten_app_config, make_context
@@ -16,7 +20,42 @@ app = Flask(app_config.PROJECT_NAME)
 @app.route('/email.html')
 def _email():
     context = make_context()
-    context['posts'] = tumblr_utils.post_limit()
+
+    post_list = tumblr_utils.fetch_posts()
+
+    if app_config.DEPLOYMENT_TARGET in ['staging', 'production']:
+        yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
+
+    else:
+        yesterday = datetime.datetime(2013, 5, 3, 12, 18, 20)
+
+    yesterdate = datetime.date(yesterday.year, yesterday.month, yesterday.day)
+
+    eastern = pytz.timezone('US/Eastern')
+
+    reset = datetime.datetime(yesterday.year, yesterday.month, yesterday.day, 0, 0, 0) + datetime.timedelta(days=1)
+    time_left = reset - yesterday
+
+    today_posts = []
+
+    for post in post_list:
+        parsed_post_date = parse(post['date'])
+        eastern_transformed_post_date = parsed_post_date.astimezone(eastern)
+        post_date = datetime.date(
+            eastern_transformed_post_date.year,
+            eastern_transformed_post_date.month,
+            eastern_transformed_post_date.day)
+
+        if post_date == yesterdate:
+            post['date'] = eastern_transformed_post_date
+            today_posts.append(post)
+
+    print "Posts since last reset: %s" % len(today_posts)
+    print "Posts remaining until next reset: %s" % (app_config.TUMBLR_POST_LIMIT - len(today_posts))
+    print "Time left until next reset: %s" % time_left
+
+    context['posts'] = today_posts
+    context['yesterday'] = (datetime.datetime.now() - datetime.timedelta(days=1))
 
     return render_template('email.html', **context)
 
@@ -44,7 +83,11 @@ def _less(filename):
     except IOError:
         abort(404)
 
-    r = envoy.run('node_modules/.bin/lessc -', data=less)
+    if os.path.exists('node_modules/.bin/lessc'):
+        r = envoy.run('node_modules/.bin/lessc -', data=less)
+
+    else:
+        r = envoy.run('node_modules/bin/lessc -', data=less)
 
     return r.std_out, 200, { 'Content-Type': 'text/css' }
 
@@ -62,6 +105,15 @@ def _app_config_js():
     js = 'window.APP_CONFIG = ' + json.dumps(config)
 
     return js, 200, { 'Content-Type': 'application/javascript' }
+
+# Server arbitrary static files on-demand
+@app.route('/%s/<path:path>' % app_config.PROJECT_SLUG)
+def _static(path):
+    try:
+        with open('www/%s' % path) as f:
+            return f.read(), 200, { 'Content-Type': guess_type(path)[0] }
+    except IOError:
+        abort(404)
 
 # Server arbitrary static files on-demand
 @app.route('/<path:path>')

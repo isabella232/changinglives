@@ -8,47 +8,13 @@ from sets import *
 import urlparse
 
 import boto
-from dateutil.parser import *
 from jinja2 import Template
 import oauth2 as oauth
-import pytz
 import requests
 from tumblpy import Tumblpy
 
 import app_config
 
-
-def post_limit():
-    post_list = fetch_posts()
-    # yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
-    #
-    # Test from back when we had posts.
-    yesterday = datetime.datetime(2013, 5, 3, 12, 18, 20)
-    #
-    yesterdate = datetime.date(yesterday.year, yesterday.month, yesterday.day)
-
-    eastern = pytz.timezone('US/Eastern')
-
-    reset = datetime.datetime(yesterday.year, yesterday.month, yesterday.day, 0, 0, 0) + datetime.timedelta(days=1)
-    time_left = reset - yesterday
-
-    today_posts = []
-
-    for post in post_list:
-        post_date = parse(post['date'])
-        post_date = post_date.astimezone(eastern)
-        post_date = datetime.date(post_date.year, post_date.month, post_date.day)
-
-        if post_date == yesterdate:
-            today_posts.append(post)
-
-    print today_posts[0]
-
-    print "Posts since last reset: %s" % len(today_posts)
-    print "Posts remaining until next reset: %s" % (app_config.TUMBLR_POST_LIMIT - len(today_posts))
-    print "Time left until next reset: %s" % time_left
-
-    return today_posts
 
 def generate_new_oauth_tokens():
     """
