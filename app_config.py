@@ -9,13 +9,14 @@ They will be exposed to users. Use environment variables instead.
 
 import os
 
-PROJECT_NAME = 'She Works: Note To Self'
+PROJECT_NAME = 'She Works: Her Money'
 PROJECT_SLUG = 'changing-lives'
 REPOSITORY_NAME = 'changinglives'
 CONFIG_NAME = PROJECT_SLUG.replace('-', '').upper()
 
 PROJECT_CREDITS = 'Jeremy Bowers, Danny DeBelius, Kitty Eisele, Christopher Groskopf, Alyson Hurt and Selena Simmons-Duffin / NPR'
 PROJECT_SHORTLINK = 'npr.org/sheworks'
+FACEBOOK_SHORTLINK = 'www.npr.org/sheworks' # Prevent circular reference (#251)
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
 PRODUCTION_SERVERS = ['54.214.20.225']
@@ -27,9 +28,9 @@ S3_BUCKETS = []
 SERVERS = []
 DEBUG = True
 
-NUMBER_OF_AGGREGATES = 12
+NUMBER_OF_AGGREGATES = 15
 
-PROJECT_DESCRIPTION = 'An opinionated project template for client-side apps.'
+PROJECT_DESCRIPTION = 'Financial wisdom you can print! Create a motivational poster and hang it somewhere with NPR\'s She Works project.'
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 
 COPY_GOOGLE_DOC_KEY = '0AlXMOHKxzQVRdHZuX1UycXplRlBfLVB0UVNldHJYZmc'
@@ -52,16 +53,15 @@ NPR_DFP = {
     'TARGET': '\/news_politics;storyid=171421875'
 }
 
-ZAZZLE_ENABLE = True 
-ZAZZLE_URL = 'http://www.zazzle.com/api/create/at-238133727124364209?rf=238133727124364209&ax=Linkover&pd=149518003391913590&fwd=ProductPage&ed=false&tc=&ic=&t_image_iid=%s'
-
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
-TUMBLR_TAGS = 'women, workplace, advice'
+TUMBLR_TAGS = 'women, workplace, advice, money'
 TUMBLR_FILENAME = 'www/live-data/%s-data.json' % PROJECT_SLUG
+TUMBLR_POST_LIMIT = 150
 
-# LOG_PATH = '/var/log/%s.log' % PROJECT_SLUG
-LOG_PATH = 'data/test.log'
+ADMIN_EMAILS = ['jbowers@npr.org']
+
+LOG_PATH = '/var/log/%s.log' % PROJECT_SLUG
 
 def get_secrets():
     """
@@ -100,20 +100,20 @@ def configure_targets(deployment_target):
         TUMBLR_URL = 'she-works.tumblr.com'
         TUMBLR_BLOG_ID = 'she-works'
 
-    elif deployment_target == 'development':
-        blog_id = os.environ.get('DEVELOPMENT_BLOG_ID', None)
-        S3_BUCKETS = ['127.0.0.1:8000']
-        SERVERS = ['127.0.0.1:8001']
-        DEBUG = True
-        TUMBLR_URL = '%s.tumblr.com' % blog_id
-        TUMBLR_BLOG_ID = blog_id
-
-    else:
+    elif deployment_target == 'staging':
         S3_BUCKETS = STAGING_S3_BUCKETS
         SERVERS = STAGING_SERVERS
         DEBUG = True
         TUMBLR_URL = 'staging-%s.tumblr.com' % PROJECT_SLUG
         TUMBLR_BLOG_ID = 'staging-%s' % PROJECT_SLUG
+
+    else:
+        blog_id = os.environ.get('DEVELOPMENT_BLOG_ID', 'staging-%s' % PROJECT_SLUG)
+        S3_BUCKETS = ['127.0.0.1:8000']
+        SERVERS = ['127.0.0.1:8001']
+        DEBUG = True
+        TUMBLR_URL = '%s.tumblr.com' % blog_id
+        TUMBLR_BLOG_ID = blog_id
 
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 

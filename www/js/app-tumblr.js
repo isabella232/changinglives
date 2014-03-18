@@ -241,7 +241,8 @@ $(function() {
     $project_hdr = $form.find('.hdr');
     $project_wrap = $form.find('.project-iframe-wrapper');
     $project_iframe = $form.find('iframe');
-    $tumblr_form = $("#tumblr-form");
+    $tumblr_form = $('#tumblr-form');
+    $post = $('li.post');
     $preview = $('#preview');
     preview_div = $preview[0];
 

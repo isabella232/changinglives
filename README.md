@@ -1,4 +1,8 @@
-nprapps' Project Template
+Copyright 2013 NPR.  All rights reserved.  No part of these materials may be reproduced, modified, stored in a retrieval system, or retransmitted, in any form or by any means, electronic, mechanical or otherwise, without prior written permission from NPR.
+
+(Want to use this code? Send an email to nprapps@npr.org!)
+
+changinglives
 =========================
 
 * [About this template](#about-this-template)
@@ -270,6 +274,8 @@ For running cron jobs:
 * Run ``fab staging master deploy`` to deploy the app.
 
 You can configure your EC2 instance to both run Web services and execute cron jobs; just set both environment variables in the fabfile.
+
+**Note:** The `Knockout-29.otf` font must be manually installed on the servers at `/home/ubuntu/apps/changing-lives/repository/Knockout-29.otf`. It can not be installed automatically due to licensing restrictions.
 
 Install cron jobs
 -----------------

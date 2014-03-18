@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import datetime
 import gzip
 import json
 import os
@@ -107,6 +107,7 @@ def fetch_posts():
     Returns a list of all tumblr posts, unsorted.
     """
     print "Starting."
+
     # Set constants
     secrets = app_config.get_secrets()
     base_url = 'http://api.tumblr.com/v2/blog/%s.tumblr.com/posts/photo' % app_config.TUMBLR_BLOG_ID

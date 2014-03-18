@@ -60,8 +60,8 @@
         {{ SOCIAL_HTML }}
 
         <script type="text/javascript" src="http://assets.tumblr.com/javascript/jquery-1.7.2.min.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/lib/underscore.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}js/lib/raphael.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/lib/underscore-min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/lib/raphael-min.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/Quicksand_400.font.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/Noto_Serif_400.font.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/Snippet_400.font.js"></script>
@@ -94,7 +94,7 @@
 
                 {block:IndexPage}<h2>Fresh Advice{block:TagPage} Tagged {Tag}{/block:TagPage}</h2>{/block:IndexPage}
 
-                {block:TagPage}<p class="editors-note">Advice not fit for the homepage, as selected by NPR's "Note To Self" editors.</p>{/block:TagPage}
+                {block:TagPage}<p class="editors-note">Advice not fit for the homepage, as selected by NPR's "She Works" editors.</p>{/block:TagPage}
                 <ul id="posts" class="posts{block:IndexPage} post-list{/block:IndexPage}">
                 <!-- START POSTS -->
                 {block:Posts}
@@ -161,13 +161,12 @@
                                     </ul>
                                     <ul class="post_info social">
                                         <li class="print">
-                                            <img src="{{ STATIC_URL }}img/print_sample.jpg">
-                                            <a href="javascript:window.print();" onclick="_gaq.push(['_trackEvent', 'Print', '', '']);" >
+                                            <a href="javascript:window.print();" onclick="_gaq.push(['_trackEvent', 'Print', '', '']);">
                                                 <span></span>Print this sign
                                             </a>
                                         </li>
-                                        <li class="facebook"><a rel="external" href="https://www.facebook.com/dialog/feed?app_id=138837436154588&amp;link={Permalink}&picture={PhotoURL-HighRes}&name=She Works: Note To Self&redirect_uri={Permalink}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Post', 'She Works: Note To Self']);" title="Like This Page On Facebook"><span></span>Share on Facebook</a></li>
-                                        <li class="twitter"><a rel="external" href="http://twitter.com/share?text=Workplace+wisdom+you+can+print!+Create+a+motivational+poster+and+hang+it+somewhere+with+NPR's+%22Note+To+Self%22+project%3a&amp;url={Permalink}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Post', 'She Works: Note To Self']);" title="Share This Page On Twitter"><span></span>Share on Twitter</a></li>
+                                        <li class="facebook"><a rel="external" href="https://www.facebook.com/dialog/feed?app_id=138837436154588&amp;link={Permalink}&picture={PhotoURL-HighRes}&name=She Works: Her Money&redirect_uri={Permalink}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Post', 'She Works']);" title="Like This Page On Facebook"><span></span>Share on Facebook</a></li>
+                                        <li class="twitter"><a rel="external" href="http://twitter.com/share?text=Financial+wisdom+you+can+print!+Create+a+motivational+poster+and+hang+it+somewhere+with+NPR's+%22Her+Money%22+project%3a&amp;url={Permalink}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Post', 'She Works']);" title="Share This Page On Twitter"><span></span>Share on Twitter</a></li>
                                         <li class="report"><a href="mailto:tumblr@npr.org?subject=Please moderate this post {PostID}&body={Permalink}"><span></span>Is this inappropriate?</a></li>
                                     </ul>
 
@@ -198,12 +197,6 @@
                                 </section>
                                 {/block:Photo}
                             </section>
-
-                            {block:IfDisqusShortname}
-                            <div id="disqus_thread"></div>
-                            <script type="text/javascript" src="http://disqus.com/forums/{text:Disqus Shortname}/embed.js"></script>
-                            <noscript><a href="http://{text:Disqus Shortname}.disqus.com/?url=ref">View the discussion thread.</a></noscript>
-                            {/block:IfDisqusShortname}
 
                             {block:PostNotes}
                             <section class="post_notes" name="notes">

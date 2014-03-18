@@ -1,18 +1,15 @@
 #!/usr/bin/env python
 
 import datetime
+import json
 import logging
 import os
 import re
 import shlex
 import subprocess
 import time
-import urllib
 
 from flask import Flask, redirect, render_template
-import Image
-import ImageDraw
-import ImageFont
 from jinja2.filters import do_mark_safe
 from tumblpy import Tumblpy
 from tumblpy import TumblpyError
@@ -100,6 +97,7 @@ def _post_to_tumblr():
 
     name = strip_html(request.form.get('signed_name', None))
     location = strip_html(request.form.get('location', None))
+    string = strip_html(request.form.get('string', None))
 
     svg = request.form.get('image', None)
     svg = re.sub('(height|width)=\"[0-9]+\"', '', svg, 2)
@@ -127,36 +125,27 @@ def _post_to_tumblr():
 
     args = shlex.split(command)
 
-    try:
-        # When used with check_output(), subprocess will return errors to a "CalledProcessError."
-        # This is nice. I'm also piping stderr to stdout so we can see a trace if we want.
-        # I am not logging the trace because we need the log to be single lines for continuity.
-        subprocess.check_output(args, stderr=subprocess.STDOUT)
+    # try:
+    #     # When used with check_output(), subprocess will return errors to a "CalledProcessError."
+    #     # This is nice. I'm also piping stderr to stdout so we can see a trace if we want.
+    #     # I am not logging the trace because we need the log to be single lines for continuity.
+    #     subprocess.check_output(args, stderr=subprocess.STDOUT)
 
-    except subprocess.CalledProcessError, e:
-        # If we encounter a CalledProcessError, log the output.
-        logger.error('%s %s %s http://%s%s reader(%s) (times in EST)' % (
-            'ERROR', '500', e, app_config.SERVERS[0], svg_path, name))
+    # except subprocess.CalledProcessError, e:
+    #     # If we encounter a CalledProcessError, log the output.
+    #     logger.error('%s %s %s http://%s%s reader(%s) (times in EST)' % (
+    #         'ERROR', '500', e, app_config.SERVERS[0], svg_path, name))
 
-        # These bits build a nicer error page that has the real stack trace on it.
-        context = {}
-        context['title'] = 'CairoSVG is unhappy.'
-        context['message'] = e.output
-        return render_template('500.html', **context)
-
-    zazzle_url = None
-
-    if app_config.ZAZZLE_ENABLE:
-        zazzle_png_path = zazzlify_png(png_path, name, location)
-
-        image_url = 'http://%s%s' % (app_config.SERVERS[0], zazzle_png_path)
-        zazzle_url = app_config.ZAZZLE_URL % urllib.quote(image_url) 
+    #     # These bits build a nicer error page that has the real stack trace on it.
+    #     context = {}
+    #     context['title'] = 'CairoSVG is unhappy.'
+    #     context['message'] = e.output
+    #     return render_template('500.html', **context)
 
     context = {
         'name': name,
         'location': location,
-        'ZAZZLE_ENABLE': app_config.ZAZZLE_ENABLE,
-        'zazzle_url': zazzle_url
+        'string': string
     }
 
     caption = render_template('caption.html', **context)
@@ -176,63 +165,25 @@ def _post_to_tumblr():
         "source": "http://%s%s" % (app_config.SERVERS[0], png_path)
     }
 
-    try:
-        tumblr_post = t.post('post', blog_url=app_config.TUMBLR_URL, params=params)
-        tumblr_url = u"http://%s/%s" % (app_config.TUMBLR_URL, tumblr_post['id'])
-        logger.info('200 %s reader(%s) (times in EST)' % (tumblr_url, name))
+    return caption
 
-        return redirect(tumblr_url, code=301)
+    # try:
+    #     tumblr_post = t.post('post', blog_url=app_config.TUMBLR_URL, params=params)
+    #     tumblr_url = u"http://%s/%s" % (app_config.TUMBLR_URL, tumblr_post['id'])
+    #     logger.info('200 %s reader(%s) (times in EST)' % (tumblr_url, name))
 
-    except TumblpyError, e:
-        logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
-            e.error_code, e.msg, app_config.SERVERS[0], svg_path, name))
-        context = {}
-        context['title'] = 'Tumblr error'
-        context['message'] = '%s\n%s' % (e.error_code, e.msg)
-        return render_template('500.html', **context)
+    #     return redirect(tumblr_url, code=301)
 
-    return redirect('%s#posts' % tumblr_url, code=301)
+    # except TumblpyError, e:
+    #     logger.error('%s %s http://%s%s reader(%s) (times in EST)' % (
+    #         e.error_code, e.msg, app_config.SERVERS[0], svg_path, name))
+    #     context = {}
+    #     context['title'] = 'Tumblr error'
+    #     context['message'] = '%s\n%s' % (e.error_code, e.msg)
 
+    #     return render_template('500.html', **context)
 
-def zazzlify_png(png_path, name, location):
-    """
-    Add a footer and border to the PNG for Zazzle.
-    """
-    path, filename = os.path.split(png_path)
-    zazzle_path = '%s/zazzle_%s' % (path, filename)
-
-    border = 128
-    size = 2048
-
-    png = Image.open('/var/www/%s' % png_path)
-    zazzle_png = Image.new('RGBA', (size + border * 2, size + border * 2), (0, 0, 0, 0))
-    zazzle_png.paste(png, (border, border))
-
-    draw = ImageDraw.Draw(zazzle_png)
-    font = ImageFont.truetype('NotoSerif-Regular.ttf', 50)
-
-    attribution = ''
-
-    if name and location:
-        attribution = '%s, %s' % (name, location)
-    elif name:
-        attribution = name
-    elif location:
-        attribution = 'Anonymous, %s' % location
-
-    draw.text((border, border + size), attribution, (255, 255, 255), font=font)
-    draw.text((border, border + size + 64), 'she-works.tumblr.com', (255, 255, 255), font=font)
-
-    logo = Image.open('www/img/npr-logo-transparent.png')
-    zazzle_png.paste(logo, (size, size + border + 10))
-
-    if app_config.DEPLOYMENT_TARGET == 'development':
-        zazzle_png.show()
-        print '/var/www/%s' % zazzle_path
-
-    zazzle_png.save('/var/www/%s' % zazzle_path)
-
-    return zazzle_path
+    # return redirect('%s#posts' % tumblr_url, code=301)
 
 
 if __name__ == '__main__':
