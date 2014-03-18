@@ -10,6 +10,17 @@ var BITMAPS = {
         [0,1,0,0,0,1,1,0,0],
         [0,0,0,0,0,0,0,0,0]
     ],
+    DOLLAR_BILLS: [
+        [0,0,0,1,0,1,0,0,0],
+        [0,0,1,1,1,1,1,0,0],
+        [0,1,0,1,0,1,0,1,0],
+        [0,1,0,1,0,1,0,0,0],
+        [0,0,1,1,1,1,1,0,0],
+        [0,0,0,1,0,1,0,1,0],
+        [0,1,0,1,0,1,0,1,0],
+        [0,0,1,1,1,1,1,0,0],
+        [0,0,0,1,0,1,0,0,0]
+    ],
     TRIPPY_TRIANGLES: [
         [0,0,0,0,0,1,0,0,1,1,1,1,1,0,0,1,0,0,1,1,1,1,1,0,0,1,0,0,1,1,1,1,1,0,0,1,0,0,0,0,0],
         [0,0,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,1,1,1,0,0,0,0],
@@ -63,6 +74,39 @@ var GLYPH_SETS = {
         align: 'center',
         valign: 'bottom',
         grid_offset_x: 0,
+        grid_offset_y: 1,
+        invert: false,
+        vinvert: false
+    }],
+    'dollar-bills': [{
+        bitmap: BITMAPS.DOLLAR_BILLS,
+        align: 'left',
+        valign: 'top',
+        grid_offset_x: 1,
+        grid_offset_y: 1,
+        invert: false,
+        vinvert: false
+    }, {
+        bitmap: BITMAPS.DOLLAR_BILLS,
+        align: 'right',
+        valign: 'top',
+        grid_offset_x: 1,
+        grid_offset_y: 1,
+        invert: false,
+        vinvert: false
+    }, {
+        bitmap: BITMAPS.DOLLAR_BILLS,
+        align: 'left',
+        valign: 'bottom',
+        grid_offset_x: 1,
+        grid_offset_y: 1,
+        invert: false,
+        vinvert: false
+    }, {
+        bitmap: BITMAPS.DOLLAR_BILLS,
+        align: 'right',
+        valign: 'bottom',
+        grid_offset_x: 1,
         grid_offset_y: 1,
         invert: false,
         vinvert: false
