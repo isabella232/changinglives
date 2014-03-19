@@ -272,7 +272,7 @@ def write_aggregates():
     featured_output = sorted(featured_output, key=lambda post: post['timestamp'], reverse=True)
 
     # Call funtion to write file.
-    return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_post_list.html', 'www/live-data/aggregates_featured.html')
+    return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_featured_post_list.html', 'www/live-data/aggregates_featured.html')
 
     with open('www/live-data/aggregates.json', 'wb') as json_file:
         json_file.write("aggregateCallback(%s)" % json.dumps(return_obj))
