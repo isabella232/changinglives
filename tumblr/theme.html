@@ -103,7 +103,7 @@
                 <!-- START POSTS -->
                 {block:Posts}
                     {block:IndexPage}
-                    <li class="post group {block:Tags}{URLSafeTag} {/block:Tags}">
+                    <li class="post group {TagsAsClasses}">
                         <div class="wrap">
                             {block:Photo}
                             <section class="media">
@@ -118,7 +118,7 @@
 
 
                     {block:PermalinkPage}
-                    <li class="post group {block:Tags}{URLSafeTag} {/block:Tags}">
+                    <li class="post group {TagsAsClasses}">
                         <div class="wrap">
 
                             {block:Photo}
