@@ -1083,6 +1083,10 @@ ol.notes {
         position: relative;
         overflow: hidden;
 
+        .caption-wrapper {
+            display: none;
+        }
+
         .wrap { padding: 0; }
         .media {
             width: auto;
@@ -1111,10 +1115,12 @@ ol.notes {
             }
             .signature-name, .footnote { display: none; }
         }
-    }
 
-    &.featured-posts {
-        .post {
+        &.featured {
+
+            .caption-wrapper {
+                display: block;
+            }
 
             .caption {
                 position: absolute;

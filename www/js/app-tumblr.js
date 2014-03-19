@@ -205,7 +205,7 @@ function render_popular(post_list){
 
     $popular = $('<div id="popular"></div>');
     if ($b.hasClass('index-page')){
-        $container = $('#post-wrap h2');
+        $container = $('#post-wrap > h2');
     } else {
         $container = $('#footer');
     }
