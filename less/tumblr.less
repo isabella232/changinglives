@@ -699,16 +699,14 @@ p.project-credits {
     }
 
     &.featured {
-        
-        .post_info.social {
-            .print,
-            .report {
-                display: none;
+        .permalink-page #post-wrap & {
+            .post_info.social {
+                .print,
+                .report {
+                    display: none;
+                }
             }
 
-        }
-
-        #post-wrap & {
             h2 {
                 font-family: "Helvetica Neue",Arial,sans-serif;
                 text-transform: none;
@@ -727,22 +725,22 @@ p.project-credits {
                     margin-bottom: 0;
                 }
             }
-        }
 
-        @media screen and (min-width: 980px){
-            .media, 
-            .caption_and_post_info.isphoto {
-                box-sizing: border-box;
-            }
+            @media screen and (min-width: 980px){
+                .media, 
+                .caption_and_post_info.isphoto {
+                    box-sizing: border-box;
+                }
 
-            .media {
-                width: 33.33333%;
-                padding-right: 15px;
-            }
+                .media {
+                    width: 33.33333%;
+                    padding-right: 15px;
+                }
 
-            .caption_and_post_info.isphoto {
-                width: 66.66666%;
-                padding-left: 15px;
+                .caption_and_post_info.isphoto {
+                    width: 66.66666%;
+                    padding-left: 15px;
+                }
             }
         }
     }
