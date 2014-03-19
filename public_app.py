@@ -13,6 +13,7 @@ from flask import Flask, redirect, render_template
 from jinja2.filters import do_mark_safe
 from tumblpy import Tumblpy
 from tumblpy import TumblpyError
+import tumblr_utils
 from werkzeug import secure_filename
 
 import app_config
@@ -30,6 +31,13 @@ file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.setLevel(logging.INFO)
 
+
+@app.route('/%s/limits/' % app_config.PROJECT_SLUG, methods=['GET'])
+def _limits():
+    context = {}
+    context['limits'] = tumblr_utils.check_limits()
+
+    return render_template('limits.html', **context)
 
 @app.route('/%s/errors/' % app_config.PROJECT_SLUG, methods=['GET'])
 def _errors():

@@ -471,6 +471,9 @@ def deploy(remote='origin'):
 """
 Tumblr-specific commands.
 """
+def check_limits():
+    tumblr_utils.check_limits()
+
 def write_test_posts():
     tumblr_utils.write_test_posts()
 
