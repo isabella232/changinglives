@@ -204,11 +204,8 @@ function render_popular(post_list){
      */
 
     $popular = $('<div id="popular"></div>');
-    // var fade_count = 0;
-    // var delay = 0;
-
     if ($b.hasClass('index-page')){
-        $container = $('#post-wrap h2');
+        $container = $('#post-wrap > h2');
     } else {
         $container = $('#footer');
     }
@@ -216,20 +213,18 @@ function render_popular(post_list){
     if (!$b.hasClass('tag-page')){
         $popular.html(post_list).insertBefore($container).prepend('<h2>Popular Advice</h2>');
     }
-    // $popular.find(".post").fadeTo(0,0);
-    // $popular.find(".post").each(function(i) {
-    //   fade_count += 1;
-    //   delay = (fade_count) * 350;
-    //   $(this).delay(delay).fadeTo(750,1);
-    // });
+}
 
-    // $('.index-page #posts').show();
+function render_featured(post_list){
+    /*
+     * Render popular posts
+     */
 
-    // $('.index-page #posts .post, .index-page #post-wrap h2').each(function(i) {
-    //     fade_count += 1;
-    //     delay = (fade_count) * 350;
-    //     $(this).delay(delay).fadeTo(750,1);
-    // });
+    var $featured = $('<div id="featured"></div>');
+
+    if (!$b.hasClass('tag-page')){
+        $featured.html(post_list).insertBefore($popular).prepend('<h2>With Advice From</h2>');
+    }
 }
 
 $(function() {
@@ -371,12 +366,7 @@ $(function() {
         if (version < 6) {
             $('.tumblr-form').html('<p>Sorry, iOS versions older than 6 are not supported.');
         }
-
-        //FastClick.attach(document.body);
     }
-
-    // $('.index-page #posts').hide();
-    // $('.index-page #posts .post, .index-page #post-wrap h2').fadeTo(0,0);
 
     $.ajax({
         url: "http://" + APP_CONFIG.S3_BUCKETS[0] + "/" + APP_CONFIG.PROJECT_SLUG + "/live-data/aggregates.json",
@@ -387,6 +377,7 @@ $(function() {
         jsonpCallback: "aggregateCallback"
     }).done(function(data) {
         render_popular(data.popular);
+        render_featured(data.featured);
     });
 });
 

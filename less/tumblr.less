@@ -125,7 +125,7 @@ p.project-credits {
         color: #bbc9e5;
         font-weight: bold;
     }
-    .project-prompt {
+    .project-prompt, .filters {
         margin-bottom: 22px;
 
         p {
@@ -697,6 +697,53 @@ p.project-credits {
             }
         }
     }
+
+    &.featured {
+        .permalink-page #post-wrap #posts & {
+            .post_info.social {
+                .print,
+                .report {
+                    display: none;
+                }
+            }
+
+            h2 {
+                font-family: "Helvetica Neue",Arial,sans-serif;
+                text-transform: none;
+                font-weight: bold;
+                color: #333;
+                margin: 0 0 5px;
+            }
+
+            h3 {
+                color: #999;
+                font-size: 14px;
+            }
+
+            blockquote {
+                p:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            @media screen and (min-width: 980px){
+                .media, 
+                .caption_and_post_info.isphoto {
+                    box-sizing: border-box;
+                }
+
+                .media {
+                    width: 33.33333%;
+                    padding-right: 15px;
+                }
+
+                .caption_and_post_info.isphoto {
+                    width: 66.66666%;
+                    padding-left: 15px;
+                }
+            }
+        }
+    }
 }
 
 .content_source {
@@ -1036,6 +1083,10 @@ ol.notes {
         position: relative;
         overflow: hidden;
 
+        .caption-wrapper {
+            display: none;
+        }
+
         .wrap { padding: 0; }
         .media {
             width: auto;
@@ -1064,11 +1115,65 @@ ol.notes {
             }
             .signature-name, .footnote { display: none; }
         }
+
+        &.featured {
+
+            .caption-wrapper {
+                display: block;
+            }
+
+            .caption {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+            }
+
+            .featured-header {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0,0,0,0.7);
+                padding: 5px;
+                margin: 0 11px 11px 11px;
+
+                @media screen and (min-width: 980px){
+                    margin: 0 16px 16px 16px;
+                }
+            }
+
+            #post-wrap & {
+                h2 {
+                    font-family: "Helvetica Neue",Arial,sans-serif;
+                    margin: 0 0 3px;
+                    font-size: 16px;
+                    text-transform: none;
+                    font-weight: bold;
+                }
+
+                h3 {
+                    font-size: 12px;
+                    color: #ddd;
+                    margin: 0;
+
+                    @media screen and (max-width: 480px){
+                        display: none;
+                    }
+                }
+            }
+
+            blockquote {
+                display: none;
+            }
+        }
     }
 }
 
 .permalink-page {
-    #popular {
+    #popular,
+    #featured {
         margin: 0 10px 0 30px;
         .post-list {
             max-width: 1020px;
@@ -1113,31 +1218,47 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
     .index-page .post-list .post { width: 20%; }
     #container { min-height: 1800px; }
     .index-page {
-        #popular .post-list .post { width: 16.666666667%; }
+        #popular,
+        #featured {
+            .post-list .post { width: 16.666666667%; }
+        }
     }
     .permalink-page {
-        #popular .post-list .post { width: 25%; }
+        #popular,
+        #featured {
+            .post-list .post { width: 25%; }
+        }
     }
 }
 @media (min-width: 1400px) and (max-width: 1599px) {
     .index-page .post-list .post { width: 25%;}
     .index-page {
-        #popular .post-list .post { width: 20%; }
+        #popular,
+        #featured {
+            .post-list .post { width: 20%; }
+        }
     }
     .permalink-page {
-        #popular .post-list .post { width: 25%; }
+        #popular,
+        #featured {
+            .post-list .post { width: 25%; }
+        }
     }
 }
 @media (min-width: 1200px) and (max-width: 1399px) {
     .post-list .post { width: 33.333333333%; }
     .index-page,
     .permalink-page {
-        #popular .post-list .post { width: 25%; }
+        #popular,
+        #featured {
+            .post-list .post { width: 25%; }
+        }
     }
 }
 @media (min-width: 980px) and (max-width: 1200px) {
     .permalink-page {
-        #popular {
+        #popular
+        #featured {
             margin: 0 10px 0 30px;
         }
     }
@@ -1175,7 +1296,10 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
         }
     }
 
-    #popular .post-list .post { width: 33.333333333%; }
+    #popular,
+    #featured {
+        .post-list .post { width: 33.333333333%; }
+    }
 
 }
 
@@ -1190,7 +1314,8 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
 }
 @media (max-width: 979px) {
     .permalink-page {
-        #popular {
+        #popular,
+        #featured {
             margin: 0 15px 0 35px;
             .posts { margin: 15px 0 0 0; }
         }
@@ -1305,7 +1430,8 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
         }
     }
     .permalink-page {
-        #popular {
+        #popular,
+        #featured {
             margin: 0 15px;
             .posts { margin: 15px 0 0 0; }
         }
@@ -1313,7 +1439,10 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
     }
     .index-page,
     .permalink-page {
-        #popular .post-list .post { width: 33.333333333%; }
+        #popular,
+        #featured {
+            .post-list .post { width: 33.333333333%; }
+        }
     }
 }
 @media (max-width: 480px) {
@@ -1340,7 +1469,8 @@ header:after, #container:after, .caption_and_post_info:after, footer:after .butt
     }
     .index-page,
     .permalink-page {
-        #popular {
+        #popular,
+        #featured {
             .post-list {
                 .post {
                     width: 50%;

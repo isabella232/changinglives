@@ -81,6 +81,10 @@
                     <h1><a href="/">{Title}</a></h1>
                     <div class="project-prompt">{{ PROMPT_HTML }}</div>
 
+                    <div class="filters">
+                        <p>Looking for workplace advice? <a href="/tagged/workplace">View signs from our first round</a>.</p>
+                    </div>
+
                     <p class="project-credits hidden-phone">
                         Credits: {{ PROJECT_CREDITS }}<br />
                         Questions? Problems? E-mail <a href="mailto:tumblr@npr.org">tumblr@npr.org</a>.
@@ -99,8 +103,11 @@
                 <!-- START POSTS -->
                 {block:Posts}
                     {block:IndexPage}
-                    <li class="post group {block:Tags}{URLSafeTag} {/block:Tags}">
+                    <li class="post group {TagsAsClasses}">
                         <div class="wrap">
+                            <div class="caption-wrapper">
+                                <a href="{Permalink}" class="caption">{Caption}</a>
+                            </div>
                             {block:Photo}
                             <section class="media">
                                  <a href="{Permalink}" class="link">
@@ -114,7 +121,7 @@
 
 
                     {block:PermalinkPage}
-                    <li class="post group {block:Tags}{URLSafeTag} {/block:Tags}">
+                    <li class="post group {TagsAsClasses}">
                         <div class="wrap">
 
                             {block:Photo}

@@ -285,8 +285,9 @@ def write_aggregates():
     popular_output = []
     # Render the sorted list, but slice to just 24 objects per bb.
     for post in popular_list[0:app_config.NUMBER_OF_AGGREGATES]:
-        simple_post = _format_post(post)
-        popular_output.append(simple_post)
+        if u'featured' not in post['tags']:
+            simple_post = _format_post(post)
+            popular_output.append(simple_post)
 
     popular_output = sorted(popular_output, key=lambda post: post['note_count'], reverse=True)
 
@@ -308,7 +309,7 @@ def write_aggregates():
     featured_output = sorted(featured_output, key=lambda post: post['timestamp'], reverse=True)
 
     # Call funtion to write file.
-    return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_post_list.html', 'www/live-data/aggregates_featured.html')
+    return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_featured_post_list.html', 'www/live-data/aggregates_featured.html')
 
     with open('www/live-data/aggregates.json', 'wb') as json_file:
         json_file.write("aggregateCallback(%s)" % json.dumps(return_obj))
