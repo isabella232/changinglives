@@ -90,7 +90,7 @@ def less():
         name = os.path.splitext(filename)[0]
         out_path = 'www/css/%s.less.css' % name
 
-        if os.path.exists('node_modules/.bin/lessc')
+        if os.path.exists('node_modules/.bin/lessc'):
             local('node_modules/.bin/lessc %s %s' % (path, out_path))
 
         else:
@@ -101,7 +101,7 @@ def jst():
     """
     Render Underscore templates to a JST package.
     """
-    if os.path.exists('node_modules/.bin/jst')
+    if os.path.exists('node_modules/.bin/jst'):
         local('node_modules/.bin/jst --template underscore jst www/js/templates.js')
 
     else:
