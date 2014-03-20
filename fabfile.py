@@ -5,6 +5,7 @@ from glob import glob
 import os
 
 from fabric.api import *
+from fabric import operations
 from jinja2 import Template
 
 import app
@@ -480,19 +481,48 @@ def deploy(remote='origin'):
 """
 Tumblr-specific commands.
 """
+def analyze_logs():
+    """
+    Analyzes our tumblr logs to look for over limit errors.
+    """
+    tumblr_utils.analyze_logs()
+
+
+def get_logs():
+    """
+    Grabs log files from remote server for analysis.
+    """
+    require('settings', provided_by=[production, staging])
+    operations.get(app_config.LOG_PATH, app_config.LOG_PATH)
+
+
 def check_limits():
+    """
+    Checks our status against Tumblr's post limits.
+    """
     tumblr_utils.check_limits()
 
+
 def write_test_posts():
+    """
+    Writes test posts to the proper tumblr instance.
+    """
     tumblr_utils.write_test_posts()
 
 
 def write_aggregates():
+    """
+    Writes an aggregates JSON file to live-data/.
+    """
     app_config.configure_targets(env.get('settings', None))
     tumblr_utils.write_aggregates()
 
 
 def deploy_aggregates():
+    """
+    Deploys aggregates JSON to S3.
+    Calls write_aggregates().
+    """
     require('settings', provided_by=[production, staging])
     app_config.configure_targets(env.get('settings', None))
     write_aggregates()
@@ -500,6 +530,9 @@ def deploy_aggregates():
 
 
 def send_email():
+    """
+    Sends a daily email update.
+    """
     with app.app.test_request_context():
         payload = app._email()
         addresses = app_config.ADMIN_EMAILS

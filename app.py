@@ -23,11 +23,7 @@ def _email():
 
     post_list = tumblr_utils.fetch_posts()
 
-    if app_config.DEPLOYMENT_TARGET in ['staging', 'production']:
-        yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
-
-    else:
-        yesterday = datetime.datetime(2013, 5, 3, 12, 18, 20)
+    yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
 
     yesterdate = datetime.date(yesterday.year, yesterday.month, yesterday.day)
 

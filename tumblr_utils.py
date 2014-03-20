@@ -8,6 +8,7 @@ from sets import *
 import urlparse
 
 import boto
+from boto import ses
 from dateutil.parser import *
 from jinja2 import Template
 import oauth2 as oauth
@@ -17,6 +18,57 @@ from tumblpy import Tumblpy
 
 import app_config
 
+
+def analyze_logs():
+    with open(app_config.LOG_PATH, 'rb') as readfile:
+        logfile = str(readfile.read())
+
+    lines = logfile.strip().split('\n')
+
+    successes = 0
+    over_limit = 0
+    other_error = 0
+
+    for line in lines:
+        line = line.decode('utf-8')
+
+        if u"INFO 200" in line:
+            successes += 1
+
+        elif u"ERROR 400" in line:
+            over_limit += 1
+
+        else:
+            other_error += 1
+
+    success_pct = str(float(successes) / float(len(lines)) * 100).split('.')[0]
+    over_limit_pct = str(float(over_limit) / float(len(lines)) * 100).split('.')[0]
+    other_error_pct = str(float(other_error) / float(len(lines)) * 100).split('.')[0]
+
+    message = "<h1>Over limit</h1><p>She Works is currently over the Tumblr post limit. "
+    message +="<a href='http://public.nprapps.org/%s/limits/'>Check limits.</a></p>" % app_config.PROJECT_SLUG
+    message += "<h2>Log analysis</h2><p>Total: %s<br>" % len(lines)
+    message += "Successes: %s, %s%%<br>" % (successes, success_pct)
+    message += "Over limit: %s, %s%%<br>" % (over_limit, over_limit_pct)
+    message += "Other error: %s, %s%%</p>" % (other_error, other_error_pct)
+
+    if u"ERROR 400" in lines[::-1][0]:
+        print "Brrrrrrnk."
+        horn_of_rohan(message)
+
+    else:
+        print "All good. Stand down, Rohirim."
+
+def horn_of_rohan(message):
+    addresses = ['cgroskopf@npr.org', 'jbowers@npr.org']
+    connection = ses.connect_to_region('us-east-1')
+    connection.send_email(
+        'NPR News Apps <nprapps@npr.org>',
+        'She Works: OVER LIMIT',
+        None,
+        addresses,
+        html_body=message,
+        format='html')
 
 def check_limits():
     post_list = fetch_posts()
