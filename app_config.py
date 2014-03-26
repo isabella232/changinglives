@@ -16,7 +16,6 @@ CONFIG_NAME = PROJECT_SLUG.replace('-', '').upper()
 
 PROJECT_CREDITS = 'Jeremy Bowers, Danny DeBelius, Kitty Eisele, Christopher Groskopf, Alyson Hurt and Selena Simmons-Duffin / NPR'
 PROJECT_SHORTLINK = 'npr.org/sheworks'
-FACEBOOK_SHORTLINK = 'www.npr.org/sheworks' # Prevent circular reference (#251)
 
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
 PRODUCTION_SERVERS = ['54.214.20.225']
@@ -55,7 +54,7 @@ NPR_DFP = {
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
-TUMBLR_TAGS = 'women, workplace, advice, money'
+TUMBLR_TAGS = 'women, advice, money'
 TUMBLR_FILENAME = 'www/live-data/%s-data.json' % PROJECT_SLUG
 TUMBLR_POST_LIMIT = 150
 
