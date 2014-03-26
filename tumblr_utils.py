@@ -338,7 +338,7 @@ def write_aggregates():
     popular_output = []
     # Render the sorted list, but slice to just 24 objects per bb.
     for post in popular_list[0:app_config.NUMBER_OF_AGGREGATES]:
-        if u'featured' not in post['tags']:
+        if u'featured' not in post['tags'] and u'newround' not in post['tags']:
             simple_post = _format_post(post)
             popular_output.append(simple_post)
 
