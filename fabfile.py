@@ -334,7 +334,7 @@ def install_cairosvg():
 
     if env.settings in ['production', 'staging']:
         with settings(warn_only=True):
-            sudo('apt-get install -y python-cairo')
+            sudo('apt-get install -y python-cairo libffi-dev')
             run('%(virtualenv_path)s/bin/pip install cairosvg' % env)
             run('ln -s /usr/lib/python2.7/dist-packages/cairo %(virtualenv_path)s/lib/python2.7/site-packages/cairo' % env)
 
