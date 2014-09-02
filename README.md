@@ -119,8 +119,10 @@ Then install the project requirements:
 
 ```
 cd changinglives
-npm install less universal-jst
+npm install
 mkvirtualenv changinglives
+ln -s /usr/local/include/freetype2 /usr/local/include/freetype
+pip install pil --allow-external pil --allow-unverified pil
 pip install -r requirements.txt
 ```
 
