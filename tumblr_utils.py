@@ -57,7 +57,7 @@ def analyze_logs():
         horn_of_rohan(message)
 
     else:
-        print "All good. Stand down, Rohirim."
+        print "All good. Stand down, Rohirrim."
 
 def horn_of_rohan(message):
     addresses = ['cgroskopf@npr.org', 'tfisher@npr.org']
