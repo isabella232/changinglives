@@ -60,7 +60,7 @@ def analyze_logs():
         print "All good. Stand down, Rohirim."
 
 def horn_of_rohan(message):
-    addresses = ['cgroskopf@npr.org', 'jbowers@npr.org']
+    addresses = ['cgroskopf@npr.org', 'tfisher@npr.org']
     connection = ses.connect_to_region('us-east-1')
     connection.send_email(
         'NPR News Apps <nprapps@npr.org>',
