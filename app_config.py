@@ -54,7 +54,7 @@ NPR_DFP = {
 
 GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
-TUMBLR_TAGS = 'women, advice, money'
+TUMBLR_TAGS = 'women, advice, image'
 TUMBLR_FILENAME = 'www/live-data/%s-data.json' % PROJECT_SLUG
 TUMBLR_POST_LIMIT = 150
 
