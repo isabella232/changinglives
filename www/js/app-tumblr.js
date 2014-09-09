@@ -377,7 +377,7 @@ $(function() {
         jsonpCallback: "aggregateCallback"
     }).done(function(data) {
         render_popular(data.popular);
-        render_featured(data.featured);
+        // render_featured(data.featured);
     });
 });
 
