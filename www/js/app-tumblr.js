@@ -13,7 +13,7 @@ var GLYPH_RECT_MARGIN = 1 / 8;
 var GLYPH_X_MARGIN = GRID_X_PITCH * GLYPH_RECT_MARGIN;
 var GLYPH_Y_MARGIN = GRID_Y_PITCH * GLYPH_RECT_MARGIN;
 
-var FONT_NAMES = ['Roboto Condensed', 'Snippet', 'Noto Serif', 'Quicksand'];
+var FONT_NAMES = ['Roboto Condensed', 'Snippet', 'Noto Serif', 'Gotham'];
 var FONT_COLOR = '#fff';
 var FONT_SIZE = 220;
 var LINE_HEIGHT = FONT_SIZE;
@@ -22,13 +22,13 @@ var X_OFFSET = {
     'Roboto Condensed': 20,
     'Snippet': 25,
     'Noto Serif': 0,
-    'Quicksand': 30
+    'Gotham': 30
 };
 var Y_OFFSET = {
     'Roboto Condensed': 150,
     'Snippet': 150,
     'Noto Serif': 150,
-    'Quicksand': 150
+    'Gotham': 150
 };
 
 var $b;
