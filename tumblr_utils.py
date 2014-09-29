@@ -364,7 +364,7 @@ def write_aggregates():
     # Call funtion to write file.
     return_obj['featured'] = _render_output_template(featured_output[0:app_config.NUMBER_OF_AGGREGATES], 'templates/_featured_post_list.html', 'www/live-data/aggregates_featured.html')
 
-    with open('www/live-data/aggregates.json', 'wb') as json_file:
+    with open('www/live-data/aggregates.js', 'wb') as json_file:
         json_file.write("aggregateCallback(%s)" % json.dumps(return_obj))
 
 
@@ -372,7 +372,7 @@ def deploy_aggregates(s3_buckets):
     """
     Control function for deploying the aggregate files.
     """
-    file_name = 'aggregates.json'
+    file_name = 'aggregates.js'
     file_path = 'www/live-data/%s' % file_name
     _deploy_file(s3_buckets, file_path, 'live-data/%s' % file_name)
 

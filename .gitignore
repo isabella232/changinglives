@@ -34,6 +34,7 @@ node_modules
 www/aggregates_*.html
 www/aggregates.json
 www/live-data/aggregates.json
+www/live-data/aggregates.js
 www/*.html
 www/css/*.min.css
 www/css/*.less.css
