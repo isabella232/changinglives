@@ -368,15 +368,12 @@ $(function() {
         }
     }
 
-    console.log('ajax');
-
     $.ajax({
         url: "http://" + APP_CONFIG.S3_BUCKETS[0] + "/" + APP_CONFIG.PROJECT_SLUG + "/live-data/aggregates.js",
         jsonp: false,
         dataType: 'jsonp',
         jsonpCallback: "aggregateCallback"
     }).done(function(data) {
-        console.log('done');
         render_popular(data.popular);
         // render_featured(data.featured);
     });
