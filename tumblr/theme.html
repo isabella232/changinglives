@@ -81,6 +81,13 @@
                     <h1><a href="/">{Title}</a></h1>
                     <div class="project-prompt">{{ PROMPT_HTML }}</div>
 
+                    <div class="sponsorship rule">
+                        <p id="ford_logo" style="text-align:left; margin-top:20px; margin-bottom:20px;">
+                        <img src="http://download.npr.org/npr-mp4/npr/underwriting/logos/ford_logo2.png" width="188"></p>
+                        <p>Ford is proud to support NPR and its coverage of The Changing Lives of Women.</p>
+                        <div class="rule"></div>
+                    </div>
+
                     <ul class="filters">
                         <li><a href="/tagged/workplace">Round One: Note To Self</a></li>
                         <li><a href="/tagged/money">Round Two: Her Money</a></li>
@@ -96,11 +103,19 @@
             </header>
 
             <section id="post-wrap">
+                {block:IndexPage}
+                <ul id="posts" class="posts{block:IndexPage} post-list{/block:IndexPage}">
+                    <div class="wide-sponsorship">
+                        <p>NPR thanks our sponsors</p>
+                        <iframe src="http://download.npr.org/npr-mp4/npr/underwriting/responsive_test/ford/ford_clow/index2.html" seamless scrolling='no' width="100%" height="300" frameborder="0"></iframe>
+                </div>
+                {/block:IndexPage}
 
                 {block:IndexPage}<h2>Fresh Advice{block:TagPage} Tagged {Tag}{/block:TagPage}</h2>{/block:IndexPage}
 
                 {block:TagPage}<p class="editors-note">Advice not fit for the homepage, as selected by NPR's "She Works" editors.</p>{/block:TagPage}
-                <ul id="posts" class="posts{block:IndexPage} post-list{/block:IndexPage}">
+
+
                 <!-- START POSTS -->
                 {block:Posts}
                     {block:IndexPage}
