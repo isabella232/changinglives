@@ -163,40 +163,40 @@ function render_glyphs(glyph_set) {
 
 function render_text(font_name, text) {
     /*
-     * Render the SVG text.
-     */
-    var font = fonts[font_name];
+         * Render the SVG text.
+         */
+        var font = fonts[font_name];
 
-    for (var i = 0; i < text_paths.length; i++) {
-        text_paths[i].remove();
+        for (var i = 0; i < text_paths.length; i++) {
+            text_paths[i].remove();
+        }
+
+        text_paths = [];
+
+        var lines = text.split('\n');
+        var lines_height = LINE_HEIGHT * lines.length;
+        var base_width = (SVG_WIDTH / 2) - X_OFFSET[font_name];
+
+        for (var i = 0; i < lines.length; i++) {
+            var line = lines[i];
+
+            var text_path = preview.print(0, 0, line, font, FONT_SIZE, 'middle');
+
+            var bbox = text_path.getBBox();
+            text_path.translate(base_width - (bbox.width / 2), 0);
+
+            text_paths.push(text_path);
+        }
+
+        var base_height = (SVG_HEIGHT / 2) - (lines_height / 2 - Y_OFFSET[font_name]);
+
+        for (var i = 0; i < text_paths.length; i++) {
+            var text_path = text_paths[i];
+
+            text_path.translate(0, base_height + LINE_HEIGHT * i);
+            text_path.attr({ fill: FONT_COLOR });
+        }
     }
-
-    text_paths = [];
-
-    var lines = text.split('\n');
-    var lines_height = LINE_HEIGHT * lines.length;
-    var base_width = (SVG_WIDTH / 2) - X_OFFSET[font_name];
-
-    for (var i = 0; i < lines.length; i++) {
-        var line = lines[i];
-
-        var text_path = preview.print(0, 0, line, font, FONT_SIZE, 'middle');
-
-        var bbox = text_path.getBBox();
-        text_path.translate(base_width - (bbox.width / 2), 0);
-
-        text_paths.push(text_path);
-    }
-
-    var base_height = (SVG_HEIGHT / 2) - (lines_height / 2 - Y_OFFSET[font_name]);
-
-    for (var i = 0; i < text_paths.length; i++) {
-        var text_path = text_paths[i];
-
-        text_path.translate(0, base_height + LINE_HEIGHT * i);
-        text_path.attr({ fill: FONT_COLOR });
-    }
-}
 
 function render_popular(post_list){
     /*
@@ -205,7 +205,8 @@ function render_popular(post_list){
 
     $popular = $('<div id="popular"></div>');
     if ($b.hasClass('index-page')){
-        $container = $('#post-wrap > h2');
+        $container = $('#posts');
+        console.log($container);
     } else {
         $container = $('#footer');
     }
